@@ -16,6 +16,7 @@ Module=Helper_Main; modules\Helper_Main.bas
 Form=forms\frmStockIn.frm
 Class=StockIn; class\StockIn.cls
 Module=Helper_Partida; modules\Helper_Partida.bas
+Module=SQL; modules\SQL.bas
 Startup="Sub Main"
 HelpFile=""
 Command32=""

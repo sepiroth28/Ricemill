@@ -44,15 +44,20 @@ End Sub
 Public Sub load_partida(partida_id As Integer)
 Dim sql As String
 Dim rs As New ADODB.Recordset
+'id, name, status, created_at, created_by
+sql = "SELECT * FROM partida WHERE id = " & partida_id & " LIMIT 1"
 
-sql = "SELECT * FROM partida"
-
-Set rs = db.execut(sql)
+Set rs = db.execute(sql)
 
 If rs.RecordCount > 0 Then
-    
+    Me.partida_id = rs.Fields("id").Value
+    Me.partida_name = rs.Fields("name").Value
+    Me.partida_status = rs.Fields("status").Value
+    Me.created_at = rs.Fields("created_at").Value
+    Me.created_by = rs.Fields("created_by").Value
 End If
 
+Set rs = Nothing
 End Sub
 
 Public Sub save()

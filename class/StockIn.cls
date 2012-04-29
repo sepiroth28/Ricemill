@@ -160,3 +160,6 @@ End Property
 
 
 
+Private Sub Class_Initialize()
+Me.id = 0
+End Sub

@@ -20,7 +20,6 @@ Public Const USER As String = "user"
 Public Const watermarkColor As String = &H808080
 Public Const normalColor As String = &H80000008
 
-
 Sub initializedConfig()
 Dim file_name As String
 Dim intEmpFileNbr As Integer
@@ -44,3 +43,7 @@ Input #intEmpFileNbr, server, dba_name, dba_username, dba_pass
 Close #intEmpFileNbr
 
 End Sub
+
+
+
+

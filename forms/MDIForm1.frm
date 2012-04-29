@@ -8,6 +8,7 @@ Begin VB.MDIForm MDIForm1
    ClientWidth     =   13845
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   3  'Windows Default
+   WindowState     =   2  'Maximized
    Begin VB.Menu mnuFile 
       Caption         =   "File"
       Begin VB.Menu mnu_file_partida 

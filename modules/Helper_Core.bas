@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper_Core"
 Sub populateResultOnThisListView(sql As String, lsv As ListView, attrubutes As Collection)
 Dim rs As New ADODB.Recordset
 Dim list As ListItem
-Dim item As Object
+Dim item As String
 Dim count As Integer
 
 Set rs = db.execute(sql)
@@ -17,8 +17,8 @@ lsv.ListItems.Clear
                     list.SubItems(count) = rs.Fields(count).Value
                 Next count
             Else
-                For Each item In attrubutes
-                    list.SubItems(count) = rs.Fields(attrubutes).Value
+                For Each items In attrubutes
+                    list.SubItems(count) = rs.Fields(items).Value
                 count = count + 1
                 Next
             End If

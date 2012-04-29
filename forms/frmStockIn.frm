@@ -59,7 +59,7 @@ Begin VB.Form frmStockIn
          Top             =   1680
          Width           =   675
       End
-      Begin VB.TextBox Text4 
+      Begin VB.TextBox txtAmount 
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -76,7 +76,7 @@ Begin VB.Form frmStockIn
          Top             =   2940
          Width           =   1815
       End
-      Begin VB.TextBox Text3 
+      Begin VB.TextBox txtPrice 
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -93,7 +93,7 @@ Begin VB.Form frmStockIn
          Top             =   2940
          Width           =   1875
       End
-      Begin VB.TextBox Text2 
+      Begin VB.TextBox txtQty 
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -124,6 +124,7 @@ Begin VB.Form frmStockIn
          Height          =   555
          Left            =   240
          TabIndex        =   3
+         Text            =   "Humay"
          Top             =   1680
          Width           =   5895
       End
@@ -264,3 +265,28 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Dim item_id As Integer
+
+Private Sub cmdSave_Click()
+Dim stock_in As New StockIn
+
+With stock_in
+    .item_id = item_id
+    .qty_in = Val(txtQty.Text)
+    .unit_price = Val(txtPrice.Text)
+    .total_amount = Val(txtAmount.Text)
+    .received_by = "admin"
+    .date_in = Format(lblDate.Caption, "yyyy-mm-dd")
+    .save_stockin
+End With
+MsgBox "Successfully Stock in", vbInformation, "Stockin"
+
+Call loadStockinListOnThisPartida(activePartidaId, frmPartidaView.lsvStockIn)
+Call loadStockInTotals(activePartidaId, frmPartidaView.lsvStockInTotal)
+
+End Sub
+
+Private Sub Form_Load()
+lblDate.Caption = FormatDateTime(Date, vbShortDate)
+item_id = 1
+End Sub
