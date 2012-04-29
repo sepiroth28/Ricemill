@@ -7,15 +7,15 @@ Begin VB.Form frmManagePartida
    ClientHeight    =   8250
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   12690
+   ClientWidth     =   9690
    FillColor       =   &H00FFFFFF&
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   8250
-   ScaleWidth      =   12690
+   ScaleWidth      =   9690
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   1  'CenterOwner
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
@@ -23,10 +23,27 @@ Begin VB.Form frmManagePartida
       Height          =   8115
       Left            =   60
       ScaleHeight     =   8085
-      ScaleWidth      =   12525
+      ScaleWidth      =   9525
       TabIndex        =   0
       Top             =   60
-      Width           =   12555
+      Width           =   9555
+      Begin VB.CommandButton cmdCreate 
+         Caption         =   "CREATE NEW"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   795
+         Left            =   6300
+         TabIndex        =   4
+         Top             =   7200
+         Width           =   3015
+      End
       Begin VB.CommandButton cmdOpen 
          Caption         =   "OPEN"
          BeginProperty Font 
@@ -39,7 +56,7 @@ Begin VB.Form frmManagePartida
             Strikethrough   =   0   'False
          EndProperty
          Height          =   795
-         Left            =   9840
+         Left            =   3720
          TabIndex        =   2
          Top             =   7200
          Width           =   2535
@@ -49,17 +66,53 @@ Begin VB.Form frmManagePartida
          Left            =   180
          TabIndex        =   1
          Top             =   600
-         Width           =   12195
-         _ExtentX        =   21511
+         Width           =   9135
+         _ExtentX        =   16113
          _ExtentY        =   11456
+         View            =   3
+         LabelEdit       =   1
          LabelWrap       =   -1  'True
          HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         GridLines       =   -1  'True
          _Version        =   393217
          ForeColor       =   -2147483640
          BackColor       =   -2147483643
          BorderStyle     =   1
          Appearance      =   0
-         NumItems        =   0
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   5
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "PARTIDA NAME"
+            Object.Width           =   12347
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "created at"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "created by"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Object.Width           =   0
+         EndProperty
       End
       Begin VB.Label Label1 
          BackStyle       =   0  'Transparent
@@ -86,6 +139,17 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private Sub cmdOpen_Click()
+Private Sub cmdCreate_Click()
+newPartida = True
 frmPartidaView.Show
+End Sub
+
+Private Sub cmdOpen_Click()
+newPartida = False
+activePartidaId = Val(lsvPartida.SelectedItem.Text)
+frmPartidaView.Show
+End Sub
+
+Private Sub Form_Load()
+Call loadPartidaList(lsvPartida)
 End Sub

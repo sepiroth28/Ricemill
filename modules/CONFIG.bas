@@ -16,6 +16,11 @@ Public Const CONSUMER As String = "consumer"
 Public Const ADMIN As String = "admin"
 Public Const USER As String = "user"
 
+
+Public Const watermarkColor As String = &H808080
+Public Const normalColor As String = &H80000008
+
+
 Sub initializedConfig()
 Dim file_name As String
 Dim intEmpFileNbr As Integer
