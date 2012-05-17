@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPartidaView 
    Appearance      =   0  'Flat
    BackColor       =   &H00E0E0E0&
@@ -42,7 +42,7 @@ Begin VB.Form frmPartidaView
          Text            =   "Input partida name here"
          Top             =   180
          Visible         =   0   'False
-         Width           =   6975
+         Width           =   4695
       End
       Begin VB.CommandButton cmdSave 
          Caption         =   "SAVE"
