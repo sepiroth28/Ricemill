@@ -1,32 +1,57 @@
 VERSION 5.00
-Begin VB.Form frmStockIn 
-   Appearance      =   0  'Flat
-   BackColor       =   &H0097C2FD&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Stock-in"
-   ClientHeight    =   6855
+Begin VB.Form frmManageItem 
+   BorderStyle     =   1  'Fixed Single
+   ClientHeight    =   6720
    ClientLeft      =   45
-   ClientTop       =   375
-   ClientWidth     =   7230
+   ClientTop       =   330
+   ClientWidth     =   7080
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6855
-   ScaleWidth      =   7230
-   ShowInTaskbar   =   0   'False
+   ScaleHeight     =   6720
+   ScaleWidth      =   7080
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
       Height          =   6735
-      Left            =   60
+      Left            =   0
       ScaleHeight     =   6705
       ScaleWidth      =   7065
       TabIndex        =   0
-      Top             =   60
+      Top             =   0
       Width           =   7095
-      Begin VB.TextBox txtdescription 
+      Begin VB.PictureBox Picture2 
+         Appearance      =   0  'Flat
+         BackColor       =   &H00C0FFFF&
+         ForeColor       =   &H80000008&
+         Height          =   5055
+         Left            =   120
+         ScaleHeight     =   5025
+         ScaleWidth      =   6825
+         TabIndex        =   13
+         Top             =   1440
+         Width           =   6855
+         Begin VB.CommandButton Command1 
+            Caption         =   "Save"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   735
+            Left            =   4560
+            TabIndex        =   14
+            Top             =   4200
+            Width           =   1995
+         End
+      End
+      Begin VB.ComboBox cbostatus 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -36,13 +61,30 @@ Begin VB.Form frmStockIn
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   735
-         Left            =   240
-         MultiLine       =   -1  'True
-         ScrollBars      =   2  'Vertical
-         TabIndex        =   14
+         Height          =   420
+         ItemData        =   "frmManageItem.frx":0000
+         Left            =   1200
+         List            =   "frmManageItem.frx":000A
+         TabIndex        =   1
+         Top             =   1560
+         Width           =   1575
+      End
+      Begin VB.TextBox txtdescription 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   555
+         Left            =   2280
+         TabIndex        =   3
          Top             =   2760
-         Width           =   5895
+         Width           =   3855
       End
       Begin VB.CommandButton cmdSave 
          Caption         =   "Save"
@@ -57,27 +99,11 @@ Begin VB.Form frmStockIn
          EndProperty
          Height          =   735
          Left            =   4920
-         TabIndex        =   13
-         Top             =   5100
+         TabIndex        =   6
+         Top             =   5160
          Width           =   1995
       End
-      Begin VB.CommandButton Command1 
-         Caption         =   "..."
-         Height          =   375
-         Left            =   6420
-         TabIndex        =   12
-         Top             =   540
-         Width           =   435
-      End
-      Begin VB.CommandButton cmdBrowse 
-         Caption         =   "..."
-         Height          =   555
-         Left            =   6180
-         TabIndex        =   10
-         Top             =   1680
-         Width           =   675
-      End
-      Begin VB.TextBox txtAmount 
+      Begin VB.TextBox txtunitofmeasure 
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -89,9 +115,9 @@ Begin VB.Form frmStockIn
             Strikethrough   =   0   'False
          EndProperty
          Height          =   555
-         Left            =   4320
-         TabIndex        =   9
-         Top             =   4140
+         Left            =   2280
+         TabIndex        =   5
+         Top             =   4020
          Width           =   1815
       End
       Begin VB.TextBox txtPrice 
@@ -106,12 +132,12 @@ Begin VB.Form frmStockIn
             Strikethrough   =   0   'False
          EndProperty
          Height          =   555
-         Left            =   2280
-         TabIndex        =   7
-         Top             =   4140
+         Left            =   240
+         TabIndex        =   4
+         Top             =   4020
          Width           =   1875
       End
-      Begin VB.TextBox txtQty 
+      Begin VB.TextBox txtcode 
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -124,32 +150,14 @@ Begin VB.Form frmStockIn
          EndProperty
          Height          =   555
          Left            =   240
-         TabIndex        =   5
-         Top             =   4140
-         Width           =   1875
+         TabIndex        =   2
+         Top             =   2760
+         Width           =   1935
       End
-      Begin VB.TextBox txtitem 
-         Appearance      =   0  'Flat
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   555
-         Left            =   240
-         TabIndex        =   3
-         Text            =   "Humay"
-         Top             =   1680
-         Width           =   5895
-      End
-      Begin VB.Label Label6 
+      Begin VB.Label Label3 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Description"
+         Caption         =   "Status"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -161,9 +169,28 @@ Begin VB.Form frmStockIn
          EndProperty
          Height          =   300
          Left            =   240
-         TabIndex        =   15
+         TabIndex        =   12
+         Top             =   1560
+         Width           =   810
+      End
+      Begin VB.Label Label6 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Item Description"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   300
+         Left            =   2280
+         TabIndex        =   11
          Top             =   2400
-         Width           =   1380
+         Width           =   1995
       End
       Begin VB.Line Line2 
          BorderColor     =   &H00C0C0C0&
@@ -179,31 +206,10 @@ Begin VB.Form frmStockIn
          Y1              =   4980
          Y2              =   4980
       End
-      Begin VB.Label lblDate 
-         Alignment       =   1  'Right Justify
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Date"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H000000C0&
-         Height          =   300
-         Left            =   5655
-         TabIndex        =   11
-         Top             =   600
-         Width           =   600
-      End
       Begin VB.Label Label5 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Total Amount"
+         Caption         =   "Unit of Measure"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -214,10 +220,10 @@ Begin VB.Form frmStockIn
             Strikethrough   =   0   'False
          EndProperty
          Height          =   300
-         Left            =   4320
-         TabIndex        =   8
-         Top             =   3780
-         Width           =   1620
+         Left            =   2280
+         TabIndex        =   10
+         Top             =   3660
+         Width           =   1935
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
@@ -233,34 +239,15 @@ Begin VB.Form frmStockIn
             Strikethrough   =   0   'False
          EndProperty
          Height          =   300
-         Left            =   2280
-         TabIndex        =   6
-         Top             =   3780
-         Width           =   1185
-      End
-      Begin VB.Label Label3 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Qty In"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   300
          Left            =   240
-         TabIndex        =   4
-         Top             =   3780
-         Width           =   735
+         TabIndex        =   9
+         Top             =   3660
+         Width           =   1185
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Item"
+         Caption         =   "Item Code"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -272,14 +259,14 @@ Begin VB.Form frmStockIn
          EndProperty
          Height          =   300
          Left            =   240
-         TabIndex        =   2
-         Top             =   1320
-         Width           =   555
+         TabIndex        =   8
+         Top             =   2400
+         Width           =   1260
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "STOCKIN INFO"
+         Caption         =   "ITEM MANAGEMENT"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -291,40 +278,27 @@ Begin VB.Form frmStockIn
          EndProperty
          Height          =   300
          Left            =   240
-         TabIndex        =   1
+         TabIndex        =   7
          Top             =   60
-         Width           =   1860
+         Width           =   2580
       End
    End
 End
-Attribute VB_Name = "frmStockIn"
+Attribute VB_Name = "frmManageItem"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim item_id As Integer
-
 Private Sub cmdSave_Click()
-Dim stock_in As New StockIn
+    Dim new_item As New Item
+        With new_item
+            .item_code = txtcode.Text
+            .description = txtdescription
+            .unit_price = txtPrice
+            .unit_of_measure = txtunitofmeasure
+            .status = cbostatus
+            .save
+        End With
+        MsgBox "Successfully saved!", vbInformation, "save"
 
-With stock_in
-    .item_id = item_id
-    .qty_in = Val(txtQty.Text)
-    .unit_price = Val(txtPrice.Text)
-    .total_amount = Val(txtAmount.Text)
-    .received_by = "admin"
-    .description = txtdescription
-    .date_in = Format(lblDate.Caption, "yyyy-mm-dd")
-    .save_stockin
-End With
-MsgBox "Successfully Stock in", vbInformation, "Stockin"
-
-Call loadStockinListOnThisPartida(activePartidaId, frmPartidaView.lsvStockIn)
-Call loadStockInTotals(activePartidaId, frmPartidaView.lsvStockInTotal)
-
-End Sub
-
-Private Sub Form_Load()
-lblDate.Caption = FormatDateTime(Date, vbShortDate)
-item_id = 1
 End Sub
