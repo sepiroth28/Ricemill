@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePartida 
    BackColor       =   &H00000080&
    BorderStyle     =   3  'Fixed Dialog
@@ -11,11 +11,11 @@ Begin VB.Form frmManagePartida
    FillColor       =   &H00FFFFFF&
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
+   MDIChild        =   -1  'True
    MinButton       =   0   'False
    ScaleHeight     =   8250
    ScaleWidth      =   9690
    ShowInTaskbar   =   0   'False
-   StartUpPosition =   1  'CenterOwner
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
@@ -72,9 +72,11 @@ Begin VB.Form frmManagePartida
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
+         HideSelection   =   0   'False
          FullRowSelect   =   -1  'True
          GridLines       =   -1  'True
+         HotTracking     =   -1  'True
+         HoverSelection  =   -1  'True
          _Version        =   393217
          ForeColor       =   -2147483640
          BackColor       =   -2147483643
@@ -101,16 +103,17 @@ Begin VB.Form frmManagePartida
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
-            Text            =   "created at"
-            Object.Width           =   2540
+            Text            =   "status"
+            Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "created by"
-            Object.Width           =   0
+            Text            =   "created on"
+            Object.Width           =   2540
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
+            Text            =   "created by"
             Object.Width           =   0
          EndProperty
       End
@@ -153,3 +156,4 @@ End Sub
 Private Sub Form_Load()
 Call loadPartidaList(lsvPartida)
 End Sub
+

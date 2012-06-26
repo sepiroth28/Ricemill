@@ -42,12 +42,12 @@ Public Sub delete_partida(partida_id As Integer)
 End Sub
 
 Public Sub load_partida(partida_id As Integer)
-Dim sql As String
+Dim SQL As String
 Dim rs As New ADODB.Recordset
 'id, name, status, created_at, created_by
-sql = "SELECT * FROM partida WHERE id = " & partida_id & " LIMIT 1"
+SQL = "SELECT * FROM partida WHERE id = " & partida_id & " LIMIT 1"
 
-Set rs = db.execute(sql)
+Set rs = db.execute(SQL)
 
 If rs.RecordCount > 0 Then
     Me.partida_id = rs.Fields("id").Value

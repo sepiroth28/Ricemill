@@ -19,8 +19,8 @@ Private mvardatabase_name As String 'local copy
 Private mvarusername As String 'local copy
 Private mvarpassword As String 'local copy
 Dim conn As New ADODB.Connection
-Public Function execute(sql As String) As ADODB.Recordset
-    Set execute = conn.execute(sql)
+Public Function execute(SQL As String) As ADODB.Recordset
+    Set execute = conn.execute(SQL)
 End Function
 
 Public Sub die()
@@ -29,13 +29,13 @@ End Sub
 
 Public Function connect() As Boolean
 conn.CursorLocation = adUseClient
-    conn.ConnectionString = "DRIVER={MySQL ODBC 5.1 Driver};" & "SERVER=" & Me.server & ";DATABASE=" & Me.database_name & ";UID=" & Me.username & ";PWD=" & Me.Password & ";"
+    conn.ConnectionString = "DRIVER={MySQL ODBC 3.51 Driver};" & "SERVER=" & Me.server & ";DATABASE=" & Me.database_name & ";UID=" & Me.username & ";PWD=" & Me.Password & ";"
     On Error GoTo Error
         conn.Open
         connect = True
 Exit Function
 Error:
-    MsgBox Err.Description
+    MsgBox Err.description
         connect = False
 End Function
 
