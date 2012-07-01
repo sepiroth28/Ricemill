@@ -1,38 +1,38 @@
 VERSION 5.00
 Begin VB.Form frmManageItem 
    BorderStyle     =   1  'Fixed Single
-   ClientHeight    =   6720
+   ClientHeight    =   6360
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   7080
+   ClientWidth     =   7560
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6720
-   ScaleWidth      =   7080
+   ScaleHeight     =   6360
+   ScaleWidth      =   7560
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   6735
+      Height          =   6435
       Left            =   0
-      ScaleHeight     =   6705
-      ScaleWidth      =   7065
+      ScaleHeight     =   6405
+      ScaleWidth      =   7545
       TabIndex        =   0
       Top             =   0
-      Width           =   7095
+      Width           =   7575
       Begin VB.PictureBox Picture2 
          Appearance      =   0  'Flat
          BackColor       =   &H00C0FFFF&
          ForeColor       =   &H80000008&
-         Height          =   5055
+         Height          =   5295
          Left            =   120
-         ScaleHeight     =   5025
-         ScaleWidth      =   6825
+         ScaleHeight     =   5265
+         ScaleWidth      =   7005
          TabIndex        =   13
-         Top             =   1440
-         Width           =   6855
+         Top             =   780
+         Width           =   7035
          Begin VB.CommandButton Command1 
             Caption         =   "Save"
             BeginProperty Font 
@@ -290,7 +290,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cmdSave_Click()
-    Dim new_item As New Item
+    Dim new_item As New item
         With new_item
             .item_code = txtcode.Text
             .description = txtdescription

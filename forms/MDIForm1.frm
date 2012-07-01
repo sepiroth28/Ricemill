@@ -3,8 +3,8 @@ Begin VB.MDIForm MDIForm1
    BackColor       =   &H8000000C&
    Caption         =   "Ricemill"
    ClientHeight    =   8865
-   ClientLeft      =   165
-   ClientTop       =   735
+   ClientLeft      =   225
+   ClientTop       =   855
    ClientWidth     =   13845
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   3  'Windows Default
@@ -33,6 +33,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub mnu_file_exit_Click()
+End
+End Sub
+
 Private Sub mnu_file_partida_Click()
 frmManagePartida.Show
 End Sub

@@ -30,7 +30,6 @@ last_stock_id = getLastId
 
 insert = "INSERT INTO partida_stockin VALUES(" & partida_id & "," & last_stock_id & ")"
 db.execute insert
-
 End Sub
 
 Public Sub delete_stockin()

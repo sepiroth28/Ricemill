@@ -5,7 +5,7 @@ Dim attributes As New Collection
 If partida_id <> 0 Then
     SQL = view_partida_stock_in_list & " WHERE ps.partida_id = " & partida_id
     
-    attributes.Add "item_name"
+    attributes.Add "description"
     attributes.Add "qty_in"
     attributes.Add "price"
     attributes.Add "total_amount"
@@ -24,6 +24,7 @@ If partida_id <> 0 Then
     MsgBox SQL
     Set rs = db.execute(SQL)
     lsv.ListItems.Clear
+    On Error Resume Next
     If rs.RecordCount > 0 Then
         Do Until rs.EOF
             Set list = lsv.ListItems.Add(, , "")

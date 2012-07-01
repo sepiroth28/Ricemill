@@ -4,6 +4,7 @@ Dim col As New Collection
 Dim sql As String
 
 sql = "SELECT * FROM partida"
+MsgBox (sql)
 col.Add "*"
 Call populateResultOnThisListView(sql, lsv, col)
 

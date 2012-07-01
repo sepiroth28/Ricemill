@@ -23,5 +23,11 @@ Public Const view_partida_stock_out_totals As String = "SELECT SUM(qty_out) as t
                                                     " ON ps.stockout_id = s.id" & _
                                                     " INNER JOIN items i " & _
                                                     " ON s.item_id = i.id"
+                                                    
+Public Const view_expenses_in_this_partida As String = "SELECT * FROM ricemill.expenses exp " & _
+                                                    " INNER JOIN ricemill.partida p " & _
+                                                    " ON exp.partida_id = p.id"
+                                                    
+
 
 

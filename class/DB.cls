@@ -29,7 +29,7 @@ End Sub
 
 Public Function connect() As Boolean
 conn.CursorLocation = adUseClient
-    conn.ConnectionString = "DRIVER={MySQL ODBC 3.51 Driver};" & "SERVER=" & Me.server & ";DATABASE=" & Me.database_name & ";UID=" & Me.username & ";PWD=" & Me.Password & ";"
+    conn.ConnectionString = "DRIVER={MySQL ODBC 5.1 Driver};" & "SERVER=" & Me.server & ";DATABASE=" & Me.database_name & ";UID=" & Me.username & ";PWD=" & Me.Password & ";"
     On Error GoTo Error
         conn.Open
         connect = True

@@ -25,7 +25,6 @@ lsv.ListItems.Clear
         rs.MoveNext
         Loop
     End If
-
 Set rs = Nothing
 End Sub
 

@@ -302,13 +302,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim item_id As Integer
+Dim id_of_item As Integer
 
 Private Sub cmdSave_Click()
+Call get_item_id(txtitem.Text)
 Dim stock_in As New StockIn
-
 With stock_in
-    .item_id = item_id
+    .item_id = itemID
     .qty_in = Val(txtQty.Text)
     .unit_price = Val(txtPrice.Text)
     .total_amount = Val(txtAmount.Text)
@@ -326,5 +326,5 @@ End Sub
 
 Private Sub Form_Load()
 lblDate.Caption = FormatDateTime(Date, vbShortDate)
-item_id = 1
 End Sub
+

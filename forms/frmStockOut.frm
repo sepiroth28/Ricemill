@@ -23,7 +23,7 @@ Begin VB.Form frmStockOut
       TabIndex        =   0
       Top             =   0
       Width           =   7095
-      Begin VB.TextBox Text1 
+      Begin VB.TextBox txtItem 
          Appearance      =   0  'Flat
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -266,9 +266,9 @@ Dim item_id As Integer
 
 Private Sub cmdSave_Click()
 Dim stock_out As New StockOut
-
+Call get_item_id(txtItem.Text)
 With stock_out
-    .item_id = item_id
+    .item_id = itemID
     .qty_out = Val(txtQty.Text)
     .unit_price = Val(txtPrice.Text)
     .total_amount = Val(txtAmount.Text)
@@ -278,9 +278,8 @@ With stock_out
 End With
 MsgBox "Successfully Stock Out", vbInformation, "StockOut"
 
-Call loadStockOutListOnThisPartida(activePartidaId, frmPartidaView.lsvStockIn)
+Call loadStockOutListOnThisPartida(activePartidaId, frmPartidaView.lsvStockOut)
 Call loadStockOutTotals(activePartidaId, frmPartidaView.lsvStockOutTotal)
-
 End Sub
 
 Private Sub Form_Load()

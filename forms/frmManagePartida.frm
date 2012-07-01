@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmManagePartida 
    BackColor       =   &H00000080&
    BorderStyle     =   3  'Fixed Dialog
@@ -156,4 +156,3 @@ End Sub
 Private Sub Form_Load()
 Call loadPartidaList(lsvPartida)
 End Sub
-
