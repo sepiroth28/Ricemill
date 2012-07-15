@@ -31,3 +31,8 @@ End Sub
 Function getLastId() As Integer
 getLastId = Val(db.execute("SELECT last_insert_id()").Fields(0).Value)
 End Function
+
+Public Sub calendar(frm As Form, calc As Form)
+calc.Top = frm.Top + 1500
+calc.Left = frm.Left + 1500
+End Sub

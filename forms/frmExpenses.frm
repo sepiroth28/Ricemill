@@ -169,15 +169,16 @@ Private Sub cmdAddExpenses_Click()
 Dim exp As New expenses
 Set exp = New expenses
 With exp
-    .partida_id = activePartidaId
     .desc = txtDescription.Text
     .amount = Val(txtAmount.Text)
     .date_created = Format(lblDate.Caption, "yyyy-mm-dd")
     .add_expenses
 End With
-Call totalexpenses(activePartidaId, frmPartidaView.lsvTotalExpenses)
+Call totalexpenses(activePartidaId, frmPartidaView.lsvtotalExpenses)
 End Sub
 
 Private Sub Form_Load()
+Me.Top = frmPartidaView.Top + 2700
+Me.Left = frmPartidaView.Left + 900
 lblDate.Caption = FormatDateTime(Date, vbShortDate)
 End Sub

@@ -27,6 +27,18 @@ Begin VB.MDIForm MDIForm1
          Caption         =   "Exit"
       End
    End
+   Begin VB.Menu mnuAdmin 
+      Caption         =   "Admin"
+      Begin VB.Menu mnuPartidavisibility 
+         Caption         =   "Partida Visibility"
+      End
+      Begin VB.Menu mnu_sep3 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuEvaluatepartida 
+         Caption         =   "Evaluate Partida"
+      End
+   End
 End
 Attribute VB_Name = "MDIForm1"
 Attribute VB_GlobalNameSpace = False
@@ -41,6 +53,17 @@ Private Sub mnu_file_partida_Click()
 frmManagePartida.Show
 End Sub
 
+Private Sub mnuClosepartida_Click()
+frmManagePartida.Show 1
+End Sub
+
+Private Sub mnuEvaluatepartida_Click()
+frmEvaluatepartida.Show 1
+End Sub
+
 Private Sub mnuitem_Click()
 frmManageItem.Show
+End Sub
+Private Sub mnuPartidavisibility_Click()
+frmPartidaVisibility.Show 1
 End Sub

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePartida 
    BackColor       =   &H00000080&
    BorderStyle     =   3  'Fixed Dialog
@@ -149,10 +149,22 @@ End Sub
 
 Private Sub cmdOpen_Click()
 newPartida = False
+Dim sql As String
+Dim rs As New ADODB.Recordset
 activePartidaId = Val(lsvPartida.SelectedItem.Text)
+sql = "select status from partida where id='" & activePartidaId & "'"
+Set rs = db.execute(sql)
+PartidaStatus = rs.Fields(0).Value
 frmPartidaView.Show
 End Sub
-
 Private Sub Form_Load()
 Call loadPartidaList(lsvPartida)
+Call enable_partida_open(lsvPartida, cmdOpen)
+End Sub
+
+Private Sub lsvPartida_DblClick()
+Dim managepartida As New partida
+    partida_id_to_manage = lsvPartida.SelectedItem.Text
+    managepartida.load_partida (lsvPartida.SelectedItem.Text)
+    frmPartidaManagement.Show 1
 End Sub

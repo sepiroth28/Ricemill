@@ -27,11 +27,12 @@ Begin VB.Form frmManageItem
          BackColor       =   &H00C0FFFF&
          ForeColor       =   &H80000008&
          Height          =   5295
-         Left            =   120
+         Left            =   210
          ScaleHeight     =   5265
          ScaleWidth      =   7005
          TabIndex        =   13
-         Top             =   780
+         Top             =   720
+         Visible         =   0   'False
          Width           =   7035
          Begin VB.CommandButton Command1 
             Caption         =   "Save"

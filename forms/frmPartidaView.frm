@@ -1,18 +1,35 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPartidaView 
    Appearance      =   0  'Flat
    BackColor       =   &H00E0E0E0&
    Caption         =   "VIEW PARTIDA"
    ClientHeight    =   10590
-   ClientLeft      =   165
-   ClientTop       =   450
-   ClientWidth     =   16305
+   ClientLeft      =   225
+   ClientTop       =   555
+   ClientWidth     =   16050
    LinkTopic       =   "Form1"
    ScaleHeight     =   10590
-   ScaleWidth      =   16305
+   ScaleWidth      =   16050
    StartUpPosition =   3  'Windows Default
    WindowState     =   2  'Maximized
+   Begin VB.CommandButton cmdPrint 
+      Caption         =   "&Print"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   555
+      Left            =   6360
+      TabIndex        =   16
+      Top             =   9600
+      Width           =   2055
+   End
    Begin VB.CommandButton cmdExpenseDetail 
       Caption         =   "Expenses Detail"
       BeginProperty Font 
@@ -25,7 +42,7 @@ Begin VB.Form frmPartidaView
          Strikethrough   =   0   'False
       EndProperty
       Height          =   555
-      Left            =   4320
+      Left            =   2190
       TabIndex        =   14
       Top             =   9630
       Width           =   2055
@@ -35,12 +52,12 @@ Begin VB.Form frmPartidaView
       BackColor       =   &H00C7FEF3&
       ForeColor       =   &H80000008&
       Height          =   10455
-      Left            =   60
+      Left            =   0
       ScaleHeight     =   10425
-      ScaleWidth      =   16725
+      ScaleWidth      =   16995
       TabIndex        =   0
-      Top             =   60
-      Width           =   16755
+      Top             =   0
+      Width           =   17025
       Begin VB.CommandButton cmdAddExpenses 
          Caption         =   "[+] Add Expenses"
          BeginProperty Font 
@@ -53,9 +70,9 @@ Begin VB.Form frmPartidaView
             Strikethrough   =   0   'False
          EndProperty
          Height          =   555
-         Left            =   6360
+         Left            =   4260
          TabIndex        =   12
-         Top             =   9540
+         Top             =   9600
          Width           =   2055
       End
       Begin VB.TextBox txtPartidaName 
@@ -90,7 +107,7 @@ Begin VB.Form frmPartidaView
             Strikethrough   =   0   'False
          EndProperty
          Height          =   855
-         Left            =   13620
+         Left            =   13800
          TabIndex        =   8
          Top             =   9480
          Visible         =   0   'False
@@ -145,17 +162,17 @@ Begin VB.Form frmPartidaView
             Strikethrough   =   0   'False
          EndProperty
          Height          =   8055
-         Left            =   8640
+         Left            =   8610
          TabIndex        =   3
          Top             =   1380
-         Width           =   7935
+         Width           =   8175
          Begin MSComctlLib.ListView lsvStockOut 
             Height          =   6795
             Left            =   180
             TabIndex        =   7
             Top             =   300
-            Width           =   7575
-            _ExtentX        =   13361
+            Width           =   7815
+            _ExtentX        =   13785
             _ExtentY        =   11986
             View            =   3
             LabelEdit       =   1
@@ -190,8 +207,8 @@ Begin VB.Form frmPartidaView
             BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   2
-               Text            =   "# of kilo"
-               Object.Width           =   1764
+               Text            =   "Number of Sack"
+               Object.Width           =   2999
             EndProperty
             BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
@@ -213,11 +230,11 @@ Begin VB.Form frmPartidaView
          End
          Begin MSComctlLib.ListView lsvStockOutTotal 
             Height          =   315
-            Left            =   120
+            Left            =   240
             TabIndex        =   11
             Top             =   7320
-            Width           =   7815
-            _ExtentX        =   13785
+            Width           =   7755
+            _ExtentX        =   13679
             _ExtentY        =   556
             View            =   3
             LabelEdit       =   1
@@ -250,8 +267,8 @@ Begin VB.Form frmPartidaView
             BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   2
-               Text            =   "# of kilo"
-               Object.Width           =   1764
+               Text            =   "# of Sack"
+               Object.Width           =   2999
             EndProperty
             BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
@@ -270,6 +287,24 @@ Begin VB.Form frmPartidaView
                Text            =   "date in"
                Object.Width           =   0
             EndProperty
+         End
+         Begin VB.Label lblpercentage 
+            BackStyle       =   0  'Transparent
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H000000FF&
+            Height          =   375
+            Left            =   330
+            TabIndex        =   15
+            Top             =   7680
+            Width           =   4635
          End
       End
       Begin VB.Frame Frame1 
@@ -330,8 +365,8 @@ Begin VB.Form frmPartidaView
             BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   2
-               Text            =   "# of kilo"
-               Object.Width           =   1764
+               Text            =   "Number of kilo"
+               Object.Width           =   2999
             EndProperty
             BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
@@ -347,7 +382,7 @@ Begin VB.Form frmPartidaView
             EndProperty
             BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   5
-               Text            =   "date in"
+               Text            =   "Date in"
                Object.Width           =   2540
             EndProperty
          End
@@ -356,8 +391,8 @@ Begin VB.Form frmPartidaView
             Left            =   240
             TabIndex        =   10
             Top             =   7200
-            Width           =   7815
-            _ExtentX        =   13785
+            Width           =   7695
+            _ExtentX        =   13573
             _ExtentY        =   450
             View            =   3
             LabelEdit       =   1
@@ -391,7 +426,7 @@ Begin VB.Form frmPartidaView
                Alignment       =   1
                SubItemIndex    =   2
                Text            =   "# of kilo"
-               Object.Width           =   1764
+               Object.Width           =   2999
             EndProperty
             BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
@@ -416,8 +451,8 @@ Begin VB.Form frmPartidaView
             Left            =   240
             TabIndex        =   13
             Top             =   7620
-            Width           =   5775
-            _ExtentX        =   10186
+            Width           =   7695
+            _ExtentX        =   13573
             _ExtentY        =   450
             View            =   3
             LabelEdit       =   1
@@ -445,13 +480,13 @@ Begin VB.Form frmPartidaView
             BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   1
                Text            =   "Item"
-               Object.Width           =   2540
+               Object.Width           =   3528
             EndProperty
             BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   2
                Text            =   "# of kilo"
-               Object.Width           =   1764
+               Object.Width           =   1940
             EndProperty
             BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
@@ -463,7 +498,7 @@ Begin VB.Form frmPartidaView
                Alignment       =   1
                SubItemIndex    =   4
                Text            =   "Total"
-               Object.Width           =   2540
+               Object.Width           =   2999
             EndProperty
             BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   5
@@ -500,8 +535,14 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim edit_partida As New Partida
 Sub renderNewPartida()
-    txtPartidaName.Visible = True
+    txtPartidaname.Visible = True
     cmdSave.Visible = True
+    With Me
+    .cmdAddStockIn.Enabled = False
+    .cmdExpenseDetail.Enabled = False
+    .cmdAddExpenses.Enabled = False
+    .cmdAddStockOut.Enabled = False
+    End With
 End Sub
 
 Private Sub cmdAddExpenses_Click()
@@ -509,12 +550,16 @@ frmExpenses.Show 1
 End Sub
 
 Private Sub cmdAddStockIn_Click()
+Set activeform = frmStockIn
 frmStockIn.Show 1
 End Sub
 
 Private Sub cmdAddStockOut_Click()
+Set activeform = frmStockOut
 frmStockOut.Show 1
 End Sub
+
+
 
 Private Sub cmdExpenseDetail_Click()
 frmExpensesdetail.Show 1
@@ -524,7 +569,7 @@ Private Sub cmdSave_Click()
 If newPartida Then
     Dim new_partida As New Partida
         With new_partida
-            .partida_name = txtPartidaName.Text
+            .partida_name = txtPartidaname.Text
             .partida_status = 1
             .created_at = Format(Date, "yyyy-mm-dd")
             .created_by = "admin"
@@ -535,25 +580,38 @@ If newPartida Then
 
         Unload Me
 End If
+Call enable_partida_open(frmManagePartida.lsvPartida, frmManagePartida.cmdOpen)
+End Sub
+
+Private Sub Command1_Click()
+
 End Sub
 
 Private Sub Form_Load()
 If newPartida Then
     Call renderNewPartida
 Else
-    edit_partida.load_partida (activePartidaId)
-    lblPartidaName.Caption = edit_partida.partida_name & " Activities"
-Call totalexpenses(activePartidaId, lsvTotalExpenses)
-Call loadStockinListOnThisPartida(activePartidaId, lsvStockIn)
-Call loadStockInTotals(activePartidaId, lsvStockInTotal)
-Call loadStockOutListOnThisPartida(activePartidaId, lsvStockOut)
-Call loadStockOutTotals(activePartidaId, lsvStockOutTotal)
-End If
-End Sub
-Private Sub txtPartidaName_Click()
-If txtPartidaName.Text = "Input partida name here" Then
-    txtPartidaName.Text = ""
-    txtPartidaName.ForeColor = normalColor
-End If
+    If PartidaStatus = 1 Then
+        cmdAddStockIn.Enabled = True
+    Else
+        cmdAddStockIn.Enabled = False
+    End If
+    
+        edit_partida.load_partida (activePartidaId)
+        lblPartidaname.Caption = edit_partida.partida_name & " Activities"
+    Call totalexpenses(activePartidaId, lsvtotalExpenses)
+    Call loadStockinListOnThisPartida(activePartidaId, lsvStockIn)
+    Call loadStockInTotals(activePartidaId, lsvStockInTotal)
+    Call loadStockOutListOnThisPartida(activePartidaId, lsvStockOut)
+    Call loadStockOutTotals(activePartidaId, lsvStockOutTotal)
+    Call get_percentage(lblpercentage)
+    End If
 
+End Sub
+
+Private Sub txtPartidaName_Click()
+If txtPartidaname.Text = "Input partida name here" Then
+    txtPartidaname.Text = ""
+    txtPartidaname.ForeColor = normalColor
+End If
 End Sub

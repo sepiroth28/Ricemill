@@ -1,23 +1,40 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmExpensesdetail 
-   Caption         =   "Form1"
-   ClientHeight    =   4680
+   Caption         =   "Expenses Details"
+   ClientHeight    =   5235
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   8250
+   ClientWidth     =   6600
    LinkTopic       =   "Form1"
-   ScaleHeight     =   4680
-   ScaleWidth      =   8250
+   ScaleHeight     =   5235
+   ScaleWidth      =   6600
    StartUpPosition =   3  'Windows Default
-   Begin MSComctlLib.ListView lsvExpenses 
-      Height          =   3315
+   Begin VB.CommandButton cmdPrint 
+      Caption         =   "&Print"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   555
+      Left            =   4080
+      TabIndex        =   3
+      Top             =   4530
+      Width           =   2295
+   End
+   Begin MSComctlLib.ListView lsvPartidaExpenses 
+      Height          =   3285
       Left            =   180
       TabIndex        =   2
-      Top             =   750
-      Width           =   7845
-      _ExtentX        =   13838
-      _ExtentY        =   5847
+      Top             =   780
+      Width           =   6225
+      _ExtentX        =   10980
+      _ExtentY        =   5794
       View            =   3
       LabelEdit       =   1
       LabelWrap       =   -1  'True
@@ -37,15 +54,34 @@ Begin VB.Form frmExpensesdetail
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      NumItems        =   0
+      NumItems        =   4
+      BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         Text            =   "id"
+         Object.Width           =   0
+      EndProperty
+      BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         SubItemIndex    =   1
+         Text            =   "Description"
+         Object.Width           =   5645
+      EndProperty
+      BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         SubItemIndex    =   2
+         Text            =   "Amount"
+         Object.Width           =   2540
+      EndProperty
+      BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         SubItemIndex    =   3
+         Text            =   "Date Created"
+         Object.Width           =   2540
+      EndProperty
    End
    Begin MSComctlLib.ListView lsvtotalExpenses 
       Height          =   255
       Left            =   210
       TabIndex        =   1
       Top             =   4110
-      Width           =   7815
-      _ExtentX        =   13785
+      Width           =   6225
+      _ExtentX        =   10980
       _ExtentY        =   450
       View            =   3
       LabelEdit       =   1
@@ -73,7 +109,7 @@ Begin VB.Form frmExpensesdetail
       BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   1
          Text            =   "Item"
-         Object.Width           =   2540
+         Object.Width           =   3528
       EndProperty
       BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Alignment       =   1
@@ -129,11 +165,17 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Dim n_expenses As New expenses
 Dim newPartida As New Partida
+
+Private Sub cmdPrint_Click()
+n_expenses.printexpenses (newPartida.partida_name)
+End Sub
+
 Private Sub Form_Load()
 Me.BackColor = &HC7FEF3
 newPartida.load_partida (activePartidaId)
 lblPartidaName.Caption = newPartida.partida_name & "Expenses"
-'Call loadExpensesOnthisPartida(activePartidaId, lsvExpenses)
+Call loadExpensesOnthisPartida(activePartidaId, lsvPartidaExpenses)
 Call totalexpenses(activePartidaId, lsvtotalExpenses)
 End Sub

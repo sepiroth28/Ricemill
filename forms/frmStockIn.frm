@@ -4,14 +4,14 @@ Begin VB.Form frmStockIn
    BackColor       =   &H0097C2FD&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Stock-in"
-   ClientHeight    =   6855
+   ClientHeight    =   6315
    ClientLeft      =   45
    ClientTop       =   375
    ClientWidth     =   7230
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6855
+   ScaleHeight     =   6315
    ScaleWidth      =   7230
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
@@ -19,9 +19,9 @@ Begin VB.Form frmStockIn
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   6735
+      Height          =   6195
       Left            =   60
-      ScaleHeight     =   6705
+      ScaleHeight     =   6165
       ScaleWidth      =   7065
       TabIndex        =   0
       Top             =   60
@@ -123,7 +123,7 @@ Begin VB.Form frmStockIn
             Strikethrough   =   0   'False
          EndProperty
          Height          =   555
-         Left            =   240
+         Left            =   270
          TabIndex        =   5
          Top             =   4140
          Width           =   1875
@@ -241,7 +241,7 @@ Begin VB.Form frmStockIn
       Begin VB.Label Label3 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Qty In"
+         Caption         =   "Qty In(kg)"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -255,7 +255,7 @@ Begin VB.Form frmStockIn
          Left            =   240
          TabIndex        =   4
          Top             =   3780
-         Width           =   735
+         Width           =   1200
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
@@ -305,7 +305,7 @@ Attribute VB_Exposed = False
 Dim id_of_item As Integer
 
 Private Sub cmdSave_Click()
-Call get_item_id(txtitem.Text)
+Call get_item_id(txtItem.Text)
 Dim stock_in As New StockIn
 With stock_in
     .item_id = itemID
@@ -313,7 +313,7 @@ With stock_in
     .unit_price = Val(txtPrice.Text)
     .total_amount = Val(txtAmount.Text)
     .received_by = "admin"
-    .description = txtdescription
+    .description = txtDescription
     .date_in = Format(lblDate.Caption, "yyyy-mm-dd")
     .save_stockin
 End With
@@ -321,10 +321,31 @@ MsgBox "Successfully Stock in", vbInformation, "Stockin"
 
 Call loadStockinListOnThisPartida(activePartidaId, frmPartidaView.lsvStockIn)
 Call loadStockInTotals(activePartidaId, frmPartidaView.lsvStockInTotal)
-
+Call clearfield
 End Sub
 
+Private Sub Command1_Click()
+Set activedate = lblDate
+frmCalendar.Show 1
+End Sub
 Private Sub Form_Load()
+Me.Top = frmPartidaView.Top + 2500
+Me.Left = frmPartidaView.Left + 700
 lblDate.Caption = FormatDateTime(Date, vbShortDate)
 End Sub
 
+Private Sub txtPrice_Change()
+Call get_total_amount(txtQty, txtPrice, txtAmount)
+End Sub
+
+Private Sub txtQty_Change()
+Call get_total_amount(txtQty, txtPrice, txtAmount)
+End Sub
+
+Private Sub clearfield()
+txtAmount.Text = ""
+With txtQty
+.Text = ""
+.SetFocus
+End With
+End Sub

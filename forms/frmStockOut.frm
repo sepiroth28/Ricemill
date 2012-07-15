@@ -166,7 +166,7 @@ Begin VB.Form frmStockOut
       Begin VB.Label Label3 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Qty Out"
+         Caption         =   "Qty Out(sack)"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -180,7 +180,7 @@ Begin VB.Form frmStockOut
          Left            =   240
          TabIndex        =   11
          Top             =   2580
-         Width           =   930
+         Width           =   1665
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
@@ -224,7 +224,7 @@ Begin VB.Form frmStockOut
          Alignment       =   1  'Right Justify
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Item"
+         Caption         =   "date"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -280,10 +280,22 @@ MsgBox "Successfully Stock Out", vbInformation, "StockOut"
 
 Call loadStockOutListOnThisPartida(activePartidaId, frmPartidaView.lsvStockOut)
 Call loadStockOutTotals(activePartidaId, frmPartidaView.lsvStockOutTotal)
+Call get_percentage(frmPartidaView.lblpercentage)
 End Sub
 
+Private Sub Command1_Click()
+Set activedate = lblDate
+frmCalendar.Show 1
+End Sub
 Private Sub Form_Load()
+Me.Top = frmPartidaView.Top + 2500
+Me.Left = frmPartidaView.Left + 9300
 lblDate.Caption = FormatDateTime(Date, vbShortDate)
 item_id = 1
 End Sub
-
+Private Sub txtPrice_Change()
+Call get_total_amount(txtQty, txtPrice, txtAmount)
+End Sub
+Private Sub txtQty_Change()
+Call get_total_amount(txtQty, txtPrice, txtAmount)
+End Sub
