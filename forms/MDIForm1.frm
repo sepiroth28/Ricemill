@@ -30,7 +30,7 @@ Begin VB.MDIForm MDIForm1
    Begin VB.Menu mnuAdmin 
       Caption         =   "Admin"
       Begin VB.Menu mnuPartidavisibility 
-         Caption         =   "Partida Visibility"
+         Caption         =   "Open Close Partida"
       End
       Begin VB.Menu mnu_sep3 
          Caption         =   "-"

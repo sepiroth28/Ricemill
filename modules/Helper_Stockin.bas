@@ -47,8 +47,3 @@ End If
 End Sub
 
 
-Sub PrintStockIn(partida_id As Integer, partida_name As String)
-Dim sql As String
- sql = view_partida_stock_in_list & " WHERE ps.partida_id = " & partida_id
-    
-End Sub

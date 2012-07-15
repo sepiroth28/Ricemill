@@ -91,7 +91,7 @@ Begin VB.Form frmManagePartida
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   5
+         NumItems        =   6
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "id"
             Object.Width           =   0
@@ -108,11 +108,16 @@ Begin VB.Form frmManagePartida
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "created on"
-            Object.Width           =   2540
+            Text            =   "stockout_status"
+            Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
+            Text            =   "created on"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
             Text            =   "created by"
             Object.Width           =   0
          EndProperty
@@ -152,9 +157,10 @@ newPartida = False
 Dim sql As String
 Dim rs As New ADODB.Recordset
 activePartidaId = Val(lsvPartida.SelectedItem.Text)
-sql = "select status from partida where id='" & activePartidaId & "'"
+sql = "select status,stockout_status from partida where id='" & activePartidaId & "'"
 Set rs = db.execute(sql)
-PartidaStatus = rs.Fields(0).Value
+PartidaStatus = rs.Fields("status").Value
+stockout_status = rs.Fields("stockout_status").Value
 frmPartidaView.Show
 End Sub
 Private Sub Form_Load()
@@ -163,7 +169,7 @@ Call enable_partida_open(lsvPartida, cmdOpen)
 End Sub
 
 Private Sub lsvPartida_DblClick()
-Dim managepartida As New partida
+Dim managepartida As New Partida
     partida_id_to_manage = lsvPartida.SelectedItem.Text
     managepartida.load_partida (lsvPartida.SelectedItem.Text)
     frmPartidaManagement.Show 1

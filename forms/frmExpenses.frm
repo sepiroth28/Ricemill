@@ -177,6 +177,10 @@ End With
 Call totalexpenses(activePartidaId, frmPartidaView.lsvtotalExpenses)
 End Sub
 
+Private Sub cmdCancel_Click()
+Unload Me
+End Sub
+
 Private Sub Form_Load()
 Me.Top = frmPartidaView.Top + 2700
 Me.Left = frmPartidaView.Left + 900

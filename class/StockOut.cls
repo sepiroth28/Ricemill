@@ -33,6 +33,28 @@ db.execute insert
 
 End Sub
 
+Sub printstockout(partidaname As String)
+Dim rs As New ADODB.Recordset
+Dim gettotalkilos As Double
+Dim gettotalamount As Double
+Dim sql As String
+ sql = view_partida_stock_out_list & " WHERE ps.partida_id = '" & activePartidaId & "'"
+Set rs = db.execute(sql)
+
+Set dtaStockout.DataSource = rs
+    dtaStockin.Sections(1).Controls("lblPartidaname").Caption = partidaname
+    dtaStockin.Sections(1).Controls("lbldate").Caption = Date
+    
+sql = view_partida_stock_in_totals & " WHERE ps.partida_id = '" & activePartidaId & "'"
+
+Set rs = db.execute(sql)
+    gettotalkilos = rs.Fields("total_in").Value
+    gettotalamount = rs.Fields("total_amount").Value
+    dtaStockin.Sections(5).Controls("lbltotalkilos").Caption = gettotalkilos & " Kg."
+    dtaStockin.Sections(5).Controls("lbltotalamount").Caption = "Php. " & gettotalamount
+dtaStockin.Show 1
+End Sub
+
 Public Sub delete_stockout()
 End Sub
 
@@ -56,10 +78,10 @@ If Me.id = 0 Then
 End If
 End Sub
 
-Public Property Let received_by(ByVal vData As String)
+Public Property Let received_by(ByVal vdata As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.received_by = 5
-    mvarreceived_by = vData
+    mvarreceived_by = vdata
 End Property
 
 
@@ -71,10 +93,10 @@ End Property
 
 
 
-Public Property Let date_out(ByVal vData As String)
+Public Property Let date_out(ByVal vdata As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.date_in = 5
-    mvardate_out = vData
+    mvardate_out = vdata
 End Property
 
 
@@ -86,10 +108,10 @@ End Property
 
 
 
-Public Property Let total_amount(ByVal vData As Double)
+Public Property Let total_amount(ByVal vdata As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.total_amount = 5
-    mvartotal_amount = vData
+    mvartotal_amount = vdata
 End Property
 
 
@@ -101,10 +123,10 @@ End Property
 
 
 
-Public Property Let unit_price(ByVal vData As Double)
+Public Property Let unit_price(ByVal vdata As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.unit_price = 5
-    mvarunit_price = vData
+    mvarunit_price = vdata
 End Property
 
 
@@ -116,10 +138,10 @@ End Property
 
 
 
-Public Property Let qty_out(ByVal vData As Double)
+Public Property Let qty_out(ByVal vdata As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.qty_in = 5
-    mvarqty_out = vData
+    mvarqty_out = vdata
 End Property
 
 
@@ -131,10 +153,10 @@ End Property
 
 
 
-Public Property Let item_id(ByVal vData As Integer)
+Public Property Let item_id(ByVal vdata As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.item_id = 5
-    mvaritem_id = vData
+    mvaritem_id = vdata
 End Property
 
 
@@ -146,10 +168,10 @@ End Property
 
 
 
-Public Property Let id(ByVal vData As Integer)
+Public Property Let id(ByVal vdata As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.id = 5
-    mvarid = vData
+    mvarid = vdata
 End Property
 
 

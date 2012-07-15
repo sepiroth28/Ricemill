@@ -15,7 +15,8 @@ Attribute VB_Ext_KEY = "SavedWithClassBuilder6" ,"Yes"
 Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 'local variable(s) to hold property value(s)
 Private mvarpartida_name As String 'local copy
-Private mvarpartida_status As String 'local copy
+Private mvarpartida_status As Integer 'local copy
+Private mvarstockout_status As Integer 'local copy
 Private mvarcreated_at As String 'local copy
 Private mvarcreated_by As String 'local copy
 'local variable(s) to hold property value(s)
@@ -27,7 +28,6 @@ Private mvarpartida_totalgross As Double
 Private mvarpartida_totalcapital As Double
 Private mvarpartida_totalexpenses As Double
 Private mvarpartida_profit As Double
-
 
 
 Public Property Let partida_id(ByVal vdata As Integer)
@@ -42,6 +42,7 @@ Public Property Get partida_id() As Integer
 'Syntax: Debug.Print X.partida_id
     partida_id = mvarpartida_id
 End Property
+
 Public Sub update_status(status_code As String)
 End Sub
 
@@ -60,6 +61,7 @@ If rs.RecordCount > 0 Then
     Me.partida_id = rs.Fields("id").Value
     Me.partida_name = rs.Fields("name").Value
     Me.partida_status = rs.Fields("status").Value
+    Me.stockout_status = rs.Fields("stockout_status").Value
     Me.created_at = rs.Fields("created_at").Value
     Me.created_by = rs.Fields("created_by").Value
 End If
@@ -71,8 +73,9 @@ Public Sub save()
 If Me.partida_id = 0 Then
     Dim insert As String
     insert = "INSERT INTO partida VALUES(null,'" & _
-                Me.partida_name & "'," & _
-                Me.partida_status & ",'" & _
+                Me.partida_name & " '," & _
+                Me.partida_status & "," & _
+                Me.stockout_status & ",'" & _
                 Me.created_at & "','" & _
                 Me.created_by & "')"
     db.execute insert
@@ -120,6 +123,19 @@ Public Property Get partida_status() As String
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.partida_status
     partida_status = mvarpartida_status
+End Property
+
+Public Property Let stockout_status(ByVal vdata As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.partida_status = 5
+    mvarstockout_status = vdata
+End Property
+
+
+Public Property Get stockout_status() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.partida_status
+    stockout_status = mvarstockout_status
 End Property
 
 

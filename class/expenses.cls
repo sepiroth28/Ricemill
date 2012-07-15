@@ -101,7 +101,7 @@ Dim rs As New ADODB.Recordset
     Me.date_created = rs.Fields("date_created")
 End Sub
 
-Sub printexpenses(partida_name)
+Sub printexpenses(partida_name As String)
 Dim rs As New ADODB.Recordset
 Dim sql As String
 Dim gettotal As String

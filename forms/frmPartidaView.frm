@@ -4,17 +4,51 @@ Begin VB.Form frmPartidaView
    Appearance      =   0  'Flat
    BackColor       =   &H00E0E0E0&
    Caption         =   "VIEW PARTIDA"
-   ClientHeight    =   10590
+   ClientHeight    =   10725
    ClientLeft      =   225
    ClientTop       =   555
-   ClientWidth     =   16050
+   ClientWidth     =   18555
    LinkTopic       =   "Form1"
-   ScaleHeight     =   10590
-   ScaleWidth      =   16050
+   ScaleHeight     =   10725
+   ScaleWidth      =   18555
    StartUpPosition =   3  'Windows Default
    WindowState     =   2  'Maximized
+   Begin VB.CommandButton Command1 
+      Caption         =   "&Close Partida Stock out"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   525
+      Left            =   13230
+      TabIndex        =   18
+      Top             =   960
+      Width           =   2685
+   End
+   Begin VB.CommandButton cmdClosePartida 
+      Caption         =   "&Close Partida Stock in"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   525
+      Left            =   5070
+      TabIndex        =   17
+      Top             =   960
+      Width           =   2685
+   End
    Begin VB.CommandButton cmdPrint 
-      Caption         =   "&Print"
+      Caption         =   "&Print Stock-in"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   12
@@ -27,8 +61,8 @@ Begin VB.Form frmPartidaView
       Height          =   555
       Left            =   6360
       TabIndex        =   16
-      Top             =   9600
-      Width           =   2055
+      Top             =   9630
+      Width           =   1935
    End
    Begin VB.CommandButton cmdExpenseDetail 
       Caption         =   "Expenses Detail"
@@ -128,7 +162,7 @@ Begin VB.Form frmPartidaView
          Height          =   495
          Left            =   15960
          TabIndex        =   6
-         Top             =   960
+         Top             =   990
          Width           =   615
       End
       Begin VB.CommandButton cmdAddStockIn 
@@ -486,7 +520,7 @@ Begin VB.Form frmPartidaView
                Alignment       =   1
                SubItemIndex    =   2
                Text            =   "# of kilo"
-               Object.Width           =   1940
+               Object.Width           =   2011
             EndProperty
             BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
@@ -498,7 +532,7 @@ Begin VB.Form frmPartidaView
                Alignment       =   1
                SubItemIndex    =   4
                Text            =   "Total"
-               Object.Width           =   2999
+               Object.Width           =   2540
             EndProperty
             BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   5
@@ -535,10 +569,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim edit_partida As New Partida
 Sub renderNewPartida()
-    txtPartidaname.Visible = True
+    txtPartidaName.Visible = True
     cmdSave.Visible = True
     With Me
-    .cmdAddStockIn.Enabled = False
+    .cmdAddStockIn.Enabled = True
     .cmdExpenseDetail.Enabled = False
     .cmdAddExpenses.Enabled = False
     .cmdAddStockOut.Enabled = False
@@ -561,45 +595,57 @@ End Sub
 
 
 
+Private Sub cmdClosepartida_Click()
+Dim toclosepartidaStockin As New Partida
+
+toclosepartidaStockin.load_partida (activePartidaId)
+Call closepartida(activePartidaId, toclosepartidaStockin.partida_status)
+End Sub
+
 Private Sub cmdExpenseDetail_Click()
 frmExpensesdetail.Show 1
 End Sub
 
-Private Sub cmdSave_Click()
-If newPartida Then
-    Dim new_partida As New Partida
-        With new_partida
-            .partida_name = txtPartidaname.Text
-            .partida_status = 1
-            .created_at = Format(Date, "yyyy-mm-dd")
-            .created_by = "admin"
-            .save
-        End With
-        MsgBox "Successfully saved!", vbInformation, "save"
-        Call loadPartidaList(frmManagePartida.lsvPartida)
+Private Sub cmdPrint_Click()
+Dim newPartida As New Partida
+newPartida.load_partida (activePartidaId)
+Dim toprintstockin As New StockIn
+toprintstockin.printstockin (newPartida.partida_name)
 
-        Unload Me
-End If
-Call enable_partida_open(frmManagePartida.lsvPartida, frmManagePartida.cmdOpen)
+End Sub
+
+Private Sub cmdSave_Click()
+Call savePartida
 End Sub
 
 Private Sub Command1_Click()
+Dim toclosepartidaStockout As New Partida
 
+toclosepartidaStockout.load_partida (activePartidaId)
+Call closepartidaStockout(activePartidaId, toclosepartidaStockout.stockout_status)
 End Sub
 
 Private Sub Form_Load()
 If newPartida Then
     Call renderNewPartida
 Else
-    If PartidaStatus = 1 Then
+    If PartidaStatus = 1 And stockout_status = 0 Then
         cmdAddStockIn.Enabled = True
+        cmdAddStockOut.Enabled = True
+    ElseIf PartidaStatus = 1 And stockout_status = 1 Then
+        cmdAddStockIn.Enabled = True
+        cmdAddStockOut.Enabled = False
+    ElseIf PartidaStatus = 0 And stockout_status = 1 Then
+        cmdAddStockIn.Enabled = False
+        cmdAddStockOut.Enabled = False
     Else
         cmdAddStockIn.Enabled = False
+        cmdAddStockOut.Enabled = True
     End If
     
         edit_partida.load_partida (activePartidaId)
-        lblPartidaname.Caption = edit_partida.partida_name & " Activities"
-    Call totalexpenses(activePartidaId, lsvtotalExpenses)
+        lblPartidaName.Caption = edit_partida.partida_name & " Activities"
+    Call totalexpenses(activePartidaId, lsvTotalExpenses)
     Call loadStockinListOnThisPartida(activePartidaId, lsvStockIn)
     Call loadStockInTotals(activePartidaId, lsvStockInTotal)
     Call loadStockOutListOnThisPartida(activePartidaId, lsvStockOut)
@@ -610,8 +656,9 @@ Else
 End Sub
 
 Private Sub txtPartidaName_Click()
-If txtPartidaname.Text = "Input partida name here" Then
-    txtPartidaname.Text = ""
-    txtPartidaname.ForeColor = normalColor
+If txtPartidaName.Text = "Input partida name here" Then
+    txtPartidaName.Text = ""
+    txtPartidaName.ForeColor = normalColor
 End If
 End Sub
+

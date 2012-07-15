@@ -2,6 +2,7 @@ Attribute VB_Name = "Helper_GLOBAL_VARS"
 Public db As New db
 Public activePartidaId As Integer
 Public PartidaStatus As Integer
+Public stockout_status As Integer
 Public newPartida As Boolean
 Public itemID As Integer
 Public activedate As Label
@@ -37,7 +38,7 @@ End Sub
 Public Sub view_profit(lbl As Label)
 Dim capital As Double
 Dim gross As Double
-capital = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(5)) + Val(frmPartidaView.lsvtotalExpenses.SelectedItem.SubItems(5))
+capital = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(5)) + Val(frmPartidaView.lsvTotalExpenses.SelectedItem.SubItems(5))
 gross = Val(frmPartidaView.lsvStockOutTotal.SelectedItem.SubItems(5))
 lbl = gross - capital
 End Sub

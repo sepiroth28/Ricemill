@@ -58,7 +58,7 @@ Begin VB.Form frmStockIn
          Height          =   735
          Left            =   4920
          TabIndex        =   13
-         Top             =   5100
+         Top             =   5130
          Width           =   1995
       End
       Begin VB.CommandButton Command1 
@@ -305,6 +305,10 @@ Attribute VB_Exposed = False
 Dim id_of_item As Integer
 
 Private Sub cmdSave_Click()
+If newPartida = True Then
+    Call savePartida
+    Call getlastpartida_id(activePartidaId)
+End If
 Call get_item_id(txtItem.Text)
 Dim stock_in As New StockIn
 With stock_in
