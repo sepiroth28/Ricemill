@@ -39,14 +39,14 @@ End Sub
 
 
 Public Sub get_percentage(lbl As Label)
-Dim percent As String
+Dim percent As Integer
 kilospersack = Val(frmPartidaView.lsvStockOutTotal.SelectedItem.SubItems(2)) * no_of_kilospersack
 totalkg = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(2))
 If totalkg = 0 Then
 lbl = "Current out percentage: 0%"
 Else
-percent = "Current out Percentage: " & (kilospersack / totalkg) * 100 & "%"
-lbl = percent
+percent = (kilospersack / totalkg) * 100
+lbl = "Current out Percentage: " & percent & "%"
 End If
 End Sub
 

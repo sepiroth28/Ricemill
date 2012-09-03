@@ -2,6 +2,7 @@ Attribute VB_Name = "Helper_GLOBAL_VARS"
 Public db As New db
 Public activePartidaId As Integer
 Public PartidaStatus As Integer
+Public stockout_status As Integer
 Public newPartida As Boolean
 Public itemID As Integer
 Public activedate As Label
@@ -11,6 +12,7 @@ Public totalkg As Double
 Public profit As Double
 Public partida_id_toevaluate As Integer
 Public partida_id_to_manage As Integer
+Public active_provider_id As String
 '
 
 

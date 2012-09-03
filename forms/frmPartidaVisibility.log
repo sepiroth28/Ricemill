@@ -1,1 +1,2 @@
-Line 33: Class TabDlg.SSTab of control SSTab1 was not a loaded control class.
+Line 103: Class MSComctlLib.ListView of control lsvActivePartida was not a loaded control class.
+Line 161: Class MSComctlLib.ListView of control lsvinactivepartida was not a loaded control class.

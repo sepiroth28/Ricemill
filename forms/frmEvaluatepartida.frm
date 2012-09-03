@@ -290,7 +290,7 @@ Begin VB.Form frmEvaluatepartida
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      NumItems        =   5
+      NumItems        =   6
       BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Text            =   "id"
          Object.Width           =   0
@@ -307,11 +307,16 @@ Begin VB.Form frmEvaluatepartida
       EndProperty
       BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   3
-         Text            =   "created at"
+         Text            =   "Stockout_status"
          Object.Width           =   0
       EndProperty
       BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   4
+         Text            =   "created at"
+         Object.Width           =   0
+      EndProperty
+      BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         SubItemIndex    =   5
          Text            =   "created by"
          Object.Width           =   0
       EndProperty
@@ -341,13 +346,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim evaluatepartida As New partida
+Dim evaluatepartida As New Partida
 
 Private Sub cmdEvaluate_Click()
 visibleDetail
 partida_id_toevaluate = lsvpartidalist.SelectedItem.Text
 evaluatepartida.load_partida_evaluation (partida_id_toevaluate)
-lblPartidaname.Caption = evaluatepartida.partida_name_toevaluate
+lblPartidaName.Caption = evaluatepartida.partida_name_toevaluate
 lblTotalincome.Caption = evaluatepartida.partida_totalgross
 lblTotalCapital.Caption = evaluatepartida.partida_totalcapital + evaluatepartida.partida_totalexpenses
 lblcapital.Caption = evaluatepartida.partida_totalcapital

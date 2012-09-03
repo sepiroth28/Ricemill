@@ -30,13 +30,19 @@ Begin VB.MDIForm MDIForm1
    Begin VB.Menu mnuAdmin 
       Caption         =   "Admin"
       Begin VB.Menu mnuPartidavisibility 
-         Caption         =   "Partida Visibility"
+         Caption         =   "Open Close Partida"
       End
       Begin VB.Menu mnu_sep3 
          Caption         =   "-"
       End
       Begin VB.Menu mnuEvaluatepartida 
          Caption         =   "Evaluate Partida"
+      End
+      Begin VB.Menu mnu_sep4 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuManage_provider 
+         Caption         =   "Manage Provider"
       End
    End
 End
@@ -64,6 +70,11 @@ End Sub
 Private Sub mnuitem_Click()
 frmManageItem.Show
 End Sub
+
+Private Sub mnuManage_provider_Click()
+frmManageProvider.Show 1
+End Sub
+
 Private Sub mnuPartidavisibility_Click()
 frmPartidaVisibility.Show 1
 End Sub

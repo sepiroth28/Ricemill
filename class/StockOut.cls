@@ -26,11 +26,33 @@ Public Sub associateToPartida(partida_id As Integer)
 Dim last_stock_id As Integer
 Dim insert As String
 
-last_stock_id = getLastId
+last_stock_id = getlastId
 
 insert = "INSERT INTO partida_stockout VALUES(" & partida_id & "," & last_stock_id & ")"
 db.execute insert
 
+End Sub
+
+Sub printstockout(partidaname As String)
+Dim rs As New ADODB.Recordset
+Dim gettotalkilos As Double
+Dim gettotalamount As Double
+Dim sql As String
+ sql = view_partida_stock_out_list & " WHERE ps.partida_id = '" & activePartidaId & "'"
+Set rs = db.execute(sql)
+
+Set dtaStockout.DataSource = rs
+    dtaStockin.Sections(1).Controls("lblPartidaname").Caption = partidaname
+    dtaStockin.Sections(1).Controls("lbldate").Caption = Date
+    
+sql = view_partida_stock_in_totals & " WHERE ps.partida_id = '" & activePartidaId & "'"
+
+Set rs = db.execute(sql)
+    gettotalkilos = rs.Fields("total_in").Value
+    gettotalamount = rs.Fields("total_amount").Value
+    dtaStockin.Sections(5).Controls("lbltotalkilos").Caption = gettotalkilos & " Kg."
+    dtaStockin.Sections(5).Controls("lbltotalamount").Caption = "Php. " & gettotalamount
+dtaStockin.Show 1
 End Sub
 
 Public Sub delete_stockout()

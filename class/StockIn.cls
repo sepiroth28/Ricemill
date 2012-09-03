@@ -22,11 +22,28 @@ Private mvartotal_amount As Double 'local copy
 Private mvardate_in As String 'local copy
 Private mvarreceived_by As String 'local copy
 Private mvardescription As String 'local copy
+'local variable(s) to hold property value(s)
+Private mvarNum_of_sack As Double 'local copy
+Public Property Let Num_of_sack(ByVal vData As Double)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.Num_of_sack = 5
+    mvarNum_of_sack = vData
+End Property
+
+
+Public Property Get Num_of_sack() As Double
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.Num_of_sack
+    Num_of_sack = mvarNum_of_sack
+End Property
+
+
+
 Public Sub associateToPartida(partida_id As Integer)
 Dim last_stock_id As Integer
 Dim insert As String
 
-last_stock_id = getLastId
+last_stock_id = getlastId
 
 insert = "INSERT INTO partida_stockin VALUES(" & partida_id & "," & last_stock_id & ")"
 db.execute insert
@@ -46,6 +63,7 @@ If Me.id = 0 Then
     insert = "INSERT INTO stock_in VALUES(null," & _
                 Me.item_id & "," & _
                 Me.qty_in & "," & _
+                Me.Num_of_sack & "," & _
                 Me.unit_price & "," & _
                 Me.total_amount & ",'" & _
                 Me.description & "','" & _
@@ -55,6 +73,31 @@ If Me.id = 0 Then
     Me.associateToPartida (activePartidaId)
 End If
 End Sub
+
+Sub printstockin(partidaname As String)
+Dim rs As New ADODB.Recordset
+Dim gettotalkilos As Double
+Dim gettotalamount As Double
+Dim sql As String
+ sql = view_partida_stock_in_list & " WHERE ps.partida_id = '" & activePartidaId & "'"
+Set rs = db.execute(sql)
+
+Set dtaStockin.DataSource = rs
+    dtaStockin.Sections(1).Controls("lblPartidaname").Caption = partidaname
+    dtaStockin.Sections(1).Controls("lbldate").Caption = Date
+    
+sql = view_partida_stock_in_totals & " WHERE ps.partida_id = '" & activePartidaId & "'"
+
+    On Error Resume Next
+Set rs = db.execute(sql)
+    
+    gettotalkilos = rs.Fields("total_in").Value
+    gettotalamount = rs.Fields("total_amount").Value
+    dtaStockin.Sections(5).Controls("lbltotalkilos").Caption = gettotalkilos & " Kg."
+    dtaStockin.Sections(5).Controls("lbltotalamount").Caption = "Php. " & gettotalamount
+dtaStockin.Show 1
+End Sub
+
 
 Public Property Let received_by(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
