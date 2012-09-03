@@ -3,15 +3,26 @@ DB = 175, 175, 1170, 630, C
 CONFIG = 25, 25, 944, 532, C
 MDIForm1 = 0, 0, 0, 0, C, 0, 0, 0, 0, C
 Partida = 100, 100, 1003, 617, C
+<<<<<<< HEAD
+frmManagePartida = 0, 0, 903, 517, , 25, 25, 928, 542, C
+frmPartidaView = 8, 75, 911, 592, C, 47, 33, 950, 550, C
+=======
 frmManagePartida = 0, 0, 903, 517, C, 25, 25, 928, 542, C
 frmPartidaView = 8, 75, 911, 592, Z, 100, 100, 1003, 617, C
+>>>>>>> 27d5c3724d17123a7e7a9cb23dd70b1cc78c930e
 Helper_Stockin = 0, 0, 919, 507, C
-Helper_Core = 50, 50, 1045, 505, C
+Helper_Core = 50, 50, 1045, 505, Z
 Helper_GLOBAL_VARS = 250, 250, 1153, 767, C
 Helper_Main = -9, 95, 894, 612, C
+<<<<<<< HEAD
+frmStockIn = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+StockIn = 225, 225, 1144, 732, C
+Helper_Partida = 32, 43, 935, 560, 
+=======
 frmStockIn = 0, 0, 0, 0, C, 50, 50, 861, 475, C
 StockIn = 225, 225, 1144, 732, 
 Helper_Partida = 150, 150, 1053, 667, C
+>>>>>>> 27d5c3724d17123a7e7a9cb23dd70b1cc78c930e
 SQL = 100, 100, 1003, 617, C
 frmStockOut = 0, 0, 0, 0, C, 0, 0, 0, 0, C
 StockOut = 0, 0, 0, 0, C
@@ -25,7 +36,7 @@ frmExpensesdetail = 39, 135, 942, 652, C, -29, 105, 874, 622, C
 frmCalendar = 0, 0, 0, 0, C, 25, 25, 836, 450, C
 frmPartidaVisibility = 0, 0, 0, 0, C, 75, 75, 978, 592, C
 frmEvaluatepartida = 25, 25, 928, 542, C, 0, 0, 903, 517, C
-frmPartidaManagement = 150, 150, 1053, 667, C, 225, 225, 1128, 742, C
+frmPartidaManagement = 150, 150, 1053, 667, C, -8, 109, 895, 626, C
 Helper_useraccount = 50, 50, 953, 567, C
 Useraccount = -130, 26, 773, 543, C
 dtapartidaexpenses = 225, 225, 1144, 732, C, 200, 200, 1100, 988, C
