@@ -12,6 +12,7 @@ Public totalkg As Double
 Public profit As Double
 Public partida_id_toevaluate As Integer
 Public partida_id_to_manage As Integer
+Public active_provider_id As String
 '
 
 
@@ -38,7 +39,7 @@ End Sub
 Public Sub view_profit(lbl As Label)
 Dim capital As Double
 Dim gross As Double
-capital = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(5)) + Val(frmPartidaView.lsvTotalExpenses.SelectedItem.SubItems(5))
+capital = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(5)) + Val(frmPartidaView.lsvtotalExpenses.SelectedItem.SubItems(5))
 gross = Val(frmPartidaView.lsvStockOutTotal.SelectedItem.SubItems(5))
 lbl = gross - capital
 End Sub

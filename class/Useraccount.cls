@@ -11,20 +11,22 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+Attribute VB_Ext_KEY = "SavedWithClassBuilder6" ,"Yes"
+Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 Private mvarusername As String
 Private mvaruserpass As String
 Private mvarusertype As String
 
-Public Property Let username(ByVal vdata As String)
-mvarusername = vdata
+Public Property Let username(ByVal vData As String)
+mvarusername = vData
 End Property
 
 Public Property Get username() As String
 username = mvarusername
 End Property
 
-Public Property Let password(ByVal vdata As String)
-mvaruserpass = vdata
+Public Property Let password(ByVal vData As String)
+mvaruserpass = vData
 End Property
 
 Public Property Get password() As String
@@ -32,8 +34,8 @@ password = mvaruserpass
 End Property
 
 
-Public Property Let usertype(ByVal vdata As String)
-mvarusertype = vdata
+Public Property Let usertype(ByVal vData As String)
+mvarusertype = vData
 End Property
 
 Public Property Get usertype() As String

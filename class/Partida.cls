@@ -30,10 +30,10 @@ Private mvarpartida_totalexpenses As Double
 Private mvarpartida_profit As Double
 
 
-Public Property Let partida_id(ByVal vdata As Integer)
+Public Property Let partida_id(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.partida_id = 5
-    mvarpartida_id = vdata
+    mvarpartida_id = vData
 End Property
 
 
@@ -61,7 +61,7 @@ If rs.RecordCount > 0 Then
     Me.partida_id = rs.Fields("id").Value
     Me.partida_name = rs.Fields("name").Value
     Me.partida_status = rs.Fields("status").Value
-    Me.stockout_status = rs.Fields("stockout_status").Value
+    'Me.stockout_status = rs.Fields("stockout_status").Value
     Me.created_at = rs.Fields("created_at").Value
     Me.created_by = rs.Fields("created_by").Value
 End If
@@ -74,18 +74,17 @@ If Me.partida_id = 0 Then
     Dim insert As String
     insert = "INSERT INTO partida VALUES(null,'" & _
                 Me.partida_name & " '," & _
-                Me.partida_status & "," & _
-                Me.stockout_status & ",'" & _
+                Me.partida_status & ",'" & _
                 Me.created_at & "','" & _
                 Me.created_by & "')"
     db.execute insert
 End If
 End Sub
 
-Public Property Let created_by(ByVal vdata As String)
+Public Property Let created_by(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.created_by = 5
-    mvarcreated_by = vdata
+    mvarcreated_by = vData
 End Property
 
 
@@ -97,10 +96,10 @@ End Property
 
 
 
-Public Property Let created_at(ByVal vdata As String)
+Public Property Let created_at(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.created_at = 5
-    mvarcreated_at = vdata
+    mvarcreated_at = vData
 End Property
 
 
@@ -112,10 +111,10 @@ End Property
 
 
 
-Public Property Let partida_status(ByVal vdata As String)
+Public Property Let partida_status(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.partida_status = 5
-    mvarpartida_status = vdata
+    mvarpartida_status = vData
 End Property
 
 
@@ -125,10 +124,10 @@ Public Property Get partida_status() As String
     partida_status = mvarpartida_status
 End Property
 
-Public Property Let stockout_status(ByVal vdata As String)
+Public Property Let stockout_status(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.partida_status = 5
-    mvarstockout_status = vdata
+    mvarstockout_status = vData
 End Property
 
 
@@ -140,10 +139,10 @@ End Property
 
 
 
-Public Property Let partida_name(ByVal vdata As String)
+Public Property Let partida_name(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.partida_name = 5
-    mvarpartida_name = vdata
+    mvarpartida_name = vData
 End Property
 
 
@@ -163,10 +162,10 @@ End Sub
 
 '##########################################################################################################################
 
-Public Property Let partida_id_toevaluate(ByVal vdata As Integer)
+Public Property Let partida_id_toevaluate(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.partida_id = 5
-    mvarpartida_id_toevaluate = vdata
+    mvarpartida_id_toevaluate = vData
 End Property
 
 
@@ -176,10 +175,10 @@ Public Property Get partida_id_toevaluate() As Integer
     partida_id_toevaluate = mvarpartida_id_toevaluate
 End Property
 
-Public Property Let partida_name_toevaluate(ByVal vdata As String)
+Public Property Let partida_name_toevaluate(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.created_by = 5
-    mvarpartida_name_toevaluate = vdata
+    mvarpartida_name_toevaluate = vData
 End Property
 
 
@@ -189,10 +188,10 @@ Public Property Get partida_name_toevaluate() As String
     partida_name_toevaluate = mvarpartida_name_toevaluate
 End Property
 
-Public Property Let partida_totalcapital(ByVal vdata As Double)
+Public Property Let partida_totalcapital(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.created_by = 5
-    mvarpartida_totalcapital = vdata
+    mvarpartida_totalcapital = vData
 End Property
 
 
@@ -202,10 +201,10 @@ Public Property Get partida_totalcapital() As Double
     partida_totalcapital = mvarpartida_totalcapital
 End Property
 
-Public Property Let partida_totalexpenses(ByVal vdata As Double)
+Public Property Let partida_totalexpenses(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.created_by = 5
-    mvarpartida_totalexpenses = vdata
+    mvarpartida_totalexpenses = vData
 End Property
 
 
@@ -215,10 +214,10 @@ Public Property Get partida_totalexpenses() As Double
     partida_totalexpenses = mvarpartida_totalexpenses
 End Property
 
-Public Property Let partida_totalgross(ByVal vdata As Double)
+Public Property Let partida_totalgross(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.created_by = 5
-    mvarpartida_totalgross = vdata
+    mvarpartida_totalgross = vData
 End Property
 
 
@@ -228,10 +227,10 @@ Public Property Get partida_totalgross() As Double
     partida_totalgross = mvarpartida_totalgross
 End Property
 
-Public Property Let partida_profit(ByVal vdata As Double)
+Public Property Let partida_profit(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.created_by = 5
-    mvarpartida_profit = vdata
+    mvarpartida_profit = vData
 End Property
 
 

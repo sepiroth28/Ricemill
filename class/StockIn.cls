@@ -22,6 +22,23 @@ Private mvartotal_amount As Double 'local copy
 Private mvardate_in As String 'local copy
 Private mvarreceived_by As String 'local copy
 Private mvardescription As String 'local copy
+'local variable(s) to hold property value(s)
+Private mvarNum_of_sack As Double 'local copy
+Public Property Let Num_of_sack(ByVal vData As Double)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.Num_of_sack = 5
+    mvarNum_of_sack = vData
+End Property
+
+
+Public Property Get Num_of_sack() As Double
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.Num_of_sack
+    Num_of_sack = mvarNum_of_sack
+End Property
+
+
+
 Public Sub associateToPartida(partida_id As Integer)
 Dim last_stock_id As Integer
 Dim insert As String
@@ -46,6 +63,7 @@ If Me.id = 0 Then
     insert = "INSERT INTO stock_in VALUES(null," & _
                 Me.item_id & "," & _
                 Me.qty_in & "," & _
+                Me.Num_of_sack & "," & _
                 Me.unit_price & "," & _
                 Me.total_amount & ",'" & _
                 Me.description & "','" & _
@@ -81,10 +99,10 @@ dtaStockin.Show 1
 End Sub
 
 
-Public Property Let received_by(ByVal vdata As String)
+Public Property Let received_by(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.received_by = 5
-    mvarreceived_by = vdata
+    mvarreceived_by = vData
 End Property
 
 
@@ -94,10 +112,10 @@ Public Property Get received_by() As String
     received_by = mvarreceived_by
 End Property
 
-Public Property Let description(ByVal vdata As String)
+Public Property Let description(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.received_by = 5
-    mvardescription = vdata
+    mvardescription = vData
 End Property
 
 
@@ -108,10 +126,10 @@ Public Property Get description() As String
 End Property
 
 
-Public Property Let date_in(ByVal vdata As String)
+Public Property Let date_in(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.date_in = 5
-    mvardate_in = vdata
+    mvardate_in = vData
 End Property
 
 
@@ -123,10 +141,10 @@ End Property
 
 
 
-Public Property Let total_amount(ByVal vdata As Double)
+Public Property Let total_amount(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.total_amount = 5
-    mvartotal_amount = vdata
+    mvartotal_amount = vData
 End Property
 
 
@@ -138,10 +156,10 @@ End Property
 
 
 
-Public Property Let unit_price(ByVal vdata As Double)
+Public Property Let unit_price(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.unit_price = 5
-    mvarunit_price = vdata
+    mvarunit_price = vData
 End Property
 
 
@@ -153,10 +171,10 @@ End Property
 
 
 
-Public Property Let qty_in(ByVal vdata As Double)
+Public Property Let qty_in(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.qty_in = 5
-    mvarqty_in = vdata
+    mvarqty_in = vData
 End Property
 
 
@@ -168,10 +186,10 @@ End Property
 
 
 
-Public Property Let item_id(ByVal vdata As Integer)
+Public Property Let item_id(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.item_id = 5
-    mvaritem_id = vdata
+    mvaritem_id = vData
 End Property
 
 
@@ -183,10 +201,10 @@ End Property
 
 
 
-Public Property Let id(ByVal vdata As Integer)
+Public Property Let id(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.id = 5
-    mvarid = vdata
+    mvarid = vData
 End Property
 
 

@@ -26,7 +26,7 @@ Public Sub associateToPartida(partida_id As Integer)
 Dim last_stock_id As Integer
 Dim insert As String
 
-last_stock_id = getLastId
+last_stock_id = getlastId
 
 insert = "INSERT INTO partida_stockout VALUES(" & partida_id & "," & last_stock_id & ")"
 db.execute insert
@@ -78,10 +78,10 @@ If Me.id = 0 Then
 End If
 End Sub
 
-Public Property Let received_by(ByVal vdata As String)
+Public Property Let received_by(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.received_by = 5
-    mvarreceived_by = vdata
+    mvarreceived_by = vData
 End Property
 
 
@@ -93,10 +93,10 @@ End Property
 
 
 
-Public Property Let date_out(ByVal vdata As String)
+Public Property Let date_out(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.date_in = 5
-    mvardate_out = vdata
+    mvardate_out = vData
 End Property
 
 
@@ -108,10 +108,10 @@ End Property
 
 
 
-Public Property Let total_amount(ByVal vdata As Double)
+Public Property Let total_amount(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.total_amount = 5
-    mvartotal_amount = vdata
+    mvartotal_amount = vData
 End Property
 
 
@@ -123,10 +123,10 @@ End Property
 
 
 
-Public Property Let unit_price(ByVal vdata As Double)
+Public Property Let unit_price(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.unit_price = 5
-    mvarunit_price = vdata
+    mvarunit_price = vData
 End Property
 
 
@@ -138,10 +138,10 @@ End Property
 
 
 
-Public Property Let qty_out(ByVal vdata As Double)
+Public Property Let qty_out(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.qty_in = 5
-    mvarqty_out = vdata
+    mvarqty_out = vData
 End Property
 
 
@@ -153,10 +153,10 @@ End Property
 
 
 
-Public Property Let item_id(ByVal vdata As Integer)
+Public Property Let item_id(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.item_id = 5
-    mvaritem_id = vdata
+    mvaritem_id = vData
 End Property
 
 
@@ -168,10 +168,10 @@ End Property
 
 
 
-Public Property Let id(ByVal vdata As Integer)
+Public Property Let id(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.id = 5
-    mvarid = vdata
+    mvarid = vData
 End Property
 
 

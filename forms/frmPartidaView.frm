@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPartidaView 
    Appearance      =   0  'Flat
    BackColor       =   &H00E0E0E0&
@@ -386,37 +386,47 @@ Begin VB.Form frmPartidaView
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            NumItems        =   6
+            NumItems        =   8
             BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Text            =   "id"
                Object.Width           =   0
             EndProperty
             BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   1
-               Text            =   "Item"
+               Text            =   "Date In"
                Object.Width           =   2540
             EndProperty
             BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   2
-               Text            =   "Number of kilo"
+               Text            =   "Provider"
                Object.Width           =   2999
             EndProperty
             BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   3
-               Text            =   "Unit price"
+               Text            =   "Number of Sack(s)"
                Object.Width           =   2540
             EndProperty
             BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   4
-               Text            =   "Total"
+               Text            =   "Number of Kilo(s)"
                Object.Width           =   2540
             EndProperty
             BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   5
-               Text            =   "Date in"
+               Text            =   "Description"
+               Object.Width           =   2540
+            EndProperty
+            BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   6
+               Text            =   "Unit Price"
+               Object.Width           =   2540
+            EndProperty
+            BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   7
+               Text            =   "Amount"
                Object.Width           =   2540
             EndProperty
          End
@@ -569,7 +579,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim edit_partida As New Partida
 Sub renderNewPartida()
-    txtPartidaName.Visible = True
+    txtPartidaname.Visible = True
     cmdSave.Visible = True
     With Me
     .cmdAddStockIn.Enabled = True
@@ -644,8 +654,8 @@ Else
     End If
     
         edit_partida.load_partida (activePartidaId)
-        lblPartidaName.Caption = edit_partida.partida_name & " Activities"
-    Call totalexpenses(activePartidaId, lsvTotalExpenses)
+        lblPartidaname.Caption = edit_partida.partida_name & " Activities"
+    Call totalexpenses(activePartidaId, lsvtotalExpenses)
     Call loadStockinListOnThisPartida(activePartidaId, lsvStockIn)
     Call loadStockInTotals(activePartidaId, lsvStockInTotal)
     Call loadStockOutListOnThisPartida(activePartidaId, lsvStockOut)
@@ -656,9 +666,9 @@ Else
 End Sub
 
 Private Sub txtPartidaName_Click()
-If txtPartidaName.Text = "Input partida name here" Then
-    txtPartidaName.Text = ""
-    txtPartidaName.ForeColor = normalColor
+If txtPartidaname.Text = "Input partida name here" Then
+    txtPartidaname.Text = ""
+    txtPartidaname.ForeColor = normalColor
 End If
 End Sub
 

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePartida 
    BackColor       =   &H00000080&
    BorderStyle     =   3  'Fixed Dialog
@@ -157,10 +157,10 @@ newPartida = False
 Dim sql As String
 Dim rs As New ADODB.Recordset
 activePartidaId = Val(lsvPartida.SelectedItem.Text)
-sql = "select status,stockout_status from partida where id='" & activePartidaId & "'"
+sql = "select status from partida where id='" & activePartidaId & "'"
 Set rs = db.execute(sql)
 PartidaStatus = rs.Fields("status").Value
-stockout_status = rs.Fields("stockout_status").Value
+'stockout_status = rs.Fields("stockout_status").Value
 frmPartidaView.Show
 End Sub
 Private Sub Form_Load()

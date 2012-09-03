@@ -11,6 +11,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+Attribute VB_Ext_KEY = "SavedWithClassBuilder6" ,"Yes"
+Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 'local variable(s) to hold property value(s)
 Private mvarid As Integer 'local copy
 Private mvarexpense_desc As String 'local copy
@@ -23,10 +25,10 @@ Me.id = 0
 End Sub
 
 
-Public Property Let id(ByVal vdata As String)
+Public Property Let id(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.id = 5
-    mvarid = vdata
+    mvarid = vData
 End Property
 Public Property Get id() As String
 'used when retrieving value of a property, on the right side of an assignment.
@@ -34,30 +36,30 @@ Public Property Get id() As String
     id = mvarid
 End Property
 
-Public Property Let desc(ByVal vdata As String)
+Public Property Let desc(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.description = 5
-    mvarexpense_desc = vdata
+    mvarexpense_desc = vData
 End Property
 Public Property Get desc() As String
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.description
     desc = mvarexpense_desc
 End Property
-Public Property Let amount(ByVal vdata As Currency)
+Public Property Let amount(ByVal vData As Currency)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.amount = 5
-    mvaramount = vdata
+    mvaramount = vData
 End Property
 Public Property Get amount() As Currency
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.amount
     amount = mvaramount
 End Property
-Public Property Let date_created(ByVal vdata As String)
+Public Property Let date_created(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.amount = 5
-    mvardate_created = vdata
+    mvardate_created = vData
 End Property
 Public Property Get date_created() As String
 'used when retrieving value of a property, on the right side of an assignment.
@@ -81,7 +83,7 @@ Public Sub associateToPartidaExpenses(partida_id As Integer)
 Dim last_expense_id As Integer
 Dim insert As String
 
-last_expense_id = getLastId
+last_expense_id = getlastId
 
 insert = "INSERT INTO partida_expenses VALUES(" & last_expense_id & "," & partida_id & ")"
 db.execute insert

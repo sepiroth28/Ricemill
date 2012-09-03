@@ -4,12 +4,13 @@ Dim sql As String
 Dim attributes As New Collection
 If partida_id <> 0 Then
     sql = view_partida_stock_in_list & " WHERE ps.partida_id = " & partida_id
-    attributes.Add "description"
+    attributes.Add "date_in"
+    attributes.Add "name"
+    attributes.Add "num_of_sack"
     attributes.Add "qty_in"
+    attributes.Add "description"
     attributes.Add "price"
     attributes.Add "total_amount"
-    attributes.Add "date_in"
-    
     Call populateResultOnThisListView(sql, lsv, attributes)
 End If
 End Sub
