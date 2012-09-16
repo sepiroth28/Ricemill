@@ -405,13 +405,13 @@ Begin VB.Form frmPartidaView
             BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   3
-               Text            =   "Number of Sack(s)"
+               Text            =   "No. of Sack(s)"
                Object.Width           =   2540
             EndProperty
             BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Alignment       =   1
                SubItemIndex    =   4
-               Text            =   "Number of Kilo(s)"
+               Text            =   "No. of Kilo(s)"
                Object.Width           =   2540
             EndProperty
             BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
@@ -579,7 +579,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim edit_partida As New Partida
 Sub renderNewPartida()
-    txtPartidaname.Visible = True
+    txtPartidaName.Visible = True
     cmdSave.Visible = True
     With Me
     .cmdAddStockIn.Enabled = True
@@ -607,9 +607,9 @@ End Sub
 
 Private Sub cmdClosepartida_Click()
 Dim toclosepartidaStockin As New Partida
-
 toclosepartidaStockin.load_partida (activePartidaId)
 Call closepartida(activePartidaId, toclosepartidaStockin.partida_status)
+Call controlsOfThisPartidaStatus
 End Sub
 
 Private Sub cmdExpenseDetail_Click()
@@ -630,32 +630,22 @@ End Sub
 
 Private Sub Command1_Click()
 Dim toclosepartidaStockout As New Partida
-
 toclosepartidaStockout.load_partida (activePartidaId)
 Call closepartidaStockout(activePartidaId, toclosepartidaStockout.stockout_status)
+Call controlsOfThisPartidaStatus
 End Sub
 
 Private Sub Form_Load()
+
 If newPartida Then
     Call renderNewPartida
 Else
-    If PartidaStatus = 1 And stockout_status = 0 Then
-        cmdAddStockIn.Enabled = True
-        cmdAddStockOut.Enabled = True
-    ElseIf PartidaStatus = 1 And stockout_status = 1 Then
-        cmdAddStockIn.Enabled = True
-        cmdAddStockOut.Enabled = False
-    ElseIf PartidaStatus = 0 And stockout_status = 1 Then
-        cmdAddStockIn.Enabled = False
-        cmdAddStockOut.Enabled = False
-    Else
-        cmdAddStockIn.Enabled = False
-        cmdAddStockOut.Enabled = True
-    End If
+
+    Call controlsOfThisPartidaStatus
     
         edit_partida.load_partida (activePartidaId)
-        lblPartidaname.Caption = edit_partida.partida_name & " Activities"
-    Call totalexpenses(activePartidaId, lsvtotalExpenses)
+        lblPartidaName.Caption = edit_partida.partida_name & " Activities"
+    Call totalexpenses(activePartidaId, lsvTotalExpenses)
     Call loadStockinListOnThisPartida(activePartidaId, lsvStockIn)
     Call loadStockInTotals(activePartidaId, lsvStockInTotal)
     Call loadStockOutListOnThisPartida(activePartidaId, lsvStockOut)
@@ -666,9 +656,26 @@ Else
 End Sub
 
 Private Sub txtPartidaName_Click()
-If txtPartidaname.Text = "Input partida name here" Then
-    txtPartidaname.Text = ""
-    txtPartidaname.ForeColor = normalColor
+If txtPartidaName.Text = "Input partida name here" Then
+    txtPartidaName.Text = ""
+    txtPartidaName.ForeColor = normalColor
 End If
 End Sub
 
+Sub controlsOfThisPartidaStatus()
+Dim loadinfo_of_this_partida As New Partida
+    loadinfo_of_this_partida.load_partida (activePartidaId)
+    If loadinfo_of_this_partida.partida_status = 1 And loadinfo_of_this_partida.stockout_status = 1 Then
+        cmdAddStockIn.Enabled = True
+        cmdAddStockOut.Enabled = True
+    ElseIf loadinfo_of_this_partida.partida_status = 1 And loadinfo_of_this_partida.stockout_status = 0 Then
+        cmdAddStockIn.Enabled = True
+        cmdAddStockOut.Enabled = False
+    ElseIf loadinfo_of_this_partida.partida_status = 0 And loadinfo_of_this_partida.stockout_status = 1 Then
+        cmdAddStockIn.Enabled = False
+        cmdAddStockOut.Enabled = True
+    Else
+        cmdAddStockIn.Enabled = False
+        cmdAddStockOut.Enabled = False
+    End If
+End Sub

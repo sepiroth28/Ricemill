@@ -437,7 +437,7 @@ If newPartida = True Then
     Call savePartida
     Call getlastpartida_id(activePartidaId)
 End If
-Call get_item_id(txtitem.Text)
+Call get_item_id(txtItem.Text)
 Dim stock_in As New StockIn
 Dim newprovider As New provider
 With stock_in
@@ -447,11 +447,11 @@ With stock_in
     .total_amount = Val(txtAmount.Text)
     .Num_of_sack = txtNum_of_sack.Text
     .received_by = "admin"
-    .description = txtdescription
+    .description = txtDescription
     .date_in = Format(lblDate.Caption, "yyyy-mm-dd")
     .save_stockin
 End With
-active_stockin_provider.insertPartidaProvider
+active_stockin_provider.insertPartidaProvider (getlastId)
 
 MsgBox "Successfully Stock in", vbInformation, "Stockin"
 

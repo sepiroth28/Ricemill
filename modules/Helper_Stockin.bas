@@ -5,7 +5,7 @@ Dim attributes As New Collection
 If partida_id <> 0 Then
     sql = view_partida_stock_in_list & " WHERE ps.partida_id = " & partida_id
     attributes.Add "date_in"
-    attributes.Add "name"
+    attributes.Add "provider_name"
     attributes.Add "num_of_sack"
     attributes.Add "qty_in"
     attributes.Add "description"

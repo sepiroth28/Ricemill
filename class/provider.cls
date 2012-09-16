@@ -21,10 +21,10 @@ Private mvarlast_insert_provider_id As Integer 'local copy
 Private mvarnewpartida As Partida 'local copy
 'local variable(s) to hold property value(s)
 Private mvarprovider_address As String 'local copy
-Public Sub insertPartidaProvider()
+Public Sub insertPartidaProvider(stockin_id As Integer)
     Dim sql As String
-    sql = "INSERT INTO partida_provider " & _
-    " VALUES(" & activePartidaId & "," & Me.provider_id & ")"
+    sql = "INSERT INTO stockin_provider " & _
+    " VALUES(" & stockin_id & "," & Me.provider_id & ")"
     db.execute (sql)
 End Sub
 

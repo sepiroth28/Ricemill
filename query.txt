@@ -1,0 +1,2 @@
+select * from stock_in s inner join stockin_provider sp on s.id=sp.stockin_id inner join provider pro on sp.provider_id=pro.id inner join partida_stockin ps on s.id=ps.stockin_id
+inner join partida p on ps.partida_id=p.id

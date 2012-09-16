@@ -18,8 +18,36 @@ Private mvarid As Integer 'local copy
 Private mvarexpense_desc As String 'local copy
 Private mvaramount As Currency 'local copy
 Private mvardate_created As String 'local copy
+'local variable(s) to hold property value(s)
+Private mvarno_of_kg As Double 'local copy
+Private mvarrate_per_kg As Double 'local copy
+Public Property Let rate_per_kg(ByVal vData As Double)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.rate_per_kg = 5
+    mvarrate_per_kg = vData
+End Property
 
 
+Public Property Get rate_per_kg() As Double
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.rate_per_kg
+    rate_per_kg = mvarrate_per_kg
+End Property
+
+
+
+Public Property Let no_of_kg(ByVal vData As Double)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.no_of_kg = 5
+    mvarno_of_kg = vData
+End Property
+
+
+Public Property Get no_of_kg() As Double
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.no_of_kg
+    no_of_kg = mvarno_of_kg
+End Property
 Private Sub Class_Initialize()
 Me.id = 0
 End Sub
@@ -70,10 +98,12 @@ End Property
 Public Sub add_expenses()
 If Me.id = 0 Then
     Dim addexpenses As String
-addexpenses = "INSERT INTO expenses(id,description,amount,date_created) VALUES(NULL,'" & _
+addexpenses = "INSERT INTO expenses(id,description,amount,date_created,no_of_kg,rate_per_kg) VALUES(NULL,'" & _
                 Me.desc & "','" & _
                 Me.amount & "','" & _
-                Me.date_created & "')"
+                Me.date_created & "'," & _
+                Me.no_of_kg & "," & _
+                Me.rate_per_kg & ")"
 db.execute addexpenses
 Me.associateToPartidaExpenses (activePartidaId)
 End If
@@ -100,7 +130,9 @@ Dim rs As New ADODB.Recordset
     partida_name = rs.Fields("name").Value
     Me.desc = rs.Fields("description").Value
     Me.amount = rs.Fields("amount").Value
-    Me.date_created = rs.Fields("date_created")
+    Me.date_created = rs.Fields("date_created").Value
+    Me.no_of_kg = rs.Fields("no_of_kg").Value
+    Me.rate_per_kg = rs.Fields("rate_per_kg").Value
 End Sub
 
 Sub printexpenses(partida_name As String)

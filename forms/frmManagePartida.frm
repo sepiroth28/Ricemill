@@ -157,9 +157,9 @@ newPartida = False
 Dim sql As String
 Dim rs As New ADODB.Recordset
 activePartidaId = Val(lsvPartida.SelectedItem.Text)
-sql = "select status from partida where id='" & activePartidaId & "'"
-Set rs = db.execute(sql)
-PartidaStatus = rs.Fields("status").Value
+'sql = "select status from partida where id='" & activePartidaId & "'"
+'Set rs = db.execute(sql)
+'PartidaStatus = rs.Fields("status").Value
 'stockout_status = rs.Fields("stockout_status").Value
 frmPartidaView.Show
 End Sub

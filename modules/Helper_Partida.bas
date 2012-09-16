@@ -67,10 +67,10 @@ Sub closepartidaStockout(partida_id As Integer, stockout_status As Integer)
 '0 open
 '1 close
     
-    If stockout_status = 0 Then
+    If stockout_status = 1 Then
         confirm = MsgBox("Are you sure you want to close partida Stock out?", vbQuestion + vbYesNo)
         If confirm = vbYes Then
-            sql = "update partida set stockout_status=1 where id='" & partida_id & "'"
+            sql = "update partida set stockout_status=0 where id='" & partida_id & "'"
             Set rs = db.execute(sql)
             MsgBox ("successfully close partida Stock out"), vbInformation, "Close partida"
         End If
@@ -83,7 +83,7 @@ Public Sub savePartida()
 If newPartida Then
     Dim new_partida As New Partida
         With new_partida
-            .partida_name = frmPartidaView.txtPartidaName.Text
+            .partida_name = frmPartidaView.txtPartidaname.Text
             .partida_status = 1
             .stockout_status = 0
             .created_at = Format(Date, "yyyy-mm-dd")

@@ -10,6 +10,38 @@ Begin VB.Form frmExpenses
    ScaleHeight     =   4140
    ScaleWidth      =   6525
    StartUpPosition =   3  'Windows Default
+   Begin VB.TextBox txtnoogkg 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   525
+      Left            =   1920
+      TabIndex        =   11
+      Top             =   2220
+      Width           =   1035
+   End
+   Begin VB.TextBox txtrate 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   525
+      Left            =   3450
+      TabIndex        =   8
+      Top             =   2250
+      Width           =   1035
+   End
    Begin VB.CommandButton cmdCancel 
       Caption         =   "Cancel"
       BeginProperty Font 
@@ -24,7 +56,7 @@ Begin VB.Form frmExpenses
       Height          =   675
       Left            =   2280
       TabIndex        =   5
-      Top             =   3120
+      Top             =   3330
       Width           =   1935
    End
    Begin VB.CommandButton cmdAddExpenses 
@@ -41,7 +73,7 @@ Begin VB.Form frmExpenses
       Height          =   675
       Left            =   4320
       TabIndex        =   4
-      Top             =   3120
+      Top             =   3330
       Width           =   1935
    End
    Begin VB.TextBox txtAmount 
@@ -54,11 +86,11 @@ Begin VB.Form frmExpenses
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   435
-      Left            =   1920
+      Height          =   525
+      Left            =   5130
       TabIndex        =   3
       Top             =   2280
-      Width           =   2115
+      Width           =   1035
    End
    Begin VB.TextBox txtDescription 
       BeginProperty Font 
@@ -74,8 +106,84 @@ Begin VB.Form frmExpenses
       Left            =   1920
       MultiLine       =   -1  'True
       TabIndex        =   2
-      Top             =   1260
+      Top             =   900
       Width           =   4215
+   End
+   Begin VB.Label Label7 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "x"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Left            =   3150
+      TabIndex        =   13
+      Top             =   2310
+      Width           =   135
+   End
+   Begin VB.Label Label6 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "No.of kg:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Left            =   1920
+      TabIndex        =   12
+      Top             =   1890
+      Width           =   1095
+   End
+   Begin VB.Label Label5 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "="
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Left            =   4740
+      TabIndex        =   10
+      Top             =   2340
+      Width           =   165
+   End
+   Begin VB.Label Label4 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Rate/kg:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Left            =   3450
+      TabIndex        =   9
+      Top             =   1920
+      Width           =   1035
    End
    Begin VB.Label lblDate 
       BackStyle       =   0  'Transparent
@@ -137,7 +245,7 @@ Begin VB.Form frmExpenses
       Height          =   300
       Left            =   420
       TabIndex        =   1
-      Top             =   1200
+      Top             =   840
       Width           =   1455
    End
    Begin VB.Label Label3 
@@ -154,9 +262,9 @@ Begin VB.Form frmExpenses
          Strikethrough   =   0   'False
       EndProperty
       Height          =   300
-      Left            =   780
+      Left            =   5160
       TabIndex        =   0
-      Top             =   2340
+      Top             =   1980
       Width           =   1020
    End
 End
@@ -172,6 +280,8 @@ With exp
     .desc = txtDescription.Text
     .amount = Val(txtAmount.Text)
     .date_created = Format(lblDate.Caption, "yyyy-mm-dd")
+    .no_of_kg = txtnoogkg.Text
+    .rate_per_kg = txtrate.Text
     .add_expenses
 End With
 Call totalexpenses(activePartidaId, frmPartidaView.lsvtotalExpenses)
@@ -185,4 +295,12 @@ Private Sub Form_Load()
 Me.Top = frmPartidaView.Top + 2700
 Me.Left = frmPartidaView.Left + 900
 lblDate.Caption = FormatDateTime(Date, vbShortDate)
+End Sub
+
+Private Sub txtnoogkg_Change()
+    Call get_total_amount(txtnoogkg, txtrate, txtAmount)
+End Sub
+
+Private Sub txtrate_Change()
+    Call get_total_amount(txtnoogkg, txtrate, txtAmount)
 End Sub

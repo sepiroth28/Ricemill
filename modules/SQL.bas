@@ -1,15 +1,9 @@
 Attribute VB_Name = "SQL"
 'SQL VIEWS ===========================================================================================================
-Public Const view_partida_stock_in_list As String = "SELECT * FROM `partida_stockin` ps " & _
-                                                    " INNER JOIN stock_in s " & _
-                                                    " ON ps.stockin_id = s.id" & _
-                                                    " INNER JOIN items i " & _
-                                                    " ON s.item_id = i.id" & _
-                                                    " INNER JOIN partida p on p.id=ps.partida_id " & _
-                                                    " INNER JOIN partida_provider pp " & _
-                                                    " ON p.id=pp.partida_id " & _
-                                                    " INNER JOIN provider pro " & _
-                                                    " ON pp.provider_id=pro.id"
+Public Const view_partida_stock_in_list As String = "select *,pro.name as provider_name from stock_in s inner join stockin_provider sp on s.id=sp.stockin_id " & _
+                                                    "inner join provider pro on sp.provider_id=pro.id inner join " & _
+                                                    "partida_stockin ps on s.id=ps.stockin_id inner join partida p " & _
+                                                    "on ps.partida_id=p.id"
 
 Public Const view_partida_stock_in_totals As String = "SELECT SUM(qty_in) as total_in,SUM(total_amount) as total_amount FROM `partida_stockin` ps " & _
                                                     " INNER JOIN stock_in s " & _

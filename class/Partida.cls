@@ -61,7 +61,7 @@ If rs.RecordCount > 0 Then
     Me.partida_id = rs.Fields("id").Value
     Me.partida_name = rs.Fields("name").Value
     Me.partida_status = rs.Fields("status").Value
-    'Me.stockout_status = rs.Fields("stockout_status").Value
+    Me.stockout_status = rs.Fields("stockout_status").Value
     Me.created_at = rs.Fields("created_at").Value
     Me.created_by = rs.Fields("created_by").Value
 End If
@@ -76,7 +76,7 @@ If Me.partida_id = 0 Then
                 Me.partida_name & " '," & _
                 Me.partida_status & ",'" & _
                 Me.created_at & "','" & _
-                Me.created_by & "')"
+                Me.created_by & "','1')"
     db.execute insert
 End If
 End Sub
