@@ -1,13 +1,13 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManageProvider 
    Caption         =   "Manage Provider"
-   ClientHeight    =   7905
+   ClientHeight    =   6585
    ClientLeft      =   225
    ClientTop       =   855
    ClientWidth     =   9210
    LinkTopic       =   "Form1"
-   ScaleHeight     =   7905
+   ScaleHeight     =   6585
    ScaleWidth      =   9210
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox Picture1 
@@ -56,13 +56,13 @@ Begin VB.Form frmManageProvider
          Width           =   3645
       End
       Begin MSComctlLib.ListView lsvProviderlist 
-         Height          =   5595
+         Height          =   4335
          Left            =   210
          TabIndex        =   4
          Top             =   2130
          Width           =   8805
          _ExtentX        =   15531
-         _ExtentY        =   9869
+         _ExtentY        =   7646
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -166,3 +166,7 @@ Private Sub cmdNewProvider_Click()
 frmProvider.Show 1
 End Sub
 
+Private Sub Form_Load()
+    Me.Top = 3900
+    Me.Left = 6100
+End Sub

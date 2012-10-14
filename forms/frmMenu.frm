@@ -89,9 +89,13 @@ End Sub
 '    Image1.MousePointer = vbHourglass
 'End Sub
 Private Sub Image1_Click()
-    frmManagePartida.Show
+    frmManagePartida.Show 1
 End Sub
 
 Private Sub Image2_Click()
-    frmManageItem.Show
+    frmManageItem.Show 1
+End Sub
+
+Private Sub Image3_Click()
+    frmManageProvider.Show 1
 End Sub

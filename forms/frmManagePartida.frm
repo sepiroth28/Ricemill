@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePartida 
    BackColor       =   &H00000080&
    BorderStyle     =   3  'Fixed Dialog
@@ -160,7 +160,7 @@ activePartidaId = Val(lsvPartida.SelectedItem.Text)
 'Set rs = db.execute(sql)
 'PartidaStatus = rs.Fields("status").Value
 'stockout_status = rs.Fields("stockout_status").Value
-frmPartidaView.Show
+frmPartidaView.Show 1
 End Sub
 
 Private Sub Form_DragDrop(Source As Control, X As Single, Y As Single)

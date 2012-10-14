@@ -158,3 +158,8 @@ Dim newprovider As New provider
     End With
     MsgBox ("New Provider Saved")
 End Sub
+
+Private Sub Form_Load()
+    Me.Top = 4500
+    Me.Left = 6100
+End Sub

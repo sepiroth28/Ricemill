@@ -132,3 +132,15 @@ For Each cnt In frmLogin
     End If
 Next cnt
 End Sub
+
+Private Sub txtPassword_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        Call imgLogin_Click
+    End If
+End Sub
+
+Private Sub txtUsername_KeyPress(KeyAscii As Integer)
+    If KeyAscii = 13 Then
+        Call imgLogin_Click
+    End If
+End Sub
