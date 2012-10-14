@@ -83,16 +83,18 @@ CREATE TABLE `items` (
   `unit_price` double(10,2) DEFAULT NULL,
   `unit_of_measure` varchar(45) DEFAULT NULL,
   `status` varchar(45) NOT NULL,
+  `product_type` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` (`id`,`item_code`,`description`,`unit_price`,`unit_of_measure`,`status`) VALUES 
- (1,'Humay','Humay',28.00,'kilo(s)','Active');
+INSERT INTO `items` (`id`,`item_code`,`description`,`unit_price`,`unit_of_measure`,`status`,`product_type`) VALUES 
+ (1,'Humay','Humay',28.00,'kilo(s)','Active','raw'),
+ (2,'rice','rice puti',1200.00,'Sack','Active','output');
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 
 
@@ -119,7 +121,7 @@ CREATE TABLE `partida` (
 INSERT INTO `partida` (`id`,`name`,`status`,`created_at`,`created_by`,`stockout_status`) VALUES 
  (1,'Partida 1 ','1','2012-09-16','admin',0),
  (2,'partida 2 ','1','2012-09-16','admin',1),
- (3,'Partida 3 ','0','2012-09-16','admin',0);
+ (3,'Partida 3 ','1','2012-09-16','admin',0);
 /*!40000 ALTER TABLE `partida` ENABLE KEYS */;
 
 
@@ -204,6 +206,31 @@ INSERT INTO `partida_stockout` (`partida_id`,`stockout_id`) VALUES
  (1,1),
  (3,2);
 /*!40000 ALTER TABLE `partida_stockout` ENABLE KEYS */;
+
+
+--
+-- Definition of table `previleges`
+--
+
+DROP TABLE IF EXISTS `previleges`;
+CREATE TABLE `previleges` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `previleges` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `previleges`
+--
+
+/*!40000 ALTER TABLE `previleges` DISABLE KEYS */;
+INSERT INTO `previleges` (`id`,`previleges`) VALUES 
+ (1,'can_create_partida'),
+ (2,'can_stockin'),
+ (3,'can_stockout'),
+ (4,'can_close_partida'),
+ (5,'can_close_partida_stockout');
+/*!40000 ALTER TABLE `previleges` ENABLE KEYS */;
 
 
 --
@@ -336,8 +363,35 @@ CREATE TABLE `user_account` (
 
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
 INSERT INTO `user_account` (`username`,`password`,`user_type`) VALUES 
- ('admin ','21232f297a57a5a743894a0e4a801fc3','Admin ');
+ ('admin ','21232f297a57a5a743894a0e4a801fc3','admin');
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user_previleges`
+--
+
+DROP TABLE IF EXISTS `user_previleges`;
+CREATE TABLE `user_previleges` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) DEFAULT NULL,
+  `previleges` varchar(45) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_previleges`
+--
+
+/*!40000 ALTER TABLE `user_previleges` DISABLE KEYS */;
+INSERT INTO `user_previleges` (`id`,`username`,`previleges`,`status`) VALUES 
+ (1,'admin','1','0'),
+ (2,'admin','2','0'),
+ (3,'admin','3','1'),
+ (4,'admin','4','0'),
+ (5,'admin','5','1');
+/*!40000 ALTER TABLE `user_previleges` ENABLE KEYS */;
 
 
 

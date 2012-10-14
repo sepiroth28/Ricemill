@@ -13,6 +13,7 @@ Public profit As Double
 Public partida_id_toevaluate As Integer
 Public partida_id_to_manage As Integer
 Public active_provider_id As String
+Public activeUser As New Useraccount
 '
 
 

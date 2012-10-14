@@ -51,6 +51,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub MDIForm_Load()
+    frmMenu.Show
+End Sub
+
 Private Sub mnu_file_exit_Click()
 End
 End Sub

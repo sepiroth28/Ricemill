@@ -1,15 +1,16 @@
 Attribute VB_Name = "Helper_Main"
 Sub main()
-initDb
-MDIForm1.Show
-'frmLogin.Show 1
-End Sub
-
-Sub initDb()
 Call initializedConfig
-db.username = DB_USERNAME
-db.password = DB_PASSWORD
+
 db.server = DBSERVER
 db.database_name = DB_NAME
-db.connect
+db.username = DB_USERNAME
+db.Password = DB_PASSWORD
+If db.connect Then
+    frmuserlogin.Show
+'    MsgBox "Successfuly connected to database...", vbInformation, "Nutrimart"
+Else
+    MsgBox "Failed to connect to database", vbInformation, "Nutrimart"
+End If
+  
 End Sub

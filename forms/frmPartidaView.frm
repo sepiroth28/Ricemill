@@ -4,16 +4,15 @@ Begin VB.Form frmPartidaView
    Appearance      =   0  'Flat
    BackColor       =   &H00E0E0E0&
    Caption         =   "VIEW PARTIDA"
-   ClientHeight    =   10725
+   ClientHeight    =   10425
    ClientLeft      =   225
    ClientTop       =   555
-   ClientWidth     =   18555
+   ClientWidth     =   16965
    LinkTopic       =   "Form1"
-   ScaleHeight     =   10725
-   ScaleWidth      =   18555
+   ScaleHeight     =   10425
+   ScaleWidth      =   16965
    StartUpPosition =   3  'Windows Default
-   WindowState     =   2  'Maximized
-   Begin VB.CommandButton Command1 
+   Begin VB.CommandButton cmdClosePartidaStockout 
       Caption         =   "&Close Partida Stock out"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
@@ -628,7 +627,7 @@ Private Sub cmdSave_Click()
 Call savePartida
 End Sub
 
-Private Sub Command1_Click()
+Private Sub cmdClosePartidaStockout_Click()
 Dim toclosepartidaStockout As New Partida
 toclosepartidaStockout.load_partida (activePartidaId)
 Call closepartidaStockout(activePartidaId, toclosepartidaStockout.stockout_status)

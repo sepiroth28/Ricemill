@@ -40,6 +40,7 @@ End Sub
 
 Public Sub get_percentage(lbl As Label)
 Dim percent As Integer
+On Error Resume Next
 kilospersack = Val(frmPartidaView.lsvStockOutTotal.SelectedItem.SubItems(2)) * no_of_kilospersack
 totalkg = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(2))
 If totalkg = 0 Then

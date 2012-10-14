@@ -4,25 +4,24 @@ Begin VB.Form frmManagePartida
    BackColor       =   &H00000080&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MANAGE PARTIDA"
-   ClientHeight    =   8250
+   ClientHeight    =   7485
    ClientLeft      =   45
    ClientTop       =   375
    ClientWidth     =   9690
    FillColor       =   &H00FFFFFF&
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   8250
+   ScaleHeight     =   7485
    ScaleWidth      =   9690
    ShowInTaskbar   =   0   'False
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   8115
+      Height          =   7365
       Left            =   60
-      ScaleHeight     =   8085
+      ScaleHeight     =   7335
       ScaleWidth      =   9525
       TabIndex        =   0
       Top             =   60
@@ -41,7 +40,7 @@ Begin VB.Form frmManagePartida
          Height          =   795
          Left            =   6300
          TabIndex        =   4
-         Top             =   7200
+         Top             =   6330
          Width           =   3015
       End
       Begin VB.CommandButton cmdOpen 
@@ -58,17 +57,17 @@ Begin VB.Form frmManagePartida
          Height          =   795
          Left            =   3720
          TabIndex        =   2
-         Top             =   7200
+         Top             =   6330
          Width           =   2535
       End
       Begin MSComctlLib.ListView lsvPartida 
-         Height          =   6495
+         Height          =   5655
          Left            =   180
          TabIndex        =   1
          Top             =   600
          Width           =   9135
          _ExtentX        =   16113
-         _ExtentY        =   11456
+         _ExtentY        =   9975
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -163,7 +162,15 @@ activePartidaId = Val(lsvPartida.SelectedItem.Text)
 'stockout_status = rs.Fields("stockout_status").Value
 frmPartidaView.Show
 End Sub
+
+Private Sub Form_DragDrop(Source As Control, X As Single, Y As Single)
+    MsgBox (Me.Top)
+    MsgBox (Me.Left)
+End Sub
+
 Private Sub Form_Load()
+Me.Top = 3900
+Me.Left = 6100
 Call loadPartidaList(lsvPartida)
 Call enable_partida_open(lsvPartida, cmdOpen)
 End Sub

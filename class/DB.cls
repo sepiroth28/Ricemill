@@ -31,7 +31,7 @@ End Sub
 
 Public Function connect() As Boolean
 conn.CursorLocation = adUseClient
-    conn.ConnectionString = "DRIVER={MySQL ODBC 5.1 Driver};" & "SERVER=" & Me.server & ";DATABASE=" & Me.database_name & ";UID=" & Me.username & ";PWD=" & Me.password & ";"
+    conn.ConnectionString = "DRIVER={MySQL ODBC 5.1 Driver};" & "SERVER=" & Me.server & ";DATABASE=" & Me.database_name & ";UID=" & Me.username & ";PWD=" & Me.Password & ";"
     On Error GoTo Error
         conn.Open
         connect = True
@@ -41,17 +41,17 @@ Error:
         connect = False
 End Function
 
-Public Property Let password(ByVal vData As String)
+Public Property Let Password(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.password = 5
     mvarpassword = vData
 End Property
 
 
-Public Property Get password() As String
+Public Property Get Password() As String
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.password
-    password = mvarpassword
+    Password = mvarpassword
 End Property
 
 
