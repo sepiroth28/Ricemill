@@ -1,4 +1,5 @@
 VERSION 5.00
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmStockOut 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Stock Out"
@@ -23,6 +24,91 @@ Begin VB.Form frmStockOut
       TabIndex        =   0
       Top             =   0
       Width           =   7095
+      Begin MSComctlLib.ListView lsvoutputProductlist 
+         Height          =   1545
+         Left            =   240
+         TabIndex        =   14
+         Top             =   2250
+         Visible         =   0   'False
+         Width           =   5895
+         _ExtentX        =   10398
+         _ExtentY        =   2725
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         HideColumnHeaders=   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   0
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   11
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "partida_id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "raw_item_id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "raw_product_id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "output_product_id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "item_id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
+            Text            =   "item_code"
+            Object.Width           =   7056
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
+            Text            =   "description"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   7
+            Text            =   "unit_price"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   8
+            Text            =   "unit_of_measure"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(10) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   9
+            Text            =   "status"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(11) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   10
+            Text            =   "type"
+            Object.Width           =   0
+         EndProperty
+      End
       Begin VB.TextBox txtItem 
          Appearance      =   0  'Flat
          BeginProperty Font 
@@ -37,7 +123,6 @@ Begin VB.Form frmStockOut
          Height          =   555
          Left            =   240
          TabIndex        =   7
-         Text            =   "Humay"
          Top             =   1680
          Width           =   5895
       End
@@ -264,6 +349,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim item_id As Integer
 
+Private Sub cmdBrowse_Click()
+    Call toggle_listview(lsvoutputProductlist)
+End Sub
+
 Private Sub cmdSave_Click()
 Dim stock_out As New StockOut
 Call get_item_id(txtItem.Text)
@@ -291,8 +380,15 @@ Private Sub Form_Load()
 Me.Top = frmPartidaView.Top + 2500
 Me.Left = frmPartidaView.Left + 9300
 lblDate.Caption = FormatDateTime(Date, vbShortDate)
-item_id = 1
+Call loadoutputProductOfThisPartida(lsvoutputProductlist, activePartidaId)
 End Sub
+
+Private Sub lsvoutputProductlist_Click()
+    txtItem.Text = lsvoutputProductlist.SelectedItem.SubItems(5)
+    txtPrice.Text = lsvoutputProductlist.SelectedItem.SubItems(7)
+    Call toggle_listview(lsvoutputProductlist)
+End Sub
+
 Private Sub txtPrice_Change()
 Call get_total_amount(txtQty, txtPrice, txtAmount)
 End Sub

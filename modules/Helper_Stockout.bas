@@ -51,4 +51,14 @@ lbl = "Current out Percentage: " & percent & "%"
 End If
 End Sub
 
+Sub loadoutputProductOfThisPartida(lsv As ListView, partida_id As Integer)
+    Dim sql As String
+    Dim col As New Collection
+        sql = "SELECT * FROM `partida_raw_item` pi inner join `associated_products` ap " & _
+              "on pi.raw_item_id=ap.raw_product_id inner join `items` i on ap.output_product_id=i.id " & _
+              "WHERE pi.partida_id=" & partida_id & ""
+    col.Add "*"
+    Call populateResultOnThisListView(sql, lsv, col)
+End Sub
+
 

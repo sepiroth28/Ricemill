@@ -88,7 +88,7 @@ Private Sub imgLogin_Click()
     
         check_user_type = checkuser.Check_UserType(mvarusername)
             
-            If check_user_type = "admin" Then
+            If check_user_type = "Admin" Then
                 MsgBox "Welcome " & mvarusername, vbInformation, "Welcome"
                 activeUser.loadUserAccount mvarusername
                 Call grantUserPreviliges(activeUser.username)

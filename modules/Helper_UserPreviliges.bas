@@ -37,9 +37,14 @@ Sub renderButtonBasedOnUserPreviliges()
     With activeUser.previliges
        frmManagePartida.cmdCreate.Enabled = .canCreatePartida
        'toolbar menu
+    End With
+End Sub
+
+Sub renderButtonBasedOnUserPreviligesInPartidaView()
+    With activeUser.previliges
        frmPartidaView.cmdAddStockIn.Enabled = .canStockIn
        frmPartidaView.cmdAddStockOut.Enabled = .canStockOut
-       frmPartidaView.cmdClosePartida.Enabled = .canClosePartida
+       frmPartidaView.cmdClosepartida.Enabled = .canClosePartida
        frmPartidaView.cmdClosePartidaStockout.Enabled = .canClosePartidaStockout
     End With
 End Sub

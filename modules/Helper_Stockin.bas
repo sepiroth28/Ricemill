@@ -47,4 +47,53 @@ Else
 End If
 End Sub
 
+Sub loadRawProduct(lsv As ListView)
+Dim col As New Collection
+Dim sql As String
+    sql = "SELECT * FROM `items` where type='raw'"
+col.Add "*"
+Call populateResultOnThisListView(sql, lsv, col)
+End Sub
 
+Function IsRawProductSetThisPartida(partida_id As Integer) As Boolean
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = "SELECT * FROM partida_raw_item WHERE partida_id=" & partida_id & ""
+    Set rs = db.execute(sql)
+    If rs.RecordCount Then
+        IsRawProductSetThisPartida = True
+    End If
+End Function
+Function getRawItemSetInThisPartida(partida_id As Integer, txt As TextBox, cmd As CommandButton)
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = "SELECT * FROM `partida_raw_item` pi inner join `items` i on pi.raw_item_id=i.id WHERE pi.partida_id=" & partida_id & ""
+    Set rs = db.execute(sql)
+        txt.Text = rs.Fields("item_code").Value
+        txt.Locked = True
+        cmd.Enabled = False
+    Set rs = Nothing
+End Function
+Function getRawItemId(partida_id As Integer) As Integer
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = "SELECT * FROM `partida_raw_item` pi inner join `items` i on pi.raw_item_id=i.id WHERE pi.partida_id=" & partida_id & ""
+    Set rs = db.execute(sql)
+        getRawItemId = rs.Fields("id").Value
+    Set rs = Nothing
+End Function
+
+Sub insertRawItemOfThisPartida(partida_id As Integer, raw_item_id As Integer)
+    Dim sql As String
+        sql = "INSERT INTO partida_raw_item VALUES(" & partida_id & "," & raw_item_id & ")"
+    db.execute (sql)
+End Sub
+
+Sub showPriceOfThisrawItem(raw_item_id As Integer, txt As TextBox)
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = "SELECT * FROM `items` WHERE id= " & raw_item_id & ""
+    Set rs = db.execute(sql)
+    txt.Text = rs.Fields("unit_price").Value
+    Set rs = Nothing
+End Sub

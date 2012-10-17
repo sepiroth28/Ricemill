@@ -22,6 +22,23 @@ Private mvarunit_of_measure As String 'local copy
 Private mvarstatus As String 'local copy
 'local variable(s) to hold property value(s)
 Private mvarproduct_type As String 'local copy
+'local variable(s) to hold property value(s)
+Private mvarlast_insert_id As Integer 'local copy
+Public Property Let last_insert_id(ByVal vData As Integer)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.last_insert_id = 5
+    mvarlast_insert_id = vData
+End Property
+
+
+Public Property Get last_insert_id() As Integer
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.last_insert_id
+    last_insert_id = mvarlast_insert_id
+End Property
+
+
+
 Public Property Let product_type(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.product_type = 5
@@ -60,12 +77,16 @@ Public Sub load_item(item_id As Integer)
             .unit_price = rs.Fields("unit_price").Value
             .unit_of_measure = rs.Fields("unit_of_measure").Value
             .status = rs.Fields("status").Value
-            .product_type = rs.Fields("product_type").Value
+            .product_type = rs.Fields("type").Value
         End With
     Set rs = Nothing
 End Sub
 
 Public Sub delete_item(item_id As Integer)
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = "DELETE FROM items WHERE id=" & Me.id & ""
+    db.execute (sql)
 End Sub
 
 Public Sub save()
@@ -80,7 +101,7 @@ If Me.id = 0 Then
                 Me.product_type & "')"
     db.execute insert
 End If
-
+Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).Value
 End Sub
 
 Public Property Let status(ByVal vData As String)

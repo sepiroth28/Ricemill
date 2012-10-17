@@ -53,6 +53,7 @@ Begin VB.Form frmManageItem
             LabelEdit       =   1
             LabelWrap       =   -1  'True
             HideSelection   =   -1  'True
+            Checkboxes      =   -1  'True
             FullRowSelect   =   -1  'True
             _Version        =   393217
             ForeColor       =   -2147483640
@@ -68,7 +69,20 @@ Begin VB.Form frmManageItem
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            NumItems        =   0
+            NumItems        =   3
+            BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               Object.Width           =   529
+            EndProperty
+            BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   1
+               Text            =   "id"
+               Object.Width           =   0
+            EndProperty
+            BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   2
+               Text            =   "PRODUCT"
+               Object.Width           =   6174
+            EndProperty
          End
       End
       Begin VB.ComboBox cboProduct_type 
@@ -104,6 +118,7 @@ Begin VB.Form frmManageItem
          Left            =   330
          List            =   "frmManageItem.frx":0025
          TabIndex        =   1
+         Text            =   "Active"
          Top             =   1290
          Width           =   1575
       End
@@ -136,7 +151,7 @@ Begin VB.Form frmManageItem
             Strikethrough   =   0   'False
          EndProperty
          Height          =   735
-         Left            =   4350
+         Left            =   4320
          TabIndex        =   6
          Top             =   5370
          Width           =   1995
@@ -339,11 +354,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private Sub cboProduct_type_Change()
+Private Sub cboProduct_type_Click()
     If cboProduct_type.Text = "raw" Then
         Frame1.Enabled = True
+        Call loadProducts(lsvAssociatedItem)
     Else
         Frame1.Enabled = False
+        lsvAssociatedItem.ListItems.Clear
     End If
 End Sub
 
@@ -358,6 +375,14 @@ Private Sub cmdSave_Click()
             .product_type = cboProduct_type.Text
             .save
         End With
+        If cboProduct_type.Text = "raw" Then
+            Dim lst As ListItem
+            For Each lst In lsvAssociatedItem.ListItems
+                If lst.Checked = True Then
+                    Call saveAssociatedItems(new_item.last_insert_id, lst.SubItems(1))
+                End If
+            Next
+        End If
         MsgBox "Successfully saved!", vbInformation, "save"
 End Sub
 

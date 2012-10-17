@@ -194,19 +194,19 @@ Begin VB.Form frmPartidaView
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   8055
+         Height          =   8895
          Left            =   8610
          TabIndex        =   3
          Top             =   1380
          Width           =   8175
          Begin MSComctlLib.ListView lsvStockOut 
-            Height          =   6795
+            Height          =   5865
             Left            =   180
             TabIndex        =   7
             Top             =   300
             Width           =   7815
             _ExtentX        =   13785
-            _ExtentY        =   11986
+            _ExtentY        =   10345
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -265,7 +265,7 @@ Begin VB.Form frmPartidaView
             Height          =   315
             Left            =   240
             TabIndex        =   11
-            Top             =   7320
+            Top             =   6360
             Width           =   7755
             _ExtentX        =   13679
             _ExtentY        =   556
@@ -278,6 +278,65 @@ Begin VB.Form frmPartidaView
             ForeColor       =   -2147483640
             BackColor       =   13106931
             Appearance      =   0
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            NumItems        =   6
+            BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               Text            =   "id"
+               Object.Width           =   0
+            EndProperty
+            BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   1
+               Text            =   "Item"
+               Object.Width           =   2540
+            EndProperty
+            BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               Alignment       =   1
+               SubItemIndex    =   2
+               Text            =   "# of Sack"
+               Object.Width           =   2999
+            EndProperty
+            BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               Alignment       =   1
+               SubItemIndex    =   3
+               Text            =   "Unit price"
+               Object.Width           =   2540
+            EndProperty
+            BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               Alignment       =   1
+               SubItemIndex    =   4
+               Text            =   "Total"
+               Object.Width           =   2540
+            EndProperty
+            BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   5
+               Text            =   "date in"
+               Object.Width           =   0
+            EndProperty
+         End
+         Begin MSComctlLib.ListView ListView1 
+            Height          =   825
+            Left            =   210
+            TabIndex        =   19
+            Top             =   6960
+            Width           =   7755
+            _ExtentX        =   13679
+            _ExtentY        =   1455
+            View            =   3
+            LabelEdit       =   1
+            LabelWrap       =   -1  'True
+            HideSelection   =   -1  'True
+            _Version        =   393217
+            ForeColor       =   -2147483640
+            BackColor       =   16777215
+            Appearance      =   1
             BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "MS Sans Serif"
                Size            =   8.25
@@ -336,7 +395,7 @@ Begin VB.Form frmPartidaView
             Height          =   375
             Left            =   330
             TabIndex        =   15
-            Top             =   7680
+            Top             =   8370
             Width           =   4635
          End
       End
@@ -358,13 +417,13 @@ Begin VB.Form frmPartidaView
          Top             =   1380
          Width           =   8175
          Begin MSComctlLib.ListView lsvStockIn 
-            Height          =   6795
+            Height          =   5835
             Left            =   180
             TabIndex        =   4
             Top             =   300
             Width           =   7815
             _ExtentX        =   13785
-            _ExtentY        =   11986
+            _ExtentY        =   10292
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
@@ -578,7 +637,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim edit_partida As New Partida
 Sub renderNewPartida()
-    txtPartidaName.Visible = True
+    txtPartidaname.Visible = True
     cmdSave.Visible = True
     With Me
     .cmdAddStockIn.Enabled = True
@@ -643,8 +702,8 @@ Else
     Call controlsOfThisPartidaStatus
     
         edit_partida.load_partida (activePartidaId)
-        lblPartidaName.Caption = edit_partida.partida_name & " Activities"
-    Call totalexpenses(activePartidaId, lsvTotalExpenses)
+        lblPartidaname.Caption = edit_partida.partida_name & " Activities"
+    Call totalexpenses(activePartidaId, lsvtotalExpenses)
     Call loadStockinListOnThisPartida(activePartidaId, lsvStockIn)
     Call loadStockInTotals(activePartidaId, lsvStockInTotal)
     Call loadStockOutListOnThisPartida(activePartidaId, lsvStockOut)
@@ -655,9 +714,9 @@ Else
 End Sub
 
 Private Sub txtPartidaName_Click()
-If txtPartidaName.Text = "Input partida name here" Then
-    txtPartidaName.Text = ""
-    txtPartidaName.ForeColor = normalColor
+If txtPartidaname.Text = "Input partida name here" Then
+    txtPartidaname.Text = ""
+    txtPartidaname.ForeColor = normalColor
 End If
 End Sub
 

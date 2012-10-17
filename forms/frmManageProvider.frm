@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManageProvider 
    Caption         =   "Manage Provider"
    ClientHeight    =   6585
@@ -49,20 +49,20 @@ Begin VB.Form frmManageProvider
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   555
+         Height          =   435
          Left            =   210
          TabIndex        =   1
-         Top             =   1410
+         Top             =   1650
          Width           =   3645
       End
       Begin MSComctlLib.ListView lsvProviderlist 
-         Height          =   4335
+         Height          =   4215
          Left            =   210
          TabIndex        =   4
          Top             =   2130
          Width           =   8805
          _ExtentX        =   15531
-         _ExtentY        =   7646
+         _ExtentY        =   7435
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -140,7 +140,7 @@ Begin VB.Form frmManageProvider
          Height          =   300
          Left            =   210
          TabIndex        =   2
-         Top             =   1050
+         Top             =   1350
          Width           =   2685
       End
    End
@@ -167,6 +167,7 @@ frmProvider.Show 1
 End Sub
 
 Private Sub Form_Load()
+Call loadProviderListInThisListview(lsvProviderlist)
     Me.Top = 3900
     Me.Left = 6100
 End Sub

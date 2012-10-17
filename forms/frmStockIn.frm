@@ -27,40 +27,15 @@ Begin VB.Form frmStockIn
       TabIndex        =   0
       Top             =   60
       Width           =   7095
-      Begin VB.TextBox txtNum_of_sack 
-         Appearance      =   0  'Flat
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   555
-         Left            =   270
-         TabIndex        =   20
-         Top             =   5100
-         Width           =   1575
-      End
-      Begin VB.CommandButton Command2 
-         Caption         =   "..."
-         Height          =   555
-         Left            =   6180
-         TabIndex        =   19
-         Top             =   1590
-         Width           =   675
-      End
       Begin MSComctlLib.ListView lsvProviderlist 
-         Height          =   2265
+         Height          =   1935
          Left            =   240
          TabIndex        =   18
          Top             =   2160
          Visible         =   0   'False
          Width           =   5895
          _ExtentX        =   10398
-         _ExtentY        =   3995
+         _ExtentY        =   3413
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -96,6 +71,96 @@ Begin VB.Form frmStockIn
             Text            =   "address"
             Object.Width           =   0
          EndProperty
+      End
+      Begin MSComctlLib.ListView lsvrawProductlist 
+         Height          =   1395
+         Left            =   240
+         TabIndex        =   22
+         Top             =   3210
+         Visible         =   0   'False
+         Width           =   5895
+         _ExtentX        =   10398
+         _ExtentY        =   2461
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         HideColumnHeaders=   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   0
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   7
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "id"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Item_code"
+            Object.Width           =   10231
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "description"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "unit_price"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "unit_of_measure"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
+            Text            =   "status"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
+            Text            =   "type"
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin VB.TextBox txtNum_of_sack 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   555
+         Left            =   270
+         TabIndex        =   20
+         Top             =   5100
+         Width           =   1575
+      End
+      Begin VB.CommandButton Command2 
+         Caption         =   "..."
+         Height          =   555
+         Left            =   6180
+         TabIndex        =   19
+         Top             =   1590
+         Width           =   675
       End
       Begin VB.TextBox txtProvider 
          Appearance      =   0  'Flat
@@ -230,7 +295,6 @@ Begin VB.Form frmStockIn
          Height          =   555
          Left            =   240
          TabIndex        =   3
-         Text            =   "Humay"
          Top             =   2640
          Width           =   5895
       End
@@ -429,7 +493,11 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim id_of_item As Integer
+Dim seted_raw_item_id_of_this_partida As Integer
 Dim active_stockin_provider As New provider
+Private Sub cmdBrowse_Click()
+    Call toggle_listview(lsvrawProductlist)
+End Sub
 
 Private Sub cmdSave_Click()
 
@@ -437,7 +505,7 @@ If newPartida = True Then
     Call savePartida
     Call getlastpartida_id(activePartidaId)
 End If
-Call get_item_id(txtItem.Text)
+Call get_item_id(txtitem.Text)
 Dim stock_in As New StockIn
 Dim newprovider As New provider
 With stock_in
@@ -447,11 +515,12 @@ With stock_in
     .total_amount = Val(txtAmount.Text)
     .Num_of_sack = txtNum_of_sack.Text
     .received_by = "admin"
-    .description = txtDescription
+    .description = txtdescription
     .date_in = Format(lblDate.Caption, "yyyy-mm-dd")
     .save_stockin
 End With
 active_stockin_provider.insertPartidaProvider (getlastId)
+Call insertRawItemOfThisPartida(activePartidaId, id_of_item)
 
 MsgBox "Successfully Stock in", vbInformation, "Stockin"
 
@@ -474,12 +543,26 @@ Me.Top = frmPartidaView.Top + 2500
 Me.Left = frmPartidaView.Left + 700
 lblDate.Caption = FormatDateTime(Date, vbShortDate)
 Call loadProviderListInThisListview(lsvProviderlist)
+Call loadRawProduct(lsvrawProductlist)
+If IsRawProductSetThisPartida(activePartidaId) = True Then
+    Call getRawItemSetInThisPartida(activePartidaId, txtitem, cmdBrowse)
+    seted_raw_item_id_of_this_partida = getRawItemId(activePartidaId)
+    Call showPriceOfThisrawItem(seted_raw_item_id_of_this_partida, txtPrice)
+End If
+
 End Sub
 
 Private Sub lsvProviderlist_Click()
 active_stockin_provider.loadProvider (lsvProviderlist.SelectedItem.Text)
 txtProvider.Text = lsvProviderlist.SelectedItem.SubItems(1)
 Call toggle_listview(lsvProviderlist)
+End Sub
+
+Private Sub lsvrawProductlist_Click()
+    txtitem.Text = lsvrawProductlist.SelectedItem.SubItems(1)
+    id_of_item = lsvrawProductlist.SelectedItem.Text
+    Call showPriceOfThisrawItem(lsvrawProductlist.SelectedItem.Text, txtPrice)
+    Call toggle_listview(lsvrawProductlist)
 End Sub
 
 Private Sub txtPrice_Change()
