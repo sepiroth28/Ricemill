@@ -362,24 +362,26 @@ With stock_out
     .unit_price = Val(txtPrice.Text)
     .total_amount = Val(txtAmount.Text)
     .received_by = "admin"
-    .date_out = Format(lblDate.Caption, "yyyy-mm-dd")
+    .date_out = Format(lbldate.Caption, "yyyy-mm-dd")
     .save_stockout
 End With
 MsgBox "Successfully Stock Out", vbInformation, "StockOut"
 
 Call loadStockOutListOnThisPartida(activePartidaId, frmPartidaView.lsvStockOut)
 Call loadStockOutTotals(activePartidaId, frmPartidaView.lsvStockOutTotal)
-Call get_percentage(frmPartidaView.lblpercentage)
+'Call get_percentage(frmPartidaView.lblpercentage)
+Call get_output_product_percentage(frmPartidaView.lsvPercentage, activePartidaId)
+    frmPartidaView.lbltotalpercentage.Caption = "TOTAL PERCENTAGE:" & updateTotalPercentage() & "%"
 End Sub
 
 Private Sub Command1_Click()
-Set activedate = lblDate
+Set activedate = lbldate
 frmCalendar.Show 1
 End Sub
 Private Sub Form_Load()
 Me.Top = frmPartidaView.Top + 2500
 Me.Left = frmPartidaView.Left + 9300
-lblDate.Caption = FormatDateTime(Date, vbShortDate)
+lbldate.Caption = FormatDateTime(Date, vbShortDate)
 Call loadoutputProductOfThisPartida(lsvoutputProductlist, activePartidaId)
 End Sub
 

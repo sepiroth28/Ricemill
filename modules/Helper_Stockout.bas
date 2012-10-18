@@ -1,4 +1,5 @@
 Attribute VB_Name = "Helper_Stockout"
+Dim item_in_listview As New Collection
 Sub loadStockOutListOnThisPartida(partida_id As Integer, lsv As ListView)
 Dim sql As String
 Dim attributes As New Collection
@@ -50,6 +51,62 @@ percent = (kilospersack / totalkg) * 100
 lbl = "Current out Percentage: " & percent & "%"
 End If
 End Sub
+
+Sub get_output_product_percentage(lsv As ListView, partida_id As Integer)
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    Dim lst As ListItem
+       sql = "SELECT * FROM `associated_products` ap inner join `partida_raw_item` pi on " & _
+            "ap.raw_product_id=pi.raw_item_id inner join `items` i on ap.output_product_id=i.id " & _
+            "where pi.partida_id=" & partida_id & ""
+    Set rs = db.execute(sql)
+    lsv.ListItems.Clear
+    If rs.RecordCount Then
+    Set item_in_listview = New Collection
+        Do Until rs.EOF
+            Set lst = lsv.ListItems.Add(, , rs.Fields("item_code").Value)
+                lst.SubItems(1) = getpercentage(activePartidaId, rs.Fields("id").Value) & "%"
+                item_in_listview.Add getpercentage(activePartidaId, rs.Fields("id").Value)
+            rs.MoveNext
+        Loop
+        Set rs = Nothing
+    End If
+End Sub
+Function updateTotalPercentage() As Double
+    Dim a As Double
+    a = 0
+    For Each item In item_in_listview
+        a = a + item
+    Next
+    updateTotalPercentage = a
+End Function
+Function getpercentage(partida_id As Integer, output_item_id As Integer) As Double
+    Dim percent As Integer
+    Dim total_kg_out_per_item As Double
+    On Error Resume Next
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = view_partida_stock_out_totals & " WHERE ps.partida_id = " & partida_id & " AND i.id=" & output_item_id & " group by i.id "
+    Set rs = db.execute(sql)
+    total_kg_out_per_item = rs.Fields("total_out").Value
+
+    kilospersack = total_kg_out_per_item * no_of_kilospersack
+    totalkg = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(2))
+    If totalkg = 0 Then
+        getpercentage = "Current out percentage: 0%"
+    Else
+        percent = (kilospersack / totalkg) * 100
+        getpercentage = percent
+    End If
+End Function
+Function getNo_of_kilospersack(output_item_id As Integer) As Double
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = "SELECT * FROM `kilos_per_sack` ks inner join `items` i on ks.item_id=i.id where i.id=" & output_item_id & ""
+    Set rs = db.execute(sql)
+        no_of_kilospersack = rs.Fields("").Value
+    Set rs = Nothing
+End Function
 
 Sub loadoutputProductOfThisPartida(lsv As ListView, partida_id As Integer)
     Dim sql As String

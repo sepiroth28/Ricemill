@@ -22,7 +22,7 @@ Public Sub get_item_id(desc As String)
 Dim rs As New ADODB.Recordset
 Dim id_of_item As Integer
 Dim sql As String
-sql = "select * from items where description ='" & desc & "'"
+sql = "select * from items where item_code ='" & desc & "'"
 Set rs = db.execute(sql)
 itemID = rs.Fields(0).Value
 End Sub

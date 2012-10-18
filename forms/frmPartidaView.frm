@@ -25,7 +25,7 @@ Begin VB.Form frmPartidaView
       EndProperty
       Height          =   525
       Left            =   13230
-      TabIndex        =   18
+      TabIndex        =   17
       Top             =   960
       Width           =   2685
    End
@@ -42,7 +42,7 @@ Begin VB.Form frmPartidaView
       EndProperty
       Height          =   525
       Left            =   5070
-      TabIndex        =   17
+      TabIndex        =   16
       Top             =   960
       Width           =   2685
    End
@@ -59,7 +59,7 @@ Begin VB.Form frmPartidaView
       EndProperty
       Height          =   555
       Left            =   6360
-      TabIndex        =   16
+      TabIndex        =   15
       Top             =   9630
       Width           =   1935
    End
@@ -140,9 +140,9 @@ Begin VB.Form frmPartidaView
             Strikethrough   =   0   'False
          EndProperty
          Height          =   855
-         Left            =   13800
+         Left            =   13650
          TabIndex        =   8
-         Top             =   9480
+         Top             =   9180
          Visible         =   0   'False
          Width           =   2955
       End
@@ -321,22 +321,23 @@ Begin VB.Form frmPartidaView
                Object.Width           =   0
             EndProperty
          End
-         Begin MSComctlLib.ListView ListView1 
-            Height          =   825
-            Left            =   210
-            TabIndex        =   19
+         Begin MSComctlLib.ListView lsvPercentage 
+            Height          =   1125
+            Left            =   240
+            TabIndex        =   18
             Top             =   6960
-            Width           =   7755
-            _ExtentX        =   13679
-            _ExtentY        =   1455
+            Width           =   4845
+            _ExtentX        =   8546
+            _ExtentY        =   1984
             View            =   3
             LabelEdit       =   1
             LabelWrap       =   -1  'True
             HideSelection   =   -1  'True
+            HideColumnHeaders=   -1  'True
             _Version        =   393217
-            ForeColor       =   -2147483640
-            BackColor       =   16777215
-            Appearance      =   1
+            ForeColor       =   255
+            BackColor       =   13106931
+            Appearance      =   0
             BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
                Name            =   "MS Sans Serif"
                Size            =   8.25
@@ -346,42 +347,20 @@ Begin VB.Form frmPartidaView
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            NumItems        =   6
+            NumItems        =   2
             BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                Text            =   "id"
-               Object.Width           =   0
+               Object.Width           =   2469
             EndProperty
             BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   1
-               Text            =   "Item"
+               Text            =   "percentage"
                Object.Width           =   2540
-            EndProperty
-            BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               Alignment       =   1
-               SubItemIndex    =   2
-               Text            =   "# of Sack"
-               Object.Width           =   2999
-            EndProperty
-            BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               Alignment       =   1
-               SubItemIndex    =   3
-               Text            =   "Unit price"
-               Object.Width           =   2540
-            EndProperty
-            BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               Alignment       =   1
-               SubItemIndex    =   4
-               Text            =   "Total"
-               Object.Width           =   2540
-            EndProperty
-            BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               SubItemIndex    =   5
-               Text            =   "date in"
-               Object.Width           =   0
             EndProperty
          End
-         Begin VB.Label lblpercentage 
+         Begin VB.Label lbltotalpercentage 
             BackStyle       =   0  'Transparent
+            Caption         =   "TOTAL PERCENTAGE:"
             BeginProperty Font 
                Name            =   "MS Sans Serif"
                Size            =   8.25
@@ -392,11 +371,11 @@ Begin VB.Form frmPartidaView
                Strikethrough   =   0   'False
             EndProperty
             ForeColor       =   &H000000FF&
-            Height          =   375
-            Left            =   330
-            TabIndex        =   15
-            Top             =   8370
-            Width           =   4635
+            Height          =   345
+            Left            =   270
+            TabIndex        =   19
+            Top             =   8340
+            Width           =   4275
          End
       End
       Begin VB.Frame Frame1 
@@ -637,7 +616,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim edit_partida As New Partida
 Sub renderNewPartida()
-    txtPartidaname.Visible = True
+    txtPartidaName.Visible = True
     cmdSave.Visible = True
     With Me
     .cmdAddStockIn.Enabled = True
@@ -702,21 +681,23 @@ Else
     Call controlsOfThisPartidaStatus
     
         edit_partida.load_partida (activePartidaId)
-        lblPartidaname.Caption = edit_partida.partida_name & " Activities"
-    Call totalexpenses(activePartidaId, lsvtotalExpenses)
+        lblPartidaName.Caption = edit_partida.partida_name & " Activities"
+    Call totalexpenses(activePartidaId, lsvTotalExpenses)
     Call loadStockinListOnThisPartida(activePartidaId, lsvStockIn)
     Call loadStockInTotals(activePartidaId, lsvStockInTotal)
     Call loadStockOutListOnThisPartida(activePartidaId, lsvStockOut)
     Call loadStockOutTotals(activePartidaId, lsvStockOutTotal)
-    Call get_percentage(lblpercentage)
+'    Call get_percentage(lblpercentage)
+    Call get_output_product_percentage(lsvPercentage, activePartidaId)
+    lbltotalpercentage = lbltotalpercentage.Caption & updateTotalPercentage() & "%"
     End If
 
 End Sub
 
 Private Sub txtPartidaName_Click()
-If txtPartidaname.Text = "Input partida name here" Then
-    txtPartidaname.Text = ""
-    txtPartidaname.ForeColor = normalColor
+If txtPartidaName.Text = "Input partida name here" Then
+    txtPartidaName.Text = ""
+    txtPartidaName.ForeColor = normalColor
 End If
 End Sub
 
