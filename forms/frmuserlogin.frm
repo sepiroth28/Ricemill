@@ -25,6 +25,7 @@ Begin VB.Form frmuserlogin
       Height          =   345
       Left            =   3480
       TabIndex        =   0
+      Text            =   "admin"
       Top             =   2280
       Width           =   3195
    End
@@ -45,6 +46,7 @@ Begin VB.Form frmuserlogin
       Left            =   3480
       PasswordChar    =   "="
       TabIndex        =   1
+      Text            =   "admin"
       Top             =   2820
       Width           =   3195
    End

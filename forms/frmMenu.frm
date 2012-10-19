@@ -93,7 +93,8 @@ Private Sub Image1_Click()
 End Sub
 
 Private Sub Image2_Click()
-    frmManageItem.Show 1
+    frmProduct.Show 1
+'    frmManageItem.Show 1
 End Sub
 
 Private Sub Image3_Click()

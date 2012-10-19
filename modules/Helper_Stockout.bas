@@ -1,5 +1,7 @@
 Attribute VB_Name = "Helper_Stockout"
 Dim item_in_listview As New Collection
+Dim id_of_output_product As Double
+
 Sub loadStockOutListOnThisPartida(partida_id As Integer, lsv As ListView)
 Dim sql As String
 Dim attributes As New Collection
@@ -64,6 +66,8 @@ Sub get_output_product_percentage(lsv As ListView, partida_id As Integer)
     If rs.RecordCount Then
     Set item_in_listview = New Collection
         Do Until rs.EOF
+            id_of_output_product = rs.Fields("id")
+            Call getNo_of_kilospersack(id_of_output_product)
             Set lst = lsv.ListItems.Add(, , rs.Fields("item_code").Value)
                 lst.SubItems(1) = getpercentage(activePartidaId, rs.Fields("id").Value) & "%"
                 item_in_listview.Add getpercentage(activePartidaId, rs.Fields("id").Value)
@@ -99,12 +103,12 @@ Function getpercentage(partida_id As Integer, output_item_id As Integer) As Doub
         getpercentage = percent
     End If
 End Function
-Function getNo_of_kilospersack(output_item_id As Integer) As Double
+Function getNo_of_kilospersack(output_item_id As Double) As Double
     Dim sql As String
     Dim rs As New ADODB.Recordset
         sql = "SELECT * FROM `kilos_per_sack` ks inner join `items` i on ks.item_id=i.id where i.id=" & output_item_id & ""
     Set rs = db.execute(sql)
-        no_of_kilospersack = rs.Fields("").Value
+        no_of_kilospersack = rs.Fields("kilos_per_sack").Value
     Set rs = Nothing
 End Function
 

@@ -389,4 +389,9 @@ End Sub
 Private Sub Form_Load()
     Me.Top = 3900
     Me.Left = 7000
+    If item_editmode = False Then
+        Call clearctrl(frmManageItem)
+    End If
 End Sub
+
+

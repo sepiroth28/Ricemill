@@ -14,9 +14,9 @@ Public partida_id_toevaluate As Integer
 Public partida_id_to_manage As Integer
 Public active_provider_id As String
 Public activeUser As New Useraccount
+Public active_edit_product_id As Double
+Public item_editmode As Boolean
 '
-
-
 
 Public Sub get_item_id(desc As String)
 Dim rs As New ADODB.Recordset

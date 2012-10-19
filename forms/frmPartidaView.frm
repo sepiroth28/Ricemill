@@ -694,6 +694,7 @@ Else
 
 End Sub
 
+
 Private Sub txtPartidaName_Click()
 If txtPartidaName.Text = "Input partida name here" Then
     txtPartidaName.Text = ""

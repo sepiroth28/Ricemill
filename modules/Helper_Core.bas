@@ -46,4 +46,14 @@ Else
 End If
 End Sub
 
+Function clearctrl(frm As Form)
+    Dim cntl As Control
+    
+    For Each cntl In frm.Controls
+        If TypeOf cntl Is TextBox Or TypeOf cntl Is ComboBox Then
+            cntl = " "
+        End If
+    Next
+End Function
+
 
