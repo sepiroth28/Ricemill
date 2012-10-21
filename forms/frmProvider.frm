@@ -1,6 +1,7 @@
 VERSION 5.00
 Begin VB.Form frmProvider 
-   Caption         =   "Form1"
+   BackColor       =   &H0097C2FD&
+   Caption         =   "SUPPLIER INFORMATION"
    ClientHeight    =   4320
    ClientLeft      =   120
    ClientTop       =   450
@@ -13,13 +14,13 @@ Begin VB.Form frmProvider
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   4425
-      Left            =   0
-      ScaleHeight     =   4395
-      ScaleWidth      =   7065
+      Height          =   4185
+      Left            =   90
+      ScaleHeight     =   4155
+      ScaleWidth      =   6795
       TabIndex        =   0
-      Top             =   0
-      Width           =   7095
+      Top             =   90
+      Width           =   6825
       Begin VB.TextBox txtAddress 
          Appearance      =   0  'Flat
          BeginProperty Font 
@@ -66,7 +67,7 @@ Begin VB.Form frmProvider
             Strikethrough   =   0   'False
          EndProperty
          Height          =   735
-         Left            =   4890
+         Left            =   4410
          TabIndex        =   1
          Top             =   3300
          Width           =   1995
@@ -93,7 +94,7 @@ Begin VB.Form frmProvider
       Begin VB.Label Label7 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Provider"
+         Caption         =   "Supplier"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -107,7 +108,7 @@ Begin VB.Form frmProvider
          Left            =   240
          TabIndex        =   4
          Top             =   720
-         Width           =   990
+         Width           =   1005
       End
       Begin VB.Line Line2 
          BorderColor     =   &H00C0C0C0&
@@ -126,7 +127,7 @@ Begin VB.Form frmProvider
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "PROVIDER INFO"
+         Caption         =   "SUPPLIER INFORMATION"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -140,7 +141,7 @@ Begin VB.Form frmProvider
          Left            =   240
          TabIndex        =   3
          Top             =   60
-         Width           =   2115
+         Width           =   3240
       End
    End
 End

@@ -17,12 +17,30 @@ Begin VB.Form frmManageItem
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
       Height          =   7425
-      Left            =   0
+      Left            =   30
       ScaleHeight     =   7395
       ScaleWidth      =   7545
       TabIndex        =   0
-      Top             =   0
+      Top             =   30
       Width           =   7575
+      Begin VB.TextBox txtno_kg_per_sack 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   555
+         Left            =   4230
+         TabIndex        =   17
+         Top             =   3180
+         Visible         =   0   'False
+         Width           =   1815
+      End
       Begin VB.Frame Frame1 
          BackColor       =   &H00E0FDFD&
          Caption         =   "Associated Item"
@@ -97,7 +115,7 @@ Begin VB.Form frmManageItem
          EndProperty
          Height          =   420
          ItemData        =   "frmManageItem.frx":0000
-         Left            =   2310
+         Left            =   2250
          List            =   "frmManageItem.frx":000A
          TabIndex        =   13
          Top             =   1320
@@ -134,7 +152,7 @@ Begin VB.Form frmManageItem
             Strikethrough   =   0   'False
          EndProperty
          Height          =   555
-         Left            =   2310
+         Left            =   2220
          TabIndex        =   3
          Top             =   2220
          Width           =   3855
@@ -168,7 +186,7 @@ Begin VB.Form frmManageItem
             Strikethrough   =   0   'False
          EndProperty
          Height          =   555
-         Left            =   2310
+         Left            =   2190
          TabIndex        =   5
          Top             =   3180
          Width           =   1815
@@ -205,7 +223,27 @@ Begin VB.Form frmManageItem
          Left            =   270
          TabIndex        =   2
          Top             =   2220
-         Width           =   1935
+         Width           =   1905
+      End
+      Begin VB.Label Label8 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "No.Kg/Sack"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Left            =   4260
+         TabIndex        =   18
+         Top             =   2880
+         Visible         =   0   'False
+         Width           =   1245
       End
       Begin VB.Label Label7 
          AutoSize        =   -1  'True
@@ -221,7 +259,7 @@ Begin VB.Form frmManageItem
             Strikethrough   =   0   'False
          EndProperty
          Height          =   300
-         Left            =   2370
+         Left            =   2310
          TabIndex        =   14
          Top             =   960
          Width           =   1605
@@ -259,7 +297,7 @@ Begin VB.Form frmManageItem
             Strikethrough   =   0   'False
          EndProperty
          Height          =   300
-         Left            =   2310
+         Left            =   2220
          TabIndex        =   11
          Top             =   1860
          Width           =   1995
@@ -277,18 +315,18 @@ Begin VB.Form frmManageItem
          Caption         =   "Unit of Measure"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   12
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
-         Left            =   2310
+         Height          =   240
+         Left            =   2190
          TabIndex        =   10
-         Top             =   2820
-         Width           =   1935
+         Top             =   2880
+         Width           =   1635
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
@@ -296,18 +334,18 @@ Begin VB.Form frmManageItem
          Caption         =   "Unit Price"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   12
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
+         Height          =   240
          Left            =   270
          TabIndex        =   9
-         Top             =   2820
-         Width           =   1185
+         Top             =   2880
+         Width           =   1020
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
@@ -358,9 +396,11 @@ Private Sub cboProduct_type_Click()
     If cboProduct_type.Text = "raw" Then
         Frame1.Enabled = True
         Call loadProducts(lsvAssociatedItem)
+        Call hideKgPerSack
     Else
         Frame1.Enabled = False
         lsvAssociatedItem.ListItems.Clear
+        Call showKgPerSack
     End If
 End Sub
 
@@ -382,6 +422,8 @@ Private Sub cmdSave_Click()
                     Call saveAssociatedItems(new_item.last_insert_id, lst.SubItems(1))
                 End If
             Next
+        Else
+            Call saveKgKilosPerSack(new_item.last_insert_id, txtno_kg_per_sack)
         End If
         MsgBox "Successfully saved!", vbInformation, "save"
 End Sub
@@ -394,4 +436,12 @@ Private Sub Form_Load()
     End If
 End Sub
 
+Sub hideKgPerSack()
+    Label8.Visible = False
+    txtno_kg_per_sack.Visible = False
+End Sub
 
+Sub showKgPerSack()
+    Label8.Visible = True
+    txtno_kg_per_sack.Visible = True
+End Sub

@@ -27,6 +27,12 @@ Begin VB.MDIForm MDIForm1
          Caption         =   "Exit"
       End
    End
+   Begin VB.Menu mnusettings 
+      Caption         =   "Settings"
+      Begin VB.Menu mnumanageuseraccount 
+         Caption         =   "Manage User Accounts"
+      End
+   End
    Begin VB.Menu mnuAdmin 
       Caption         =   "Admin"
       Begin VB.Menu mnuPartidavisibility 
@@ -72,11 +78,15 @@ frmEvaluatepartida.Show 1
 End Sub
 
 Private Sub mnuitem_Click()
-frmManageItem.Show
+frmProduct.Show 1
 End Sub
 
 Private Sub mnuManage_provider_Click()
 frmManageProvider.Show 1
+End Sub
+
+Private Sub mnumanageuseraccount_Click()
+    frmManageUseraccount.Show 1
 End Sub
 
 Private Sub mnuPartidavisibility_Click()

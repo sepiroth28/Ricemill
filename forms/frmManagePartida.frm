@@ -92,32 +92,32 @@ Begin VB.Form frmManagePartida
          EndProperty
          NumItems        =   6
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "id"
+            Text            =   "ID"
             Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
             Text            =   "PARTIDA NAME"
-            Object.Width           =   12347
+            Object.Width           =   8819
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
-            Text            =   "status"
+            Text            =   "STATUS"
             Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "stockout_status"
-            Object.Width           =   0
+            Text            =   "CREATED ON"
+            Object.Width           =   3528
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
-            Text            =   "created on"
-            Object.Width           =   2540
+            Text            =   "CREATED BY"
+            Object.Width           =   3528
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   5
-            Text            =   "created by"
+            Text            =   "STOCKOU STATUS"
             Object.Width           =   0
          EndProperty
       End
@@ -156,6 +156,7 @@ newPartida = False
 Dim sql As String
 Dim rs As New ADODB.Recordset
 activePartidaId = Val(lsvPartida.SelectedItem.Text)
+'MsgBox (activePartidaId)
 'sql = "select status from partida where id='" & activePartidaId & "'"
 'Set rs = db.execute(sql)
 'PartidaStatus = rs.Fields("status").Value

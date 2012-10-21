@@ -24,6 +24,16 @@ Private mvarreceived_by As String 'local copy
 Private mvardescription As String 'local copy
 'local variable(s) to hold property value(s)
 Private mvarNum_of_sack As Double 'local copy
+Public Sub updateStockin()
+    Dim sql As String
+        sql = "UPDATE `stock_in` SET id=" & Me.id & ",item_id=" & Me.item_id & "," & _
+              "qty_in=" & Me.qty_in & ",num_of_sack=" & Me.Num_of_sack & "," & _
+              "price=" & Me.unit_price & ",total_amount=" & Me.total_amount & "," & _
+              "description='" & Me.description & "',date_in='" & Me.date_in & "',received_by='" & Me.received_by & "'" & _
+              "WHERE id=" & Me.id & ""
+    db.execute (sql)
+End Sub
+
 Public Property Let Num_of_sack(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.Num_of_sack = 5
@@ -37,8 +47,6 @@ Public Property Get Num_of_sack() As Double
     Num_of_sack = mvarNum_of_sack
 End Property
 
-
-
 Public Sub associateToPartida(partida_id As Integer)
 Dim last_stock_id As Integer
 Dim insert As String
@@ -50,9 +58,28 @@ db.execute insert
 End Sub
 
 Public Sub delete_stockin()
+    Dim sql As String
+        sql = "DELETE FROM stock_in WHERE id=" & Me.id & ""
+    db.execute (sql)
 End Sub
 
-Public Sub load_stockin(id As Integer)
+Public Sub load_stockin(s_id As Double)
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = "SELECT * FROM `stock_in` WHERE id=" & s_id & ""
+    Set rs = db.execute(sql)
+    
+    With Me
+        .id = rs.Fields("id").Value
+        .item_id = rs.Fields("item_id").Value
+        .qty_in = rs.Fields("qty_in").Value
+        .Num_of_sack = rs.Fields("num_of_sack").Value
+        .unit_price = rs.Fields("price").Value
+        .total_amount = rs.Fields("total_amount").Value
+        .description = rs.Fields("description").Value
+        .date_in = rs.Fields("date_in").Value
+        .received_by = rs.Fields("received_by").Value
+    End With
 End Sub
 
 Public Sub save_stockin()

@@ -36,12 +36,6 @@ CREATE TABLE `activepartida` (
 --
 
 /*!40000 ALTER TABLE `activepartida` DISABLE KEYS */;
-INSERT INTO `activepartida` (`partida_id`,`active`) VALUES 
- (1,1),
- (2,1),
- (3,1),
- (4,1),
- (5,1);
 /*!40000 ALTER TABLE `activepartida` ENABLE KEYS */;
 
 
@@ -65,13 +59,13 @@ CREATE TABLE `associated_products` (
 
 /*!40000 ALTER TABLE `associated_products` DISABLE KEYS */;
 INSERT INTO `associated_products` (`raw_product_id`,`output_product_id`) VALUES 
- (3,4),
- (6,1),
- (6,4),
- (10,2),
- (10,7),
- (10,8),
- (10,9);
+ (3,1),
+ (3,2),
+ (9,4),
+ (9,5),
+ (9,6),
+ (9,7),
+ (9,8);
 /*!40000 ALTER TABLE `associated_products` ENABLE KEYS */;
 
 
@@ -108,13 +102,17 @@ CREATE TABLE `expenses` (
   `no_of_kg` double NOT NULL,
   `rate_per_kg` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `expenses`
 --
 
 /*!40000 ALTER TABLE `expenses` DISABLE KEYS */;
+INSERT INTO `expenses` (`id`,`description`,`amount`,`date_created`,`no_of_kg`,`rate_per_kg`) VALUES 
+ (1,'Milling Charge',900,'2012-10-20',750,1.2),
+ (2,'Trucking Charge',1500,'2012-10-20',750,2),
+ (3,'Milling Charge',780,'2012-10-20',650,1.2);
 /*!40000 ALTER TABLE `expenses` ENABLE KEYS */;
 
 
@@ -132,7 +130,7 @@ CREATE TABLE `items` (
   `status` varchar(45) NOT NULL,
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
@@ -140,15 +138,15 @@ CREATE TABLE `items` (
 
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
 INSERT INTO `items` (`id`,`item_code`,`description`,`unit_price`,`unit_of_measure`,`status`,`type`) VALUES 
- (1,'Tiki-tiki','Tiki-tiki for humay',500.00,'sack','Active','output'),
- (2,'Tahop','Tahop for mais',300.00,'sack','Active','output'),
- (3,'Humay','Humay',25.00,'Kg','Active','raw'),
- (4,'rice','rice product of humay pasi',1200.00,'sack','Active','output'),
- (6,'pasi','pasi',20.00,'kg','Active','raw'),
- (7,'Tik2x','tik2x',400.00,'sack','Active','output'),
- (8,'binload #10','binlod pino',800.00,'sack','Active','output'),
- (9,'binload #12','binlod segunda pino',800.00,'sack','Active','output'),
- (10,'Mais','Mais not milled',15.00,'kg','Active','raw');
+ (1,'Rice','Rice Product ',1600.00,'Sack','Active','output'),
+ (2,'Tiki-tiki','Tiki-tiki',700.00,'Sack','Active','output'),
+ (3,'Humay pasi','Humay pasi',20.50,'kg','Active','raw'),
+ (4,'Tahop','Tahop Mais',500.00,'Sack','Active','output'),
+ (5,'Tik2x','Tik2x Mais',500.00,'Sack','Active','output'),
+ (6,'binlod #11','binlod #11 Mais',1000.00,'Sack','Active','output'),
+ (7,'binlod #12','binlod #12 Mais',1000.00,'Sack','Active','output'),
+ (8,'binlod #14','binlod #14 Mais',1000.00,'Sack','Active','output'),
+ (9,'Mais','Mais',17.00,'Kg','Active','raw');
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 
 
@@ -170,13 +168,13 @@ CREATE TABLE `kilos_per_sack` (
 
 /*!40000 ALTER TABLE `kilos_per_sack` DISABLE KEYS */;
 INSERT INTO `kilos_per_sack` (`item_id`,`kilos_per_sack`) VALUES 
- (3,49),
- (1,30),
- (2,20),
- (7,30),
- (8,49),
- (9,49),
- (4,49);
+ (1,49),
+ (2,50),
+ (4,50),
+ (5,50),
+ (6,50),
+ (7,50),
+ (8,50);
 /*!40000 ALTER TABLE `kilos_per_sack` ENABLE KEYS */;
 
 
@@ -193,7 +191,7 @@ CREATE TABLE `partida` (
   `created_by` varchar(45) DEFAULT NULL,
   `stockout_status` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `partida`
@@ -201,13 +199,9 @@ CREATE TABLE `partida` (
 
 /*!40000 ALTER TABLE `partida` DISABLE KEYS */;
 INSERT INTO `partida` (`id`,`name`,`status`,`created_at`,`created_by`,`stockout_status`) VALUES 
- (1,'Minga Uy ','1','2012-10-03','admin',1),
- (2,'  Nutrimart-Tagb. ','1','2012-10-03','admin',1),
- (3,'partida Erning ','1','2012-10-11','admin',1),
- (4,'Partida Erning ','1','2012-10-11','admin',1),
- (5,'Partida Erning ','1','2012-10-11','admin',1),
- (6,'sample partida ','1','2012-10-18','admin',1),
- (7,'Ester ','1','2012-10-18','admin',1);
+ (1,'Erning ','1','2012-10-20','admin ',1),
+ (2,'YY Mais ','1','2012-10-20','admin ',0),
+ (3,'Nutrimart-Tagb ','1','2012-10-20','dev',1);
 /*!40000 ALTER TABLE `partida` ENABLE KEYS */;
 
 
@@ -230,6 +224,10 @@ CREATE TABLE `partida_expenses` (
 --
 
 /*!40000 ALTER TABLE `partida_expenses` DISABLE KEYS */;
+INSERT INTO `partida_expenses` (`expenses_id`,`partida_id`) VALUES 
+ (1,1),
+ (2,1),
+ (3,2);
 /*!40000 ALTER TABLE `partida_expenses` ENABLE KEYS */;
 
 
@@ -253,11 +251,8 @@ CREATE TABLE `partida_raw_item` (
 
 /*!40000 ALTER TABLE `partida_raw_item` DISABLE KEYS */;
 INSERT INTO `partida_raw_item` (`partida_id`,`raw_item_id`) VALUES 
- (5,3),
- (6,6),
- (7,10),
- (2,3),
- (1,3);
+ (1,3),
+ (2,9);
 /*!40000 ALTER TABLE `partida_raw_item` ENABLE KEYS */;
 
 
@@ -283,28 +278,8 @@ CREATE TABLE `partida_stockin` (
 INSERT INTO `partida_stockin` (`partida_id`,`stockin_id`) VALUES 
  (1,1),
  (1,2),
- (1,3),
- (1,4),
- (1,5),
- (1,6),
- (1,7),
- (1,8),
- (1,9),
- (1,10),
- (1,11),
- (1,12),
- (1,13),
- (1,14),
- (1,15),
- (1,16),
- (2,17),
- (3,18),
- (4,19),
- (5,20),
- (5,21),
- (6,23),
- (7,24),
- (2,25);
+ (2,3),
+ (2,4);
 /*!40000 ALTER TABLE `partida_stockin` ENABLE KEYS */;
 
 
@@ -331,26 +306,13 @@ INSERT INTO `partida_stockout` (`partida_id`,`stockout_id`) VALUES
  (1,1),
  (1,2),
  (1,3),
- (1,4),
- (1,5),
- (1,6),
- (1,7),
- (1,8),
- (1,9),
- (2,10),
- (2,11),
- (2,12),
- (2,13),
- (6,15),
- (6,16),
- (6,17),
- (6,18),
- (7,19),
- (7,20),
- (7,21),
- (7,22),
- (7,23),
- (7,24);
+ (2,4),
+ (2,5),
+ (2,6),
+ (2,7),
+ (2,9),
+ (1,10),
+ (1,11);
 /*!40000 ALTER TABLE `partida_stockout` ENABLE KEYS */;
 
 
@@ -363,7 +325,7 @@ CREATE TABLE `previleges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `previleges` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `previleges`
@@ -375,7 +337,10 @@ INSERT INTO `previleges` (`id`,`previleges`) VALUES
  (2,'can_stockin'),
  (3,'can_stockout'),
  (4,'can_close_partida'),
- (5,'can_close_partida_stockout');
+ (5,'can_close_partida_stockout'),
+ (6,'can_edit_delete_partida_prod'),
+ (7,'can_open_close_partida'),
+ (8,'can_evaluate_partida');
 /*!40000 ALTER TABLE `previleges` ENABLE KEYS */;
 
 
@@ -426,7 +391,7 @@ CREATE TABLE `stock_in` (
   `date_in` datetime DEFAULT NULL,
   `received_by` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stock_in`
@@ -434,30 +399,10 @@ CREATE TABLE `stock_in` (
 
 /*!40000 ALTER TABLE `stock_in` DISABLE KEYS */;
 INSERT INTO `stock_in` (`id`,`item_id`,`qty_in`,`num_of_sack`,`price`,`total_amount`,`description`,`date_in`,`received_by`) VALUES 
- (1,3,492.00,14,20.50,10086.00,'humay puti','2012-10-03 00:00:00','admin'),
- (2,3,109.00,3,20.00,2180.00,'humay puti','2012-10-03 00:00:00','admin'),
- (3,3,33.00,1,20.00,660.00,'humay puti','2012-09-21 00:00:00','admin'),
- (4,3,1394.00,34,20.00,27880.00,'humay puti','2012-09-21 00:00:00','admin'),
- (5,3,109.00,2,20.50,2234.50,'humay puti','2012-09-22 00:00:00','admin'),
- (6,3,225.00,5,20.00,4500.00,'humay puti','2012-09-24 00:00:00','admin'),
- (7,3,83.00,2,20.00,1660.00,'humay puti','2012-09-24 00:00:00','admin'),
- (8,3,242.00,7,20.00,4840.00,'humay puti','2012-09-24 00:00:00','admin'),
- (9,3,616.00,13,20.00,12320.00,'humay puti','2012-09-29 00:00:00','admin'),
- (10,3,2855.00,66,19.00,54245.00,'humay puti','2012-09-29 00:00:00','admin'),
- (11,3,1064.00,24,20.00,21280.00,'humay puti','2012-10-02 00:00:00','admin'),
- (12,3,116.00,3,19.00,2204.00,'humay puti','2012-10-02 00:00:00','admin'),
- (13,3,550.00,9,20.00,11000.00,'humay puti','2012-09-26 00:00:00','admin'),
- (14,3,721.00,19,20.00,14420.00,'humay puti','2012-09-26 00:00:00','admin'),
- (15,3,165.00,5,19.00,3135.00,'humay puti','2012-09-28 00:00:00','admin'),
- (16,3,481.00,13,18.50,8898.50,'humay puti','2012-09-30 00:00:00','admin'),
- (17,3,59.00,1,18.50,1091.50,'humay puti','2012-10-02 00:00:00','admin'),
- (18,3,197.00,5,21.00,4137.00,'humay puwa','2012-09-21 00:00:00','admin'),
- (19,3,89.00,2,21.00,1869.00,'Humay puwa','2012-10-11 00:00:00','admin'),
- (20,3,197.00,5,21.00,4137.00,'Humay puwa','2012-10-11 00:00:00','admin'),
- (21,3,250.00,5,25.00,6250.00,'Humay Pula','2012-10-18 00:00:00','admin'),
- (23,6,500.00,10,20.00,10000.00,'pasi pula','2012-10-18 00:00:00','admin'),
- (24,10,800.00,20,15.00,12000.00,'Mais','2012-10-18 00:00:00','admin'),
- (25,3,100.00,20,25.00,2500.00,'fdfdfd','2012-10-18 00:00:00','admin');
+ (1,3,500.00,10,20.00,10000.00,'Humay Puti','2012-10-20 00:00:00','admin'),
+ (2,3,250.00,5,20.50,5125.00,'Humay Puti','2012-10-20 00:00:00','admin'),
+ (3,9,500.00,10,17.00,8500.00,'Mais puti','2012-10-20 00:00:00','admin'),
+ (4,9,150.00,3,17.00,2550.00,'Mais puti','2012-10-20 00:00:00','admin');
 /*!40000 ALTER TABLE `stock_in` ENABLE KEYS */;
 
 
@@ -475,7 +420,7 @@ CREATE TABLE `stock_out` (
   `date_out` date DEFAULT NULL,
   `out_by` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stock_out`
@@ -483,29 +428,16 @@ CREATE TABLE `stock_out` (
 
 /*!40000 ALTER TABLE `stock_out` DISABLE KEYS */;
 INSERT INTO `stock_out` (`id`,`item_id`,`qty_out`,`price`,`total_amount`,`date_out`,`out_by`) VALUES 
- (1,4,30.00,1650.00,49500.00,'2012-10-03','admin'),
- (2,4,10.00,1600.00,16000.00,'2012-10-03','admin'),
- (3,4,20.00,1600.00,32000.00,'2012-10-03','admin'),
- (4,1,5.00,500.00,2500.00,'2012-10-03','admin'),
- (5,1,4.00,500.00,2000.00,'2012-10-04','admin'),
- (6,4,33.00,1600.00,52800.00,'2012-10-04','admin'),
- (7,1,14.00,500.00,7000.00,'2012-10-05','admin'),
- (8,4,27.00,1600.00,43200.00,'2012-10-05','admin'),
- (9,4,4.00,1600.00,6400.00,'2012-10-06','admin'),
- (10,4,20.00,1600.00,32000.00,'2012-10-08','admin'),
- (11,4,20.00,1600.00,32000.00,'2012-10-09','admin'),
- (12,4,25.00,1600.00,40000.00,'2012-10-10','admin'),
- (13,4,30.00,1600.00,48000.00,'2012-10-11','admin'),
- (15,4,1.00,1200.00,1200.00,'2012-10-18','admin'),
- (16,4,1.00,12.00,12.00,'2012-10-18','admin'),
- (17,4,1.00,1200.00,1200.00,'2012-10-18','admin'),
- (18,4,2.00,12.00,24.00,'2012-10-18','admin'),
- (19,8,1.00,800.00,800.00,'2012-10-18','admin'),
- (20,1,2.00,12.00,24.00,'2012-10-18','admin'),
- (21,9,1.00,800.00,800.00,'2012-10-18','admin'),
- (22,1,2.00,12.00,24.00,'2012-10-18','admin'),
- (23,7,5.00,150.00,750.00,'2012-10-18','admin'),
- (24,1,1.00,12.00,12.00,'2012-10-18','admin');
+ (1,1,5.00,1600.00,8000.00,'2012-10-20','admin '),
+ (2,1,3.00,1600.00,4800.00,'2012-10-20','admin '),
+ (3,2,3.00,700.00,2100.00,'2012-10-20','admin '),
+ (4,6,2.00,1000.00,2000.00,'2012-10-20','admin '),
+ (5,4,1.00,500.00,500.00,'2012-10-20','admin '),
+ (6,5,0.50,500.00,250.00,'2012-10-20','admin '),
+ (7,7,1.00,1000.00,1000.00,'2012-10-20','admin '),
+ (9,8,1.00,1000.00,1000.00,'2012-10-20','admin '),
+ (10,1,1.00,1600.00,1600.00,'2012-10-21','admin '),
+ (11,2,2.00,700.00,1400.00,'2012-10-21','admin ');
 /*!40000 ALTER TABLE `stock_out` ENABLE KEYS */;
 
 
@@ -529,30 +461,10 @@ CREATE TABLE `stockin_provider` (
 
 /*!40000 ALTER TABLE `stockin_provider` DISABLE KEYS */;
 INSERT INTO `stockin_provider` (`stockin_id`,`provider_id`) VALUES 
- (1,6),
- (2,7),
- (3,8),
- (4,9),
- (5,5),
- (6,10),
- (7,11),
- (8,8),
- (9,7),
- (10,9),
- (11,10),
- (12,11),
- (13,12),
- (14,12),
- (15,12),
- (16,12),
- (17,11),
- (18,7),
- (19,8),
- (20,7),
- (21,5),
- (23,5),
- (24,2),
- (25,3);
+ (1,7),
+ (2,5),
+ (3,12),
+ (4,11);
 /*!40000 ALTER TABLE `stockin_provider` ENABLE KEYS */;
 
 
@@ -574,7 +486,11 @@ CREATE TABLE `user_account` (
 
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
 INSERT INTO `user_account` (`username`,`password`,`user_type`) VALUES 
- ('admin ','21232f297a57a5a743894a0e4a801fc3','Admin');
+ ('a ','80c9ef0fb86369cd25f90af27ef53a9e','user '),
+ ('admin ','21232f297a57a5a743894a0e4a801fc3','Admin'),
+ ('b ','1692fcfff3e01e7ba8cffc2baadef5f5','user '),
+ ('c ','94f3b3a16d8ce064c808b16bee5003c5','user '),
+ ('dev','0cc175b9c0f1b6a831c399e269772661','user');
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 
 
@@ -586,10 +502,14 @@ DROP TABLE IF EXISTS `user_previleges`;
 CREATE TABLE `user_previleges` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
-  `previleges` varchar(45) DEFAULT NULL,
+  `previleges` int(11) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `FK_user_previleges_1` (`username`),
+  KEY `FK_user_previleges_2` (`previleges`),
+  CONSTRAINT `FK_user_previleges_2` FOREIGN KEY (`previleges`) REFERENCES `previleges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_user_previleges_1` FOREIGN KEY (`username`) REFERENCES `user_account` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_previleges`
@@ -597,11 +517,46 @@ CREATE TABLE `user_previleges` (
 
 /*!40000 ALTER TABLE `user_previleges` DISABLE KEYS */;
 INSERT INTO `user_previleges` (`id`,`username`,`previleges`,`status`) VALUES 
- (1,'admin','1','1'),
- (2,'admin','2','1'),
- (3,'admin','3','1'),
- (4,'admin','4','0'),
- (5,'admin','5','1');
+ (1,'admin',1,'1'),
+ (2,'admin',2,'1'),
+ (3,'admin',3,'1'),
+ (4,'admin',4,'1'),
+ (5,'admin',5,'1'),
+ (6,'admin',6,'1'),
+ (7,'dev',1,'1'),
+ (8,'dev',2,'1'),
+ (9,'dev',3,'1'),
+ (10,'dev',4,'1'),
+ (11,'dev',5,'1'),
+ (12,'dev',6,'1'),
+ (13,'dev',7,'0'),
+ (14,'dev',8,'0'),
+ (15,'admin',7,'1'),
+ (16,'admin',8,'1'),
+ (17,'a',1,'1'),
+ (18,'a',2,'1'),
+ (19,'a',3,'1'),
+ (20,'a',4,'0'),
+ (21,'a',5,'0'),
+ (22,'a',6,'0'),
+ (23,'a',7,'0'),
+ (24,'a',8,'0'),
+ (25,'b',1,'1'),
+ (26,'b',2,'1'),
+ (27,'b',3,'1'),
+ (28,'b',4,'1'),
+ (29,'b',5,'1'),
+ (30,'b',6,'1'),
+ (31,'b',7,'1'),
+ (32,'b',8,'1'),
+ (33,'c',1,'1'),
+ (34,'c',2,'1'),
+ (35,'c',3,'1'),
+ (36,'c',4,'1'),
+ (37,'c',5,'1'),
+ (38,'c',6,'1'),
+ (39,'c',7,'1'),
+ (40,'c',8,'1');
 /*!40000 ALTER TABLE `user_previleges` ENABLE KEYS */;
 
 

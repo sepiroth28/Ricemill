@@ -27,14 +27,19 @@ Sub setPrevileges(previleges, action As Boolean)
             activeUser.previliges.canClosePartida = action
         Case "can_close_partida_stockout":
             activeUser.previliges.canClosePartidaStockout = action
+        Case "can_edit_delete_partida_prod":
+            activeUser.previliges.canEditDeletePartidaProd = action
+        Case "can_open_close_partida":
+            activeUser.previliges.canOpenClosePartida = action
+        Case "can_evaluate_partida":
+            activeUser.previliges.canEvaluatePartida = action
     End Select
 End Sub
 
-
-
-
 Sub renderButtonBasedOnUserPreviliges()
     With activeUser.previliges
+        MDIForm1.mnuPartidavisibility.Enabled = .canOpenClosePartida
+        MDIForm1.mnuEvaluatepartida.Enabled = .canEvaluatePartida
        frmManagePartida.cmdCreate.Enabled = .canCreatePartida
        'toolbar menu
     End With
@@ -42,10 +47,12 @@ End Sub
 
 Sub renderButtonBasedOnUserPreviligesInPartidaView()
     With activeUser.previliges
-       frmPartidaView.cmdAddStockIn.Enabled = .canStockIn
-       frmPartidaView.cmdAddStockOut.Enabled = .canStockOut
+'       frmPartidaView.cmdAddStockIn.Enabled = .canStockIn
+'       frmPartidaView.cmdAddStockOut.Enabled = .canStockOut
        frmPartidaView.cmdClosepartida.Enabled = .canClosePartida
        frmPartidaView.cmdClosePartidaStockout.Enabled = .canClosePartidaStockout
+       frmPartidaView.mnuedit.Enabled = .canEditDeletePartidaProd
+       frmPartidaView.mnudelete.Enabled = .canEditDeletePartidaProd
     End With
 End Sub
 

@@ -20,6 +20,55 @@ Private mvarcanStockOut As Boolean 'local copy
 'local variable(s) to hold property value(s)
 Private mvarcanClosePartida As Boolean 'local copy
 Private mvarcanClosePartidaStockout As Boolean 'local copy
+'local variable(s) to hold property value(s)
+Private mvarcanEditDeletePartidaProd As Boolean 'local copy
+'local variable(s) to hold property value(s)
+Private mvarcanOpenClosePartida As Boolean 'local copy
+Private mvarcanEvaluatePartida As Boolean 'local copy
+Public Property Let canEvaluatePartida(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.canEvaluatePartida = 5
+    mvarcanEvaluatePartida = vData
+End Property
+
+
+Public Property Get canEvaluatePartida() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.canEvaluatePartida
+    canEvaluatePartida = mvarcanEvaluatePartida
+End Property
+
+
+
+Public Property Let canOpenClosePartida(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.canOpenClosePartida = 5
+    mvarcanOpenClosePartida = vData
+End Property
+
+
+Public Property Get canOpenClosePartida() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.canOpenClosePartida
+    canOpenClosePartida = mvarcanOpenClosePartida
+End Property
+
+
+
+
+Public Property Let canEditDeletePartidaProd(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.canEditDeleteStockin = 5
+    mvarcanEditDeletePartidaProd = vData
+End Property
+
+
+Public Property Get canEditDeletePartidaProd() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.canEditDeleteStockin
+    canEditDeletePartidaProd = mvarcanEditDeletePartidaProd
+End Property
+
 Public Property Let canClosePartidaStockout(ByVal vData As Boolean)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.canClosePartidaStockout = 5

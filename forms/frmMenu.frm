@@ -1,46 +1,74 @@
 VERSION 5.00
 Begin VB.Form frmMenu 
-   ClientHeight    =   11520
+   BackColor       =   &H00000080&
+   ClientHeight    =   12345
    ClientLeft      =   120
-   ClientTop       =   450
-   ClientWidth     =   16410
+   ClientTop       =   120
+   ClientWidth     =   16710
+   ControlBox      =   0   'False
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
    Picture         =   "frmMenu.frx":0000
-   ScaleHeight     =   11520
-   ScaleWidth      =   16410
+   ScaleHeight     =   12345
+   ScaleWidth      =   16710
+   Begin VB.Image Image7 
+      Height          =   1110
+      Left            =   690
+      Picture         =   "frmMenu.frx":D0C32
+      Top             =   2070
+      Width           =   1110
+   End
+   Begin VB.Label lblactiv_user 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Label1"
+      BeginProperty Font 
+         Name            =   "Arial Narrow"
+         Size            =   20.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   495
+      Left            =   2010
+      TabIndex        =   1
+      Top             =   2190
+      Width           =   2955
+   End
    Begin VB.Image Image6 
       Height          =   330
       Left            =   3780
-      Picture         =   "frmMenu.frx":C916E
+      Picture         =   "frmMenu.frx":D5743
       Top             =   2970
       Width           =   1290
    End
    Begin VB.Image Image5 
       Height          =   1260
       Left            =   360
-      Picture         =   "frmMenu.frx":CD21A
+      Picture         =   "frmMenu.frx":D97EF
       Top             =   8730
       Width           =   4800
    End
    Begin VB.Image Image4 
       Height          =   1260
       Left            =   360
-      Picture         =   "frmMenu.frx":D469C
+      Picture         =   "frmMenu.frx":E0C71
       Top             =   7440
       Width           =   4800
    End
    Begin VB.Image Image3 
       Height          =   1260
       Left            =   360
-      Picture         =   "frmMenu.frx":DBAFF
+      Picture         =   "frmMenu.frx":E80D4
       Top             =   6150
       Width           =   4800
    End
    Begin VB.Image Image2 
       Height          =   1260
       Left            =   360
-      Picture         =   "frmMenu.frx":E366A
+      Picture         =   "frmMenu.frx":EFC3F
       Top             =   4860
       Width           =   4800
    End
@@ -48,7 +76,7 @@ Begin VB.Form frmMenu
       Height          =   1260
       Left            =   360
       MousePointer    =   99  'Custom
-      Picture         =   "frmMenu.frx":EB24B
+      Picture         =   "frmMenu.frx":F7820
       Top             =   3570
       Width           =   4800
    End
@@ -99,4 +127,13 @@ End Sub
 
 Private Sub Image3_Click()
     frmManageProvider.Show 1
+End Sub
+
+Private Sub Image6_Click()
+Dim confirm As Byte
+    confirm = MsgBox("Do you want to Log-out now?", vbQuestion + vbYesNo)
+    If confirm = vbYes Then
+        Unload MDIForm1
+        frmuserlogin.Show
+    End If
 End Sub

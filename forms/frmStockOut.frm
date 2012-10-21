@@ -1,6 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmStockOut 
+   BackColor       =   &H0097C2FD&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Stock Out"
    ClientHeight    =   5055
@@ -17,22 +18,22 @@ Begin VB.Form frmStockOut
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   5055
-      Left            =   0
-      ScaleHeight     =   5025
-      ScaleWidth      =   7065
+      Height          =   4935
+      Left            =   60
+      ScaleHeight     =   4905
+      ScaleWidth      =   6915
       TabIndex        =   0
-      Top             =   0
-      Width           =   7095
+      Top             =   60
+      Width           =   6945
       Begin MSComctlLib.ListView lsvoutputProductlist 
-         Height          =   1545
+         Height          =   1395
          Left            =   240
          TabIndex        =   14
          Top             =   2250
          Visible         =   0   'False
-         Width           =   5895
-         _ExtentX        =   10398
-         _ExtentY        =   2725
+         Width           =   5655
+         _ExtentX        =   9975
+         _ExtentY        =   2461
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -124,7 +125,7 @@ Begin VB.Form frmStockOut
          Left            =   240
          TabIndex        =   7
          Top             =   1680
-         Width           =   5895
+         Width           =   5655
       End
       Begin VB.TextBox txtQty 
          Appearance      =   0  'Flat
@@ -175,12 +176,12 @@ Begin VB.Form frmStockOut
          Left            =   4320
          TabIndex        =   4
          Top             =   2940
-         Width           =   1815
+         Width           =   1575
       End
       Begin VB.CommandButton cmdBrowse 
          Caption         =   "..."
          Height          =   555
-         Left            =   6180
+         Left            =   5970
          TabIndex        =   3
          Top             =   1680
          Width           =   675
@@ -188,7 +189,7 @@ Begin VB.Form frmStockOut
       Begin VB.CommandButton Command1 
          Caption         =   "..."
          Height          =   375
-         Left            =   6420
+         Left            =   6180
          TabIndex        =   2
          Top             =   540
          Width           =   435
@@ -205,9 +206,9 @@ Begin VB.Form frmStockOut
             Strikethrough   =   0   'False
          EndProperty
          Height          =   735
-         Left            =   4920
+         Left            =   4650
          TabIndex        =   1
-         Top             =   4140
+         Top             =   3990
          Width           =   1995
       End
       Begin VB.Label Label1 
@@ -321,17 +322,17 @@ Begin VB.Form frmStockOut
          EndProperty
          ForeColor       =   &H000000C0&
          Height          =   300
-         Left            =   5700
+         Left            =   5460
          TabIndex        =   8
          Top             =   600
          Width           =   555
       End
       Begin VB.Line Line1 
          BorderColor     =   &H00C0C0C0&
-         X1              =   180
-         X2              =   6900
-         Y1              =   4020
-         Y2              =   4020
+         X1              =   120
+         X2              =   6840
+         Y1              =   3810
+         Y2              =   3810
       End
       Begin VB.Line Line2 
          BorderColor     =   &H00C0C0C0&
@@ -355,17 +356,25 @@ End Sub
 
 Private Sub cmdSave_Click()
 Dim stock_out As New StockOut
-Call get_item_id(txtItem.Text)
+Call get_item_id(txtitem.Text)
 With stock_out
+    If stockout_product_edit_mode = True Then
+    .id = activestockoutID
+    End If
     .item_id = itemID
     .qty_out = Val(txtQty.Text)
     .unit_price = Val(txtPrice.Text)
     .total_amount = Val(txtAmount.Text)
-    .received_by = "admin"
+    .received_by = activeUser.username
     .date_out = Format(lbldate.Caption, "yyyy-mm-dd")
+    If stockout_product_edit_mode = True Then
+    .editStockout
+    MsgBox "Successfully Updated stockout", vbInformation, "StockOut"
+    Else
     .save_stockout
+    MsgBox "Successfully Stock Out", vbInformation, "StockOut"
+    End If
 End With
-MsgBox "Successfully Stock Out", vbInformation, "StockOut"
 
 Call loadStockOutListOnThisPartida(activePartidaId, frmPartidaView.lsvStockOut)
 Call loadStockOutTotals(activePartidaId, frmPartidaView.lsvStockOutTotal)
@@ -386,7 +395,7 @@ Call loadoutputProductOfThisPartida(lsvoutputProductlist, activePartidaId)
 End Sub
 
 Private Sub lsvoutputProductlist_Click()
-    txtItem.Text = lsvoutputProductlist.SelectedItem.SubItems(5)
+    txtitem.Text = lsvoutputProductlist.SelectedItem.SubItems(5)
     txtPrice.Text = lsvoutputProductlist.SelectedItem.SubItems(7)
     Call toggle_listview(lsvoutputProductlist)
 End Sub

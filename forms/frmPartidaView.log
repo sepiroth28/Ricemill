@@ -1,5 +1,6 @@
 Line 202: Class MSComctlLib.ListView of control lsvStockOut was not a loaded control class.
 Line 264: Class MSComctlLib.ListView of control lsvStockOutTotal was not a loaded control class.
-Line 360: Class MSComctlLib.ListView of control lsvStockIn was not a loaded control class.
-Line 432: Class MSComctlLib.ListView of control lsvStockInTotal was not a loaded control class.
-Line 492: Class MSComctlLib.ListView of control lsvTotalExpenses was not a loaded control class.
+Line 324: Class MSComctlLib.ListView of control lsvPercentage was not a loaded control class.
+Line 398: Class MSComctlLib.ListView of control lsvStockIn was not a loaded control class.
+Line 470: Class MSComctlLib.ListView of control lsvStockInTotal was not a loaded control class.
+Line 530: Class MSComctlLib.ListView of control lsvTotalExpenses was not a loaded control class.

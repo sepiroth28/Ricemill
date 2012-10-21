@@ -1,14 +1,17 @@
 VERSION 5.00
 Begin VB.Form frmuserlogin 
+   BorderStyle     =   1  'Fixed Single
    Caption         =   "USER LOG IN"
-   ClientHeight    =   4350
-   ClientLeft      =   120
-   ClientTop       =   450
-   ClientWidth     =   7155
+   ClientHeight    =   4380
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   7200
    LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
    Picture         =   "frmuserlogin.frx":0000
-   ScaleHeight     =   4350
-   ScaleWidth      =   7155
+   ScaleHeight     =   4380
+   ScaleWidth      =   7200
    StartUpPosition =   1  'CenterOwner
    Begin VB.TextBox txtUsername 
       Appearance      =   0  'Flat
@@ -25,7 +28,6 @@ Begin VB.Form frmuserlogin
       Height          =   345
       Left            =   3480
       TabIndex        =   0
-      Text            =   "admin"
       Top             =   2280
       Width           =   3195
    End
@@ -46,21 +48,20 @@ Begin VB.Form frmuserlogin
       Left            =   3480
       PasswordChar    =   "="
       TabIndex        =   1
-      Text            =   "admin"
       Top             =   2820
       Width           =   3195
    End
    Begin VB.Image imgLogin 
       Height          =   570
       Left            =   5100
-      Picture         =   "frmuserlogin.frx":24747
+      Picture         =   "frmuserlogin.frx":24549
       Top             =   3450
       Width           =   1665
    End
    Begin VB.Image imgCancel 
       Height          =   570
       Left            =   3420
-      Picture         =   "frmuserlogin.frx":28203
+      Picture         =   "frmuserlogin.frx":28005
       Top             =   3450
       Width           =   1665
    End
@@ -70,9 +71,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Dim cntr As Integer
 Private Sub imgCancel_Click()
     End
 End Sub
+
 
 Private Sub imgLogin_Click()
     Dim checkuser As New Useraccount
@@ -108,6 +111,7 @@ Private Sub imgLogin_Click()
                 MDIForm1.Show
                
             End If
+            frmMenu.lblactiv_user.Caption = activeUser.username
                 Unload Me
     Else
         prompt
@@ -115,7 +119,8 @@ Private Sub imgLogin_Click()
 End Sub
 
 Sub prompt()
-For Each cnt In frmLogin
+Dim cnt As Control
+For Each cnt In frmuserlogin
     If TypeOf cnt Is TextBox Then
         cntr = cntr + 1
         If cntr = 1 Then

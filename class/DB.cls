@@ -47,14 +47,11 @@ Public Property Let Password(ByVal vData As String)
     mvarpassword = vData
 End Property
 
-
 Public Property Get Password() As String
 'used when retrieving value of a property, on the right side of an assignment.
 'Syntax: Debug.Print X.password
     Password = mvarpassword
 End Property
-
-
 
 Public Property Let username(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.

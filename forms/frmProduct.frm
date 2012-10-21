@@ -2,22 +2,22 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmProduct 
    BackColor       =   &H00000080&
-   Caption         =   "Form1"
-   ClientHeight    =   7455
+   Caption         =   "MANAGE PRODUCT"
+   ClientHeight    =   6795
    ClientLeft      =   225
    ClientTop       =   855
    ClientWidth     =   9645
    LinkTopic       =   "Form1"
-   ScaleHeight     =   7455
+   ScaleHeight     =   6795
    ScaleWidth      =   9645
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   7365
+      Height          =   6705
       Left            =   60
-      ScaleHeight     =   7335
+      ScaleHeight     =   6675
       ScaleWidth      =   9525
       TabIndex        =   0
       Top             =   60
@@ -55,17 +55,17 @@ Begin VB.Form frmProduct
          Height          =   795
          Left            =   6750
          TabIndex        =   1
-         Top             =   6330
+         Top             =   5730
          Width           =   2535
       End
       Begin MSComctlLib.ListView lsvProduct 
-         Height          =   5655
+         Height          =   4995
          Left            =   180
          TabIndex        =   2
          Top             =   570
          Width           =   9135
          _ExtentX        =   16113
-         _ExtentY        =   9975
+         _ExtentY        =   8811
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True

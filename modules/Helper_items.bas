@@ -20,6 +20,11 @@ Sub saveAssociatedItems(raw_id As Integer, output_id As Integer)
         sql = "INSERT INTO associated_products VALUES(" & raw_id & "," & output_id & ")"
     db.execute (sql)
 End Sub
+Sub saveKgKilosPerSack(output_item_id As Double, kg_per_sack As Double)
+    Dim sql As String
+        sql = "INSERT INTO `kilos_per_sack` VALUES(" & output_item_id & "," & kg_per_sack & ")"
+    db.execute (sql)
+End Sub
 
 
 Sub loadAllProducts(lsv As ListView, category As String)

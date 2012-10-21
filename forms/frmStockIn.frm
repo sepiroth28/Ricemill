@@ -29,7 +29,7 @@ Begin VB.Form frmStockIn
       Width           =   7095
       Begin MSComctlLib.ListView lsvProviderlist 
          Height          =   1935
-         Left            =   240
+         Left            =   1380
          TabIndex        =   18
          Top             =   2160
          Visible         =   0   'False
@@ -492,7 +492,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim id_of_item As Integer
+Dim id_of_item As Double
 Dim seted_raw_item_id_of_this_partida As Integer
 Dim active_stockin_provider As New provider
 Private Sub cmdBrowse_Click()
@@ -517,15 +517,24 @@ With stock_in
     .received_by = "admin"
     .description = txtdescription
     .date_in = Format(lblDate.Caption, "yyyy-mm-dd")
-    .save_stockin
 End With
-active_stockin_provider.insertPartidaProvider (getlastId)
-Call insertRawItemOfThisPartida(activePartidaId, id_of_item)
-
-MsgBox "Successfully Stock in", vbInformation, "Stockin"
-
+If stockin_product_edit_mode = True Then
+    stock_in.id = activestockinID
+    stock_in.updateStockin
+    MsgBox "Successfully updated Stock in", vbInformation, "Stockin"
+Else
+    stock_in.save_stockin
+        
+        active_stockin_provider.insertPartidaProvider (getlastId)
+        If IsRawProductSetThisPartida(activePartidaId) <> True Then
+        Call insertRawItemOfThisPartida(activePartidaId, id_of_item)
+        End If
+        
+        MsgBox "Successfully Stock in", vbInformation, "Stockin"
+End If
 Call loadStockinListOnThisPartida(activePartidaId, frmPartidaView.lsvStockIn)
-Call loadStockInTotals(activePartidaId, frmPartidaView.lsvStockInTotal)
+Call loadStockInTotals(activePartidaId, frmPartidaView.lsvStockInTotal, frmPartidaView.ListView1)
+Call get_output_product_percentage(frmPartidaView.lsvPercentage, activePartidaId)
 Call clearfield
 End Sub
 

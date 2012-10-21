@@ -39,7 +39,7 @@ End If
     db.execute (sql)
 End Sub
 
-Sub closepartida(partida_id As Integer, status As Integer)
+Sub closepartida(partida_id As Double, status As Integer)
 
     Dim sql As String
     Dim rs As New ADODB.Recordset
@@ -59,7 +59,7 @@ Sub closepartida(partida_id As Integer, status As Integer)
     End If
 End Sub
 
-Sub closepartidaStockout(partida_id As Integer, stockout_status As Integer)
+Sub closepartidaStockout(partida_id As Double, stockout_status As Integer)
 
     Dim sql As String
     Dim rs As New ADODB.Recordset
@@ -87,20 +87,74 @@ If newPartida Then
             .partida_status = 1
             .stockout_status = 0
             .created_at = Format(Date, "yyyy-mm-dd")
-            .created_by = "admin"
+            .created_by = activeUser.username
             .save
         End With
         MsgBox "Successfully saved!", vbInformation, "save"
         Call loadPartidaList(frmManagePartida.lsvPartida)
-
+        newPartida = False
+        activePartidaId = getlastId
         'Unload Me
 End If
 Call enable_partida_open(frmManagePartida.lsvPartida, frmManagePartida.cmdOpen)
 End Sub
 
 
-Public Sub getlastpartida_id(set_activePartidaId As Integer)
+Public Sub getlastpartida_id(set_activePartidaId As Double)
 Dim getlastId As Integer
 getlastId = Val(db.execute("SELECT last_insert_id()").Fields(0).Value)
 set_activePartidaId = getlastId
 End Sub
+
+Function editstockoutproduct(stockout_id As Double)
+Dim editstckout As New StockOut
+    With editstckout
+        .load_stockout (stockout_id)
+        frmStockOut.lblDate.Caption = .date_out
+        frmStockOut.txtitem.Text = getItemcode(.item_id)
+        frmStockOut.txtPrice.Text = .unit_price
+        frmStockOut.txtQty.Text = .qty_out
+        frmStockOut.txtAmount.Text = .total_amount
+    End With
+        frmStockOut.Show 1
+End Function
+
+Function editstockinProduct(stockin_id As Double)
+Dim editstockin As New StockIn
+     With editstockin
+        .load_stockin (stockin_id)
+        frmStockIn.lblDate.Caption = .date_in
+'        frmStockIn.txtItem.Text = getItemcode(.item_id)
+        frmStockIn.txtAmount.Text = .total_amount
+        frmStockIn.txtdescription.Text = .description
+        frmStockIn.txtNum_of_sack.Text = .Num_of_sack
+        frmStockIn.txtPrice.Text = .unit_price
+        frmStockIn.txtProvider.Text = getprovider(.id)
+        frmStockIn.txtQty.Text = .qty_in
+     End With
+        frmStockIn.Show 1
+End Function
+
+Function getItemcode(item_id As Double) As String
+    Dim sql As String
+    Dim tempitem As New item
+        tempitem.load_item (item_id)
+    getItemcode = tempitem.item_code
+End Function
+
+Function getprovider(item_id As Double) As String
+    Dim sql As String
+    Dim tempprovider_id As Double
+    Dim rs As New ADODB.Recordset
+    Dim tempprovider As New provider
+    
+    sql = "SELECT * FROM `stockin_provider` WHERE stockin_id=" & item_id & ""
+    Set rs = db.execute(sql)
+    tempprovider_id = rs.Fields("provider_id").Value
+    
+    tempprovider.loadProvider (tempprovider_id)
+    
+    getprovider = tempprovider.provider_name
+    
+    Set rs = Nothing
+End Function

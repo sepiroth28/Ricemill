@@ -2,12 +2,13 @@ Attribute VB_Name = "Helper_Stockout"
 Dim item_in_listview As New Collection
 Dim id_of_output_product As Double
 
-Sub loadStockOutListOnThisPartida(partida_id As Integer, lsv As ListView)
+Sub loadStockOutListOnThisPartida(partida_id As Double, lsv As ListView)
 Dim sql As String
 Dim attributes As New Collection
 If partida_id <> 0 Then
     sql = view_partida_stock_out_list & " WHERE ps.partida_id = " & partida_id
     
+    attributes.Add "stockout_id"
     attributes.Add "description"
     attributes.Add "qty_out"
     attributes.Add "price"
@@ -18,7 +19,7 @@ If partida_id <> 0 Then
 End If
 End Sub
 
-Sub loadStockOutTotals(partida_id As Integer, lsv As ListView)
+Sub loadStockOutTotals(partida_id As Double, lsv As ListView)
 Dim sql As String
 Dim rs As New ADODB.Recordset
 Dim list As ListItem
@@ -32,7 +33,7 @@ If partida_id <> 0 Then
                 Set list = lsv.ListItems.Add(, , "")
                 list.SubItems(1) = "TOTALS"
                 list.SubItems(2) = rs.Fields("total_out").Value
-                list.SubItems(4) = rs.Fields("total_amount").Value
+                list.SubItems(4) = "Php." & FormatNumber(rs.Fields("total_amount").Value, 2)
                 totalgrossholder = list.SubItems(4)
             rs.MoveNext
             Loop
@@ -54,7 +55,7 @@ lbl = "Current out Percentage: " & percent & "%"
 End If
 End Sub
 
-Sub get_output_product_percentage(lsv As ListView, partida_id As Integer)
+Sub get_output_product_percentage(lsv As ListView, partida_id As Double)
     Dim sql As String
     Dim rs As New ADODB.Recordset
     Dim lst As ListItem
@@ -63,8 +64,9 @@ Sub get_output_product_percentage(lsv As ListView, partida_id As Integer)
             "where pi.partida_id=" & partida_id & ""
     Set rs = db.execute(sql)
     lsv.ListItems.Clear
-    If rs.RecordCount Then
     Set item_in_listview = New Collection
+    If rs.RecordCount Then
+    
         Do Until rs.EOF
             id_of_output_product = rs.Fields("id")
             Call getNo_of_kilospersack(id_of_output_product)
@@ -84,8 +86,8 @@ Function updateTotalPercentage() As Double
     Next
     updateTotalPercentage = a
 End Function
-Function getpercentage(partida_id As Integer, output_item_id As Integer) As Double
-    Dim percent As Integer
+Function getpercentage(partida_id As Double, output_item_id As Integer) As Double
+    Dim percent As Double
     Dim total_kg_out_per_item As Double
     On Error Resume Next
     Dim sql As String
@@ -100,7 +102,7 @@ Function getpercentage(partida_id As Integer, output_item_id As Integer) As Doub
         getpercentage = "Current out percentage: 0%"
     Else
         percent = (kilospersack / totalkg) * 100
-        getpercentage = percent
+        getpercentage = FormatNumber(percent, 2)
     End If
 End Function
 Function getNo_of_kilospersack(output_item_id As Double) As Double
@@ -112,7 +114,7 @@ Function getNo_of_kilospersack(output_item_id As Double) As Double
     Set rs = Nothing
 End Function
 
-Sub loadoutputProductOfThisPartida(lsv As ListView, partida_id As Integer)
+Sub loadoutputProductOfThisPartida(lsv As ListView, partida_id As Double)
     Dim sql As String
     Dim col As New Collection
         sql = "SELECT * FROM `partida_raw_item` pi inner join `associated_products` ap " & _

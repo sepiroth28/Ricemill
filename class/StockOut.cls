@@ -21,6 +21,14 @@ Private mvarunit_price As Double 'local copy
 Private mvartotal_amount As Double 'local copy
 Private mvardate_out As String 'local copy
 Private mvarreceived_by As String 'local copy
+Public Sub editStockout()
+    Dim sql As String
+        sql = "UPDATE `stock_out` SET item_id=" & Me.item_id & ",qty_out=" & Me.qty_out & ",price=" & Me.unit_price & "," & _
+              "total_amount=" & Me.total_amount & ",date_out='" & Me.date_out & "',out_by='" & Me.received_by & "' WHERE id=" & Me.id & ""
+        db.execute (sql)
+        
+End Sub
+
 
 Public Sub associateToPartida(partida_id As Integer)
 Dim last_stock_id As Integer
@@ -56,9 +64,24 @@ dtaStockin.Show 1
 End Sub
 
 Public Sub delete_stockout()
+    Dim sql As String
+        sql = "DELETE FROM `stock_out` WHERE id=" & Me.id & ""
+    db.execute (sql)
 End Sub
 
 Public Sub load_stockout(id As Integer)
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+        sql = "SELECT * FROM `stock_out` WHERE id=" & id & ""
+    Set rs = db.execute(sql)
+    With Me
+            .id = rs.Fields("id").Value
+            .item_id = rs.Fields("item_id").Value
+            .qty_out = rs.Fields("qty_out").Value
+            .unit_price = rs.Fields("price").Value
+            .total_amount = rs.Fields("total_amount").Value
+            .date_out = rs.Fields("date_out").Value
+    End With
 End Sub
 
 Public Sub save_stockout()

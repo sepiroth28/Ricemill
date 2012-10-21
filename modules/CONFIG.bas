@@ -10,7 +10,7 @@ Public Const PAYMENT_ACCOUNT_RECEIVABLE As Integer = 2
 Public Const ITEM_IN_STOCK As Integer = 1
 Public Const ITEM_OUT_OF_STOCK As Integer = 0
 'Public Const no_of_kilospersack As Integer = 49
-Public no_of_kilospersack As Integer
+Public no_of_kilospersack As Double
 Public Const DEALER As String = "dealer"
 Public Const CONSUMER As String = "consumer"
 
