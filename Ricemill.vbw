@@ -27,7 +27,11 @@ frmEvaluatepartida = 175, 175, 1058, 611, C, 100, 100, 911, 525, C
 frmPartidaManagement = 0, 0, 948, 436, C, 50, 50, 861, 475, C
 Helper_useraccount = 0, 0, 883, 436, C
 Useraccount = 0, 0, 904, 409, C
+<<<<<<< HEAD
 dtapartidaexpenses = 0, 0, 0, 0, C, 175, 175, 1075, 1075, C
+=======
+dtapartidaexpenses = 0, 0, 0, 0, C, -7, 54, 893, 954, C
+>>>>>>> 66bddeb1202ec6b9feff6b702b70609df41723a4
 dtaStockin = 0, 0, 0, 0, C, 50, 50, 950, 818, C
 dtaStockout = 0, 0, 0, 0, C, 81, 262, 981, 1030, C
 provider = 100, 100, 844, 609, C

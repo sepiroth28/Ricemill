@@ -200,6 +200,16 @@ Private Sub lsvProduct_MouseDown(Button As Integer, Shift As Integer, x As Singl
     End If
 End Sub
 
+Private Sub mnudelete_Click()
+    Dim delete_item As New item
+    Dim confirm As Byte
+        confirm = MsgBox("Do you want to delete this item?", vbQuestion + vbYesNo)
+        If confirm = vbYes Then
+            delete_item.load_item (lsvProduct.SelectedItem.Text)
+            delete_item.delete_item
+        End If
+End Sub
+
 Private Sub mnuedit_Click()
     item_editmode = True
     Dim editproduct As New item
@@ -215,7 +225,7 @@ Private Sub mnuedit_Click()
         End With
             If editproduct.product_type = "raw" Then
                 frmManageItem.Frame1.Enabled = True
-                Call outputProductInListview(frmManageItem.lsvAssociatedItem, active_edit_product_id)
+                Call outputProductInListview(frmManageItem.lsvAssociatedItem, frmProduct.lsvProduct.SelectedItem.Text)
             Else
                 frmManageItem.Frame1.Enabled = False
             End If
