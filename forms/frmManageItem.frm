@@ -407,23 +407,41 @@ End Sub
 Private Sub cmdSave_Click()
     Dim new_item As New item
         With new_item
-            .item_code = txtcode.Text
-            .description = txtdescription.Text
-            .unit_price = txtPrice.Text
-            .unit_of_measure = txtunitofmeasure.Text
-            .status = cbostatus.Text
-            .product_type = cboProduct_type.Text
-            .save
+            If item_editmode = True Then
+                .load_item (active_edit_product_id)
+            End If
+                .item_code = txtcode.Text
+                .description = txtdescription.Text
+                .unit_price = txtPrice.Text
+                .unit_of_measure = txtunitofmeasure.Text
+                .status = cbostatus.Text
+                .product_type = cboProduct_type.Text
+            If item_editmode = True Then
+                .Edit_item
+            Else
+                .save
+            End If
         End With
+
         If cboProduct_type.Text = "raw" Then
             Dim lst As ListItem
             For Each lst In lsvAssociatedItem.ListItems
-                If lst.Checked = True Then
-                    Call saveAssociatedItems(new_item.last_insert_id, lst.SubItems(1))
-                End If
+                    If item_editmode = True Then
+                        Call updateAssociatedItems(new_item.id, lst.SubItems(1), lst)
+                    Else
+                        If lst.Checked = True Then
+                            Call saveAssociatedItems(new_item.last_insert_id, lst.SubItems(1))
+                        End If
+                    End If
             Next
         Else
-            Call saveKgKilosPerSack(new_item.last_insert_id, txtno_kg_per_sack)
+            If item_editmode = True Then
+                If cboProduct_type = "raw" Then
+                Call updateKilosPerSack(new_item.id, txtno_kg_per_sack)
+                End If
+            Else
+                Call saveKgKilosPerSack(new_item.last_insert_id, txtno_kg_per_sack)
+            End If
         End If
         MsgBox "Successfully saved!", vbInformation, "save"
 End Sub

@@ -24,6 +24,8 @@ Private mvarstatus As String 'local copy
 Private mvarproduct_type As String 'local copy
 'local variable(s) to hold property value(s)
 Private mvarlast_insert_id As Integer 'local copy
+
+
 Public Property Let last_insert_id(ByVal vData As Integer)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.last_insert_id = 5
@@ -64,7 +66,19 @@ Public Sub load_status(status As String)
     Set rs = db.execute(sql)
     
 End Sub
+Public Sub Edit_item()
+    Dim sql As String
+        sql = "UPDATE `items` " & _
+            "SET item_code='" & Me.item_code & "'," & _
+                "description='" & Me.description & "'," & _
+                "unit_price=" & Me.unit_price & "," & _
+                "unit_of_measure='" & Me.unit_of_measure & "'," & _
+                "status='" & Me.status & "'," & _
+                "type='" & Me.product_type & "'" & _
+                "WHERE id=" & Me.id & ""
+    db.execute (sql)
 
+End Sub
 Public Sub load_item(item_id As Integer)
     Dim sql As String
     Dim rs As New ADODB.Recordset
@@ -82,7 +96,7 @@ Public Sub load_item(item_id As Integer)
     Set rs = Nothing
 End Sub
 
-Public Sub delete_item(item_id As Integer)
+Public Sub delete_item()
     Dim sql As String
     Dim rs As New ADODB.Recordset
         sql = "DELETE FROM items WHERE id=" & Me.id & ""
