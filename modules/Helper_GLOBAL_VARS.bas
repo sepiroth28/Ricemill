@@ -20,6 +20,7 @@ Public stockout_product_edit_mode As Boolean
 Public activestockoutID As Double
 Public stockin_product_edit_mode As Boolean
 Public activestockinID As Double
+Public editPartida_id As Double
 '
 
 Public Sub get_item_id(desc As String)
@@ -44,7 +45,7 @@ End Sub
 Public Sub view_profit(lbl As Label)
 Dim capital As Double
 Dim gross As Double
-capital = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(5)) + Val(frmPartidaView.lsvTotalExpenses.SelectedItem.SubItems(5))
+capital = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(5)) + Val(frmPartidaView.lsvtotalExpenses.SelectedItem.SubItems(5))
 gross = Val(frmPartidaView.lsvStockOutTotal.SelectedItem.SubItems(5))
 lbl = gross - capital
 End Sub

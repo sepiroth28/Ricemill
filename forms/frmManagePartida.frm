@@ -1,12 +1,12 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManagePartida 
    BackColor       =   &H00000080&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "MANAGE PARTIDA"
    ClientHeight    =   7485
    ClientLeft      =   45
-   ClientTop       =   375
+   ClientTop       =   675
    ClientWidth     =   9690
    FillColor       =   &H00FFFFFF&
    LinkTopic       =   "Form1"
@@ -140,6 +140,12 @@ Begin VB.Form frmManagePartida
          Width           =   2775
       End
    End
+   Begin VB.Menu mnumanagepartida 
+      Caption         =   "Manage Partida"
+      Begin VB.Menu mnueditPartida 
+         Caption         =   "Edit Partida Name"
+      End
+   End
 End
 Attribute VB_Name = "frmManagePartida"
 Attribute VB_GlobalNameSpace = False
@@ -178,8 +184,14 @@ Call enable_partida_open(lsvPartida, cmdOpen)
 End Sub
 
 Private Sub lsvPartida_DblClick()
-Dim managepartida As New Partida
-    partida_id_to_manage = lsvPartida.SelectedItem.Text
-    managepartida.load_partida (lsvPartida.SelectedItem.Text)
-    frmPartidaManagement.Show 1
+'Dim managepartida As New Partida
+'    partida_id_to_manage = lsvPartida.SelectedItem.Text
+'    managepartida.load_partida (lsvPartida.SelectedItem.Text)
+'    frmPartidaManagement.Show 1
+End Sub
+
+Private Sub lsvPartida_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+    If Button = 2 Then
+        PopupMenu mnumanagepartida
+    End If
 End Sub

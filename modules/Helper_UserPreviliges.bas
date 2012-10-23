@@ -33,6 +33,8 @@ Sub setPrevileges(previleges, action As Boolean)
             activeUser.previliges.canOpenClosePartida = action
         Case "can_evaluate_partida":
             activeUser.previliges.canEvaluatePartida = action
+        Case "can_manage_user_account":
+            activeUser.previliges.canCreateUserAccount = action
     End Select
 End Sub
 
@@ -40,6 +42,7 @@ Sub renderButtonBasedOnUserPreviliges()
     With activeUser.previliges
         MDIForm1.mnuPartidavisibility.Enabled = .canOpenClosePartida
         MDIForm1.mnuEvaluatepartida.Enabled = .canEvaluatePartida
+        MDIForm1.mnumanageuseraccount.Enabled = .canCreateUserAccount
        frmManagePartida.cmdCreate.Enabled = .canCreatePartida
        'toolbar menu
     End With

@@ -17,6 +17,12 @@ Private mvarusername As String
 Private mvaruserpass As String
 Private mvarusertype As String
 Private mvarpreviliges As New User_Previleges  'local copy
+Public Sub editUser()
+    Dim sql As String
+        sql = "UPDATE `user_account` SET username='" & Me.username & "',password=md5('" & Me.Password & "'),user_type='" & Me.usertype & "' WHERE username='" & Me.username & "'"
+db.execute (sql)
+End Sub
+
 Public Property Set previliges(ByVal vData As User_Previleges)
 'used when assigning an Object to the property, on the left side of a Set statement.
 'Syntax: Set x.previliges = Form1

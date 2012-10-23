@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmStockIn 
    Appearance      =   0  'Flat
    BackColor       =   &H0097C2FD&
@@ -29,7 +29,7 @@ Begin VB.Form frmStockIn
       Width           =   7095
       Begin MSComctlLib.ListView lsvProviderlist 
          Height          =   1935
-         Left            =   1380
+         Left            =   240
          TabIndex        =   18
          Top             =   2160
          Visible         =   0   'False
@@ -505,7 +505,7 @@ If newPartida = True Then
     Call savePartida
     Call getlastpartida_id(activePartidaId)
 End If
-Call get_item_id(txtitem.Text)
+Call get_item_id(txtItem.Text)
 Dim stock_in As New StockIn
 Dim newprovider As New provider
 With stock_in
@@ -515,8 +515,8 @@ With stock_in
     .total_amount = Val(txtAmount.Text)
     .Num_of_sack = txtNum_of_sack.Text
     .received_by = "admin"
-    .description = txtdescription
-    .date_in = Format(lblDate.Caption, "yyyy-mm-dd")
+    .description = txtDescription
+    .date_in = Format(lbldate.Caption, "yyyy-mm-dd")
 End With
 If stockin_product_edit_mode = True Then
     stock_in.id = activestockinID
@@ -539,7 +539,7 @@ Call clearfield
 End Sub
 
 Private Sub Command1_Click()
-Set activedate = lblDate
+Set activedate = lbldate
 frmCalendar.Show 1
 End Sub
 
@@ -550,11 +550,11 @@ End Sub
 Private Sub Form_Load()
 Me.Top = frmPartidaView.Top + 2500
 Me.Left = frmPartidaView.Left + 700
-lblDate.Caption = FormatDateTime(Date, vbShortDate)
+lbldate.Caption = FormatDateTime(Date, vbShortDate)
 Call loadProviderListInThisListview(lsvProviderlist)
 Call loadRawProduct(lsvrawProductlist)
 If IsRawProductSetThisPartida(activePartidaId) = True Then
-    Call getRawItemSetInThisPartida(activePartidaId, txtitem, cmdBrowse)
+    Call getRawItemSetInThisPartida(activePartidaId, txtItem, cmdBrowse)
     seted_raw_item_id_of_this_partida = getRawItemId(activePartidaId)
     Call showPriceOfThisrawItem(seted_raw_item_id_of_this_partida, txtPrice)
 End If
@@ -568,7 +568,7 @@ Call toggle_listview(lsvProviderlist)
 End Sub
 
 Private Sub lsvrawProductlist_Click()
-    txtitem.Text = lsvrawProductlist.SelectedItem.SubItems(1)
+    txtItem.Text = lsvrawProductlist.SelectedItem.SubItems(1)
     id_of_item = lsvrawProductlist.SelectedItem.Text
     Call showPriceOfThisrawItem(lsvrawProductlist.SelectedItem.Text, txtPrice)
     Call toggle_listview(lsvrawProductlist)

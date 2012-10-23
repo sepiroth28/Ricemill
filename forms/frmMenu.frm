@@ -11,6 +11,25 @@ Begin VB.Form frmMenu
    Picture         =   "frmMenu.frx":0000
    ScaleHeight     =   12345
    ScaleWidth      =   16710
+   Begin VB.Label lblChangePassword 
+      BackStyle       =   0  'Transparent
+      Caption         =   "CHANGE PASSWORD"
+      BeginProperty Font 
+         Name            =   "Arial Narrow"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00C0FFFF&
+      Height          =   195
+      Left            =   1920
+      TabIndex        =   2
+      Top             =   3000
+      Width           =   1635
+   End
    Begin VB.Image Image7 
       Height          =   1110
       Left            =   690
@@ -136,4 +155,8 @@ Dim confirm As Byte
         Unload MDIForm1
         frmuserlogin.Show
     End If
+End Sub
+
+Private Sub lblChangePassword_Click()
+    frmChangePassword.Show 1
 End Sub

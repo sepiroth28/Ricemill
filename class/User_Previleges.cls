@@ -25,6 +25,23 @@ Private mvarcanEditDeletePartidaProd As Boolean 'local copy
 'local variable(s) to hold property value(s)
 Private mvarcanOpenClosePartida As Boolean 'local copy
 Private mvarcanEvaluatePartida As Boolean 'local copy
+'local variable(s) to hold property value(s)
+Private mvarcanCreateUserAccount As Boolean 'local copy
+Public Property Let canCreateUserAccount(ByVal vData As Boolean)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.canCreateUserAccount = 5
+    mvarcanCreateUserAccount = vData
+End Property
+
+
+Public Property Get canCreateUserAccount() As Boolean
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.canCreateUserAccount
+    canCreateUserAccount = mvarcanCreateUserAccount
+End Property
+
+
+
 Public Property Let canEvaluatePartida(ByVal vData As Boolean)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.canEvaluatePartida = 5

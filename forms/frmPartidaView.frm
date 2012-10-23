@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPartidaView 
    Appearance      =   0  'Flat
    BackColor       =   &H00000080&
@@ -319,10 +319,9 @@ Begin VB.Form frmPartidaView
                Object.Width           =   2540
             EndProperty
             BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-               Alignment       =   1
                SubItemIndex    =   4
                Text            =   "Total"
-               Object.Width           =   2540
+               Object.Width           =   4410
             EndProperty
             BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
                SubItemIndex    =   5
@@ -765,7 +764,7 @@ Else
     Call controlsOfThisPartidaStatus
     
         edit_partida.load_partida (activePartidaId)
-        lblPartidaName.Caption = edit_partida.partida_name & " Activities"
+        lblPartidaname.Caption = edit_partida.partida_name & " Activities"
     Call totalexpenses(activePartidaId, lsvtotalExpenses)
     Call loadStockinListOnThisPartida(activePartidaId, lsvStockIn)
     Call loadStockInTotals(activePartidaId, lsvStockInTotal, ListView1)

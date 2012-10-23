@@ -49,7 +49,7 @@ End Sub
 Public Sub delete_partida(partida_id As Integer)
 End Sub
 
-Public Sub load_partida(partida_id As Integer)
+Public Sub load_partida(partida_id As Double)
 Dim sql As String
 Dim rs As New ADODB.Recordset
 'id, name, status, created_at, created_by
