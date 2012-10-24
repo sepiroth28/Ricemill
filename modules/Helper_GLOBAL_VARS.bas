@@ -21,6 +21,8 @@ Public activestockoutID As Double
 Public stockin_product_edit_mode As Boolean
 Public activestockinID As Double
 Public editPartida_id As Double
+Public edit_user_account As Boolean
+Public activeEditUsername As String
 '
 
 Public Sub get_item_id(desc As String)

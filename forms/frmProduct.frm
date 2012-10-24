@@ -217,7 +217,7 @@ Private Sub mnuedit_Click()
             .load_item (lsvProduct.SelectedItem.Text)
             active_edit_product_id = .id
             frmManageItem.txtcode.Text = .item_code
-            frmManageItem.txtdescription.Text = .description
+            frmManageItem.txtDescription.Text = .description
             frmManageItem.txtPrice.Text = .unit_price
             frmManageItem.txtunitofmeasure.Text = .unit_of_measure
             frmManageItem.cbostatus.Text = .status
@@ -228,6 +228,22 @@ Private Sub mnuedit_Click()
                 Call outputProductInListview(frmManageItem.lsvAssociatedItem, frmProduct.lsvProduct.SelectedItem.Text)
             Else
                 frmManageItem.Frame1.Enabled = False
+                frmManageItem.Label8.Visible = True
+                With frmManageItem.txtno_kg_per_sack
+                    .Visible = True
+                    .Text = getKilosPersSackOfThisOutputItem(editproduct.id)
+                End With
             End If
             frmManageItem.Show 1
 End Sub
+
+   Function getKilosPersSackOfThisOutputItem(item_id As Double)
+        Dim sql As String
+        Dim temp As Double
+        Dim rs As New ADODB.Recordset
+            sql = "SELECT * FROM `kilos_per_sack` WHERE item_id=" & item_id & ""
+        Set rs = db.execute(sql)
+        temp = rs.Fields("kilos_per_sack").Value
+        getKilosPersSackOfThisOutputItem = temp
+   End Function
+    

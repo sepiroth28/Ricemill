@@ -1,7 +1,9 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManageItem 
+   BackColor       =   &H0097C2FD&
    BorderStyle     =   1  'Fixed Single
+   Caption         =   "MANAGE PRODUCT"
    ClientHeight    =   6705
    ClientLeft      =   45
    ClientTop       =   330
@@ -16,13 +18,13 @@ Begin VB.Form frmManageItem
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       ForeColor       =   &H80000008&
-      Height          =   7425
-      Left            =   30
-      ScaleHeight     =   7395
-      ScaleWidth      =   7545
+      Height          =   6585
+      Left            =   60
+      ScaleHeight     =   6555
+      ScaleWidth      =   6495
       TabIndex        =   0
-      Top             =   30
-      Width           =   7575
+      Top             =   60
+      Width           =   6525
       Begin VB.TextBox txtno_kg_per_sack 
          Appearance      =   0  'Flat
          BeginProperty Font 
@@ -369,7 +371,7 @@ Begin VB.Form frmManageItem
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "ITEM MANAGEMENT"
+         Caption         =   "PRODUCT MANAGEMENT"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -383,7 +385,7 @@ Begin VB.Form frmManageItem
          Left            =   240
          TabIndex        =   7
          Top             =   60
-         Width           =   2580
+         Width           =   3225
       End
    End
 End
@@ -404,14 +406,14 @@ Private Sub cboProduct_type_Click()
     End If
 End Sub
 
-Private Sub cmdSave_Click()
-    Dim new_item As New item
-        With new_item
+Private Sub cmdsave_Click()
+    Dim new_item As New item 'instantiate new item
+        With new_item 'set properties of class new_item,and choose appropriate method depends on the action(new,edit)
             If item_editmode = True Then
                 .load_item (active_edit_product_id)
             End If
                 .item_code = txtcode.Text
-                .description = txtdescription.Text
+                .description = txtDescription.Text
                 .unit_price = txtPrice.Text
                 .unit_of_measure = txtunitofmeasure.Text
                 .status = cbostatus.Text
@@ -423,27 +425,28 @@ Private Sub cmdSave_Click()
             End If
         End With
 
-        If cboProduct_type.Text = "raw" Then
+        If cboProduct_type.Text = "raw" Then 'test product type if it is output or raw, if raw then save the associated products
             Dim lst As ListItem
             For Each lst In lsvAssociatedItem.ListItems
-                    If item_editmode = True Then
+                    If item_editmode = True Then 'update every associated item of this raw product
                         Call updateAssociatedItems(new_item.id, lst.SubItems(1), lst)
                     Else
                         If lst.Checked = True Then
-                            Call saveAssociatedItems(new_item.last_insert_id, lst.SubItems(1))
+                            Call saveAssociatedItems(new_item.last_insert_id, lst.SubItems(1)) 'save every associated item of this raw product
                         End If
                     End If
             Next
         Else
             If item_editmode = True Then
-                If cboProduct_type = "raw" Then
+'                If cboProduct_type = "raw" Then
                 Call updateKilosPerSack(new_item.id, txtno_kg_per_sack)
-                End If
+'                End If
             Else
                 Call saveKgKilosPerSack(new_item.last_insert_id, txtno_kg_per_sack)
             End If
         End If
         MsgBox "Successfully saved!", vbInformation, "save"
+         Call loadAllProducts(frmProduct.lsvProduct, frmProduct.cbocategory)
 End Sub
 
 Private Sub Form_Load()

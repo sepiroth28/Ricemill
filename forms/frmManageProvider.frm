@@ -171,4 +171,5 @@ Private Sub Form_Load()
 Call loadProviderListInThisListview(lsvProviderlist)
     Me.Top = 3900
     Me.Left = 6100
+    Me.Height = 7455
 End Sub

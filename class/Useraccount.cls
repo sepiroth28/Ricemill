@@ -17,6 +17,17 @@ Private mvarusername As String
 Private mvaruserpass As String
 Private mvarusertype As String
 Private mvarpreviliges As New User_Previleges  'local copy
+Public Sub deleteUserAccount()
+    Dim sql As String
+        sql = "DELETE FROM `user_account` WHERE username='" & Me.username & "'"
+    db.execute (sql)
+End Sub
+
+Public Sub editUseracount()
+    Dim sql As String
+        sql = "UPDATE `user_account` SET username='" & Me.username & "',password='" & Me.Password & "',user_type='" & Me.usertype & "' WHERE username='" & Me.username & "'"
+db.execute (sql)
+End Sub
 Public Sub editUser()
     Dim sql As String
         sql = "UPDATE `user_account` SET username='" & Me.username & "',password=md5('" & Me.Password & "'),user_type='" & Me.usertype & "' WHERE username='" & Me.username & "'"

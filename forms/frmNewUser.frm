@@ -40,7 +40,7 @@ Begin VB.Form frmNewUser
             Strikethrough   =   0   'False
          EndProperty
          Height          =   555
-         Left            =   4230
+         Left            =   4200
          TabIndex        =   10
          Top             =   5700
          Width           =   2205
@@ -252,16 +252,32 @@ End Sub
 Private Sub cmdCreate_user_Click()
     Dim new_user As New Useraccount
         With new_user
+                If edit_user_account = True Then
+                    .loadUserAccount (activeEditUsername)
+                    .username = txtusername.Text
+                    .usertype = cboUsertype.Text
+                    .editUseracount
+                Else
                     .username = txtusername.Text
                     .Password = txtpassword.Text
                     .usertype = cboUsertype.Text
-                    .insert_user
+                    If usernameIsExist(txtusername.Text) = True Then
+                        MsgBox ("username already taken")
+                    Else
+                        .insert_user
+                    End If
+                End If
         End With
         Call savePrevilegesOFThisUser(txtusername, lsvPrevileges)
+    MsgBox ("User Account Saved")
 End Sub
 
 Private Sub Form_Load()
-    Call loadPrevilegesList(lsvPrevileges)
+    If edit_user_account = True Then
+         Call loadPrevilegesSetOfThisUserAccount(activeEditUsername, lsvPrevileges)
+    Else
+        Call loadPrevilegesList(lsvPrevileges)
+    End If
 End Sub
 
 Private Sub txtusername_Change()
@@ -272,18 +288,4 @@ Private Sub txtusername_Change()
     End If
 End Sub
 
-Sub savePrevilegesOFThisUser(username As String, lsv As ListView)
-    Dim lst As ListItem
-    Dim status As Integer
-    Dim sql As String
-        For Each lst In lsv.ListItems
-            If lst.Checked = True Then
-            status = 1
-            Else
-            status = 0
-            End If
-            sql = "INSERT INTO `user_previleges` VALUES(NULL,'" & username & "'," & lst.Text & "," & status & ")"
-            db.execute (sql)
-        Next
-End Sub
 

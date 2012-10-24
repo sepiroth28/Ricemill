@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPartidaView 
    Appearance      =   0  'Flat
    BackColor       =   &H00000080&
@@ -693,7 +693,7 @@ Dim activeModifyProduct As String
 
 Sub renderNewPartida()
     txtPartidaname.Visible = True
-    cmdSave.Visible = True
+    cmdsave.Visible = True
     With Me
     .cmdAddStockIn.Enabled = True
     .cmdExpenseDetail.Enabled = False
@@ -741,7 +741,7 @@ toprintstockin.printstockin (newPartida.partida_name)
 
 End Sub
 
-Private Sub cmdSave_Click()
+Private Sub cmdsave_Click()
 Call savePartida
 Unload Me
 Me.Show 1
@@ -757,6 +757,7 @@ End Sub
 Private Sub Form_Load()
     Me.Top = 700
     Me.Left = 500
+    Me.Height = 11100
 If newPartida Then
     Call renderNewPartida
 Else
@@ -790,7 +791,7 @@ Private Sub lsvStockOut_MouseDown(Button As Integer, Shift As Integer, x As Sing
     End If
 End Sub
 
-Private Sub mnuDelete_Click()
+Private Sub mnudelete_Click()
 Dim confirm As Byte
     confirm = MsgBox("Are you sure you want to delete this " & activeModifyProduct & "?", vbQuestion + vbYesNo)
     

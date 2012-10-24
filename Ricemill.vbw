@@ -1,6 +1,6 @@
 DB = -331, 141, 620, 461, C
 CONFIG = 150, 150, 894, 659, C
-MDIForm1 = 25, 25, 769, 534, C, 25, 25, 836, 450, C
+MDIForm1 = 25, 25, 769, 534, , 25, 25, 836, 450, C
 Partida = -159, 115, 792, 435, C
 frmManagePartida = 75, 75, 886, 500, C, 100, 100, 911, 525, C
 frmPartidaView = 50, 50, 861, 475, C, 175, 175, 986, 600, C
@@ -27,11 +27,7 @@ frmEvaluatepartida = 175, 175, 1058, 611, C, 100, 100, 911, 525, C
 frmPartidaManagement = 0, 0, 948, 436, C, 50, 50, 861, 475, C
 Helper_useraccount = 0, 0, 883, 436, C
 Useraccount = 0, 0, 904, 409, C
-<<<<<<< HEAD
-dtapartidaexpenses = 0, 0, 0, 0, C, 175, 175, 1075, 1075, C
-=======
 dtapartidaexpenses = 0, 0, 0, 0, C, -7, 54, 893, 954, C
->>>>>>> 66bddeb1202ec6b9feff6b702b70609df41723a4
 dtaStockin = 0, 0, 0, 0, C, 50, 50, 950, 818, C
 dtaStockout = 0, 0, 0, 0, C, 81, 262, 981, 1030, C
 provider = 100, 100, 844, 609, C
@@ -39,9 +35,9 @@ frmProvider = 200, 200, 944, 709, C, 250, 250, 994, 759, C
 frmManageProvider = 250, 250, 994, 759, C, 200, 200, 944, 709, C
 Helper_Provider = 100, 100, 844, 609, C
 frmMenu = 125, 125, 1029, 534, C, 25, 25, 874, 421, C
-frmuserlogin = 25, 25, 929, 434, C, 150, 150, 1054, 559, C
-Helper_UserPreviliges = 86, 112, 990, 521, C
-User_Previleges = 150, 150, 1054, 559, C
+frmuserlogin = 25, 25, 929, 434, , 150, 150, 1054, 559, C
+Helper_UserPreviliges = 86, 112, 990, 521, Z
+User_Previleges = 150, 150, 1054, 559, 
 Helper_items = 100, 100, 981, 545, C
 frmManageProductPrice = 0, 0, 0, 0, C, 25, 25, 906, 470, C
 frmProduct = 10, 122, 891, 558, C, 175, 175, 1056, 611, C

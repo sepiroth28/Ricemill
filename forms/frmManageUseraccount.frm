@@ -123,6 +123,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 Private Sub cmdAddnew_user_Click()
+    edit_user_account = False
     frmNewUser.Show 1
 End Sub
 
@@ -136,5 +137,20 @@ Private Sub lsvuseraccounts_MouseDown(Button As Integer, Shift As Integer, x As 
     If Button = 2 Then
         PopupMenu mnumanageuser
     End If
+End Sub
+
+Private Sub mnuedit_user_Click()
+    edit_user_account = True
+    Dim edit_user As New Useraccount
+        edit_user.loadUserAccount (lsvuseraccounts.SelectedItem.Text)
+        activeEditUsername = lsvuseraccounts.SelectedItem.Text
+    With frmNewUser
+                    .txtusername.Text = edit_user.username
+                    .cboUsertype = edit_user.usertype
+                    .txtpassword.Visible = False
+                    .Label3.Visible = False
+                    .Check2.Visible = False
+                    .Show 1
+    End With
 End Sub
 
