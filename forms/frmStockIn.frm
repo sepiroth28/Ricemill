@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmStockIn 
    Appearance      =   0  'Flat
    BackColor       =   &H0097C2FD&
@@ -101,7 +101,7 @@ Begin VB.Form frmStockIn
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   7
+         NumItems        =   8
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "id"
             Object.Width           =   0
@@ -135,6 +135,11 @@ Begin VB.Form frmStockIn
             SubItemIndex    =   6
             Text            =   "type"
             Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   7
+            Text            =   "is_include_in_evaluation"
+            Object.Width           =   0
          EndProperty
       End
       Begin VB.TextBox txtNum_of_sack 
@@ -499,7 +504,7 @@ Private Sub cmdBrowse_Click()
     Call toggle_listview(lsvrawProductlist)
 End Sub
 
-Private Sub cmdSave_Click()
+Private Sub cmdsave_Click()
 
 If newPartida = True Then
     Call savePartida
@@ -515,7 +520,7 @@ With stock_in
     .total_amount = Val(txtAmount.Text)
     .Num_of_sack = txtNum_of_sack.Text
     .received_by = "admin"
-    .description = txtDescription
+    .description = txtdescription
     .date_in = Format(lbldate.Caption, "yyyy-mm-dd")
 End With
 If stockin_product_edit_mode = True Then

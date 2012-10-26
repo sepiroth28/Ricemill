@@ -54,7 +54,7 @@ Begin VB.Form frmStockOut
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   11
+         NumItems        =   12
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "partida_id"
             Object.Width           =   0
@@ -107,6 +107,11 @@ Begin VB.Form frmStockOut
          BeginProperty ColumnHeader(11) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   10
             Text            =   "type"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(12) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   11
+            Text            =   "is_include_in_evaluation"
             Object.Width           =   0
          EndProperty
       End
@@ -354,9 +359,9 @@ Private Sub cmdBrowse_Click()
     Call toggle_listview(lsvoutputProductlist)
 End Sub
 
-Private Sub cmdSave_Click()
+Private Sub cmdsave_Click()
 Dim stock_out As New StockOut
-Call get_item_id(txtitem.Text)
+Call get_item_id(txtItem.Text)
 With stock_out
     If stockout_product_edit_mode = True Then
     .id = activestockoutID
@@ -395,7 +400,7 @@ Call loadoutputProductOfThisPartida(lsvoutputProductlist, activePartidaId)
 End Sub
 
 Private Sub lsvoutputProductlist_Click()
-    txtitem.Text = lsvoutputProductlist.SelectedItem.SubItems(5)
+    txtItem.Text = lsvoutputProductlist.SelectedItem.SubItems(5)
     txtPrice.Text = lsvoutputProductlist.SelectedItem.SubItems(7)
     Call toggle_listview(lsvoutputProductlist)
 End Sub

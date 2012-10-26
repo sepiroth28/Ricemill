@@ -88,7 +88,7 @@ Begin VB.Form frmProduct
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   7
+         NumItems        =   8
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "ID"
             Object.Width           =   0
@@ -121,6 +121,11 @@ Begin VB.Form frmProduct
          BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   6
             Text            =   "TYPE"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   7
+            Text            =   "is_include_in_evaluation"
             Object.Width           =   0
          EndProperty
       End
@@ -217,7 +222,7 @@ Private Sub mnuedit_Click()
             .load_item (lsvProduct.SelectedItem.Text)
             active_edit_product_id = .id
             frmManageItem.txtcode.Text = .item_code
-            frmManageItem.txtDescription.Text = .description
+            frmManageItem.txtdescription.Text = .description
             frmManageItem.txtPrice.Text = .unit_price
             frmManageItem.txtunitofmeasure.Text = .unit_of_measure
             frmManageItem.cbostatus.Text = .status
@@ -233,10 +238,23 @@ Private Sub mnuedit_Click()
                     .Visible = True
                     .Text = getKilosPersSackOfThisOutputItem(editproduct.id)
                 End With
+                With frmManageItem.Check1
+                    .Value = editproduct.include_in_evaluation
+                    .Visible = True
+                End With
             End If
             frmManageItem.Show 1
 End Sub
 
+Function IsItemIncludeInEvaluation(output_item_id As Double) As Integer
+    Dim sql As String
+    Dim rs As New ADODB.Recordset
+    Dim temp As Integer
+        sql = "SELECT * FROM `associated_products` where output_product_id=" & output_item_id & ""
+    Set rs = db.execute(sql)
+    temp = rs.Fields("include_in_profit_evaluation").Value
+    IsItemIncludeInEvaluation = temp
+End Function
    Function getKilosPersSackOfThisOutputItem(item_id As Double)
         Dim sql As String
         Dim temp As Double

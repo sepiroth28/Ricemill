@@ -254,7 +254,7 @@ sql = view_partida_capital & " WHERE ps.partida_id = " & partida_id_toevaluate &
 Set rs_capital = db.execute(sql)
 sql = view_partida_expenses & " where pe.partida_id= " & partida_id_toevaluate & " group by pe.partida_id LIMIT 1" 'query the expenses
 Set rs_expenses = db.execute(sql)
-sql = view_partida_gross & " where pso.partida_id =" & partida_id_toevaluate & " group by pso.partida_id LIMIT 1" 'query the gross
+sql = view_partida_gross & " where pso.partida_id =" & partida_id_toevaluate & " and i.include_in_evaluation=1 group by pso.partida_id LIMIT 1" 'query the gross
 Set rs_gross = db.execute(sql)
 
 

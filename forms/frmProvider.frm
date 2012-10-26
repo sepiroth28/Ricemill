@@ -2,12 +2,12 @@ VERSION 5.00
 Begin VB.Form frmProvider 
    BackColor       =   &H0097C2FD&
    Caption         =   "SUPPLIER INFORMATION"
-   ClientHeight    =   4320
+   ClientHeight    =   4305
    ClientLeft      =   120
    ClientTop       =   450
    ClientWidth     =   6990
    LinkTopic       =   "Form1"
-   ScaleHeight     =   4320
+   ScaleHeight     =   4305
    ScaleWidth      =   6990
    StartUpPosition =   3  'Windows Default
    Begin VB.PictureBox Picture1 
@@ -150,7 +150,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private Sub cmdSave_Click()
+Private Sub cmdsave_Click()
 Dim newprovider As New provider
     With newprovider
          .provider_name = txtProvider.Text

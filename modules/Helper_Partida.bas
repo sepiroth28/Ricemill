@@ -17,6 +17,34 @@ coll.Add "*"
 Call populateResultOnThisListView(sql, lsv, coll)
 End Sub
 
+Sub loadPartidalistMainwindow(lsv As ListView)
+Dim sql As String
+Dim rs As New ADODB.Recordset
+Dim lst As ListItem
+
+    sql = "SELECT *,p.id as P_id FROM `partida`  p left join `partida_stockin` ps on p.id=ps.partida_id left join `stock_in` s on ps.stockin_id=s.id group by partida_id"
+Set rs = db.execute(sql)
+   lsv.ListItems.Clear
+   On Error Resume Next
+If rs.RecordCount Then
+   Do Until rs.EOF
+        Set lst = lsv.ListItems.Add(, , rs.Fields("P_id").Value)
+            lst.SubItems(1) = rs.Fields("name").Value
+            If rs.Fields("status").Value = 1 Then
+            lst.SubItems(2) = "open"
+            Else
+            lst.SubItems(2) = "closed"
+            End If
+            lst.SubItems(3) = rs.Fields("description").Value
+            lst.SubItems(4) = rs.Fields("created_at").Value
+            lst.SubItems(5) = rs.Fields("created_by").Value
+            lst.SubItems(6) = rs.Fields("stockout_status").Value
+    rs.MoveNext
+    Loop
+End If
+End Sub
+
+
 
 Sub swithch_partidaload(lsv As ListView, pswitch As Boolean)
 Dim sql As String
@@ -110,8 +138,8 @@ Function editstockoutproduct(stockout_id As Double)
 Dim editstckout As New StockOut
     With editstckout
         .load_stockout (stockout_id)
-        frmStockOut.lblDate.Caption = .date_out
-        frmStockOut.txtitem.Text = getItemcode(.item_id)
+        frmStockOut.lbldate.Caption = .date_out
+        frmStockOut.txtItem.Text = getItemcode(.item_id)
         frmStockOut.txtPrice.Text = .unit_price
         frmStockOut.txtQty.Text = .qty_out
         frmStockOut.txtAmount.Text = .total_amount
@@ -123,10 +151,10 @@ Function editstockinProduct(stockin_id As Double)
 Dim editstockin As New StockIn
      With editstockin
         .load_stockin (stockin_id)
-        frmStockIn.lblDate.Caption = .date_in
+        frmStockIn.lbldate.Caption = .date_in
 '        frmStockIn.txtItem.Text = getItemcode(.item_id)
         frmStockIn.txtAmount.Text = .total_amount
-        frmStockIn.txtdescription.Text = .description
+        frmStockIn.txtDescription.Text = .description
         frmStockIn.txtNum_of_sack.Text = .Num_of_sack
         frmStockIn.txtPrice.Text = .unit_price
         frmStockIn.txtProvider.Text = getprovider(.id)

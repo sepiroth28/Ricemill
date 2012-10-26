@@ -61,7 +61,7 @@ Sub get_output_product_percentage(lsv As ListView, partida_id As Double)
     Dim lst As ListItem
        sql = "SELECT * FROM `associated_products` ap inner join `partida_raw_item` pi on " & _
             "ap.raw_product_id=pi.raw_item_id inner join `items` i on ap.output_product_id=i.id " & _
-            "where pi.partida_id=" & partida_id & ""
+            "where pi.partida_id=" & partida_id & " and i.include_in_evaluation=1"
     Set rs = db.execute(sql)
     lsv.ListItems.Clear
     Set item_in_listview = New Collection

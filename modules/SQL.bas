@@ -43,6 +43,6 @@ Public Const view_partida_capital As String = "select sum(s.total_amount) as tot
 Public Const view_partida_expenses As String = "select sum(e.amount) as total_expenses from partida p inner join partida_expenses pe on " & _
                                                 " p.id=pe.partida_id inner join expenses e on e.id=pe.expenses_id"
 Public Const view_partida_gross As String = "select sum(so.total_amount) as total_gross from partida p inner join partida_stockout pso on " & _
-                                                " p.id=pso.partida_id inner join stock_out so on so.id=pso.stockout_id"
+                                                " p.id=pso.partida_id inner join stock_out so on so.id=pso.stockout_id inner join items i on so.item_id=i.id"
 
 

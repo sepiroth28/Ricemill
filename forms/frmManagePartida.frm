@@ -90,7 +90,7 @@ Begin VB.Form frmManagePartida
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   6
+         NumItems        =   7
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "ID"
             Object.Width           =   0
@@ -98,25 +98,30 @@ Begin VB.Form frmManagePartida
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
             Text            =   "PARTIDA NAME"
-            Object.Width           =   8819
+            Object.Width           =   5292
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
             Text            =   "STATUS"
-            Object.Width           =   0
+            Object.Width           =   2117
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "CREATED ON"
-            Object.Width           =   3528
+            Text            =   "DESCRIPTION"
+            Object.Width           =   3175
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
-            Text            =   "CREATED BY"
-            Object.Width           =   3528
+            Text            =   "CREATED ON"
+            Object.Width           =   3175
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   5
+            Text            =   "CREATED BY"
+            Object.Width           =   3528
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
             Text            =   "STOCKOU STATUS"
             Object.Width           =   0
          EndProperty
@@ -180,7 +185,7 @@ Private Sub Form_Load()
 Me.Top = 3900
 Me.Left = 6100
 Me.Height = 8205
-Call loadPartidaList(lsvPartida)
+Call loadPartidalistMainwindow(lsvPartida)
 Call enable_partida_open(lsvPartida, cmdOpen)
 End Sub
 

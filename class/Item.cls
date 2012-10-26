@@ -24,6 +24,20 @@ Private mvarstatus As String 'local copy
 Private mvarproduct_type As String 'local copy
 'local variable(s) to hold property value(s)
 Private mvarlast_insert_id As Integer 'local copy
+'local variable(s) to hold property value(s)
+Private mvarinclude_in_evaluation As Integer 'local copy
+Public Property Let include_in_evaluation(ByVal vData As Integer)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.include_in_evaluation = 5
+    mvarinclude_in_evaluation = vData
+End Property
+
+
+Public Property Get include_in_evaluation() As Integer
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.include_in_evaluation
+    include_in_evaluation = mvarinclude_in_evaluation
+End Property
 
 
 Public Property Let last_insert_id(ByVal vData As Integer)
@@ -58,6 +72,7 @@ End Property
 
 Private Sub Class_Initialize()
     Me.id = 0
+    Me.include_in_evaluation = 0
 End Sub
 Public Sub load_status(status As String)
     Dim sql As String
@@ -74,7 +89,8 @@ Public Sub Edit_item()
                 "unit_price=" & Me.unit_price & "," & _
                 "unit_of_measure='" & Me.unit_of_measure & "'," & _
                 "status='" & Me.status & "'," & _
-                "type='" & Me.product_type & "'" & _
+                "type='" & Me.product_type & "'," & _
+                "include_in_evaluation=" & Me.include_in_evaluation & " " & _
                 "WHERE id=" & Me.id & ""
     db.execute (sql)
 
@@ -92,6 +108,7 @@ Public Sub load_item(item_id As Integer)
             .unit_of_measure = rs.Fields("unit_of_measure").Value
             .status = rs.Fields("status").Value
             .product_type = rs.Fields("type").Value
+            .include_in_evaluation = rs.Fields("include_in_evaluation").Value
         End With
     Set rs = Nothing
 End Sub
@@ -112,7 +129,8 @@ If Me.id = 0 Then
                 Me.unit_price & "','" & _
                 Me.unit_of_measure & "','" & _
                 Me.status & "','" & _
-                Me.product_type & "')"
+                Me.product_type & "'," & _
+                Me.include_in_evaluation & ")"
     db.execute insert
 End If
 Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).Value

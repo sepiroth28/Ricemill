@@ -70,7 +70,11 @@ Sub outputProductInListview(lsv As ListView, raw_roduct_id As Double)
         Do Until rs.EOF
             Set lst = lsv.ListItems.Add(, , "")
             On Error Resume Next
+            If IsNull(rs.Fields("raw_product_id").Value) Then
+                temp = 0
+            Else
                 temp = rs.Fields("raw_product_id").Value
+            End If
                 If temp = raw_roduct_id Then
                 lst.Checked = True
                 Else

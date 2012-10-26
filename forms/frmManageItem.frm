@@ -25,6 +25,26 @@ Begin VB.Form frmManageItem
       TabIndex        =   0
       Top             =   60
       Width           =   6525
+      Begin VB.CheckBox Check1 
+         BackColor       =   &H80000018&
+         Caption         =   "Include in evaluation"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   465
+         Left            =   3870
+         TabIndex        =   19
+         Top             =   1260
+         Value           =   1  'Checked
+         Visible         =   0   'False
+         Width           =   2475
+      End
       Begin VB.TextBox txtno_kg_per_sack 
          Appearance      =   0  'Flat
          BeginProperty Font 
@@ -117,11 +137,11 @@ Begin VB.Form frmManageItem
          EndProperty
          Height          =   420
          ItemData        =   "frmManageItem.frx":0000
-         Left            =   2250
+         Left            =   1920
          List            =   "frmManageItem.frx":000A
          TabIndex        =   13
-         Top             =   1320
-         Width           =   2445
+         Top             =   1290
+         Width           =   1875
       End
       Begin VB.ComboBox cbostatus 
          BeginProperty Font 
@@ -261,9 +281,9 @@ Begin VB.Form frmManageItem
             Strikethrough   =   0   'False
          EndProperty
          Height          =   300
-         Left            =   2310
+         Left            =   1980
          TabIndex        =   14
-         Top             =   960
+         Top             =   930
          Width           =   1605
       End
       Begin VB.Label Label3 
@@ -401,6 +421,7 @@ Private Sub cboProduct_type_Click()
         Call hideKgPerSack
     Else
         Frame1.Enabled = False
+        Check1.Visible = True
         lsvAssociatedItem.ListItems.Clear
         Call showKgPerSack
     End If
@@ -413,11 +434,14 @@ Private Sub cmdsave_Click()
                 .load_item (active_edit_product_id)
             End If
                 .item_code = txtcode.Text
-                .description = txtDescription.Text
+                .description = txtdescription.Text
                 .unit_price = txtPrice.Text
                 .unit_of_measure = txtunitofmeasure.Text
                 .status = cbostatus.Text
                 .product_type = cboProduct_type.Text
+                If cboProduct_type = "output" Then
+                    .include_in_evaluation = Check1.Value
+                End If
             If item_editmode = True Then
                 .Edit_item
             Else
