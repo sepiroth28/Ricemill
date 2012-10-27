@@ -150,6 +150,9 @@ Begin VB.Form frmManagePartida
       Begin VB.Menu mnueditPartida 
          Caption         =   "Edit Partida Name"
       End
+      Begin VB.Menu mnusend_to_archived 
+         Caption         =   "Send to Archive"
+      End
    End
 End
 Attribute VB_Name = "frmManagePartida"
@@ -200,4 +203,25 @@ Private Sub lsvPartida_MouseDown(Button As Integer, Shift As Integer, x As Singl
     If Button = 2 Then
         PopupMenu mnumanagepartida
     End If
+End Sub
+
+Private Sub mnueditPartida_Click()
+Dim edited_name As String
+Dim confirm As Byte
+confirm = MsgBox("are you sure you want to edit this partida name?", vbQuestion + vbYesNo)
+If confirm = vbYes Then
+    edited_name = InputBox("Edit Partida name", "Edit partida name")
+    Call editPartidaname(edited_name, lsvPartida.SelectedItem.Text)
+End If
+    Call loadPartidalistMainwindow(lsvPartida)
+End Sub
+
+Private Sub mnusend_to_archived_Click()
+    Dim confirm As Byte
+        confirm = MsgBox("Send Patida to Archive?", vbQuestion + vbYesNo)
+    If confirm = vbYes Then
+    Call ArchiveThisPartida(lsvPartida.SelectedItem.Text)
+        MsgBox ("partida " & lsvPartida.SelectedItem.SubItems(1) & " is now on archived")
+    End If
+    Call loadPartidalistMainwindow(lsvPartida)
 End Sub

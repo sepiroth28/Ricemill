@@ -28,6 +28,20 @@ Private mvarpartida_totalgross As Double
 Private mvarpartida_totalcapital As Double
 Private mvarpartida_totalexpenses As Double
 Private mvarpartida_profit As Double
+'local variable(s) to hold property value(s)
+Private mvarlast_insert_id As Double 'local copy
+Public Property Let last_insert_id(ByVal vData As Double)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.last_insert_id = 5
+    mvarlast_insert_id = vData
+End Property
+
+
+Public Property Get last_insert_id() As Double
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.last_insert_id
+    last_insert_id = mvarlast_insert_id
+End Property
 
 
 Public Property Let partida_id(ByVal vData As Integer)
@@ -78,6 +92,7 @@ If Me.partida_id = 0 Then
                 Me.created_at & "','" & _
                 Me.created_by & "','1')"
     db.execute insert
+    Me.last_insert_id = db.execute("select last_insert_id()").Fields(0).Value
 End If
 End Sub
 

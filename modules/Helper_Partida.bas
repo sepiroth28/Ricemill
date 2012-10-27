@@ -7,7 +7,6 @@ sql = "SELECT * FROM partida"
 
 col.Add "*"
 Call populateResultOnThisListView(sql, lsv, col)
-
 End Sub
 
 
@@ -17,12 +16,19 @@ coll.Add "*"
 Call populateResultOnThisListView(sql, lsv, coll)
 End Sub
 
+Sub savedArchivedefaultStatus(partida_id As Double)
+    Dim sql As String
+        sql = "INSERT INTO `archievestatus` VALUES(" & partida_id & ",1)"
+    db.execute (sql)
+End Sub
+
 Sub loadPartidalistMainwindow(lsv As ListView)
 Dim sql As String
 Dim rs As New ADODB.Recordset
 Dim lst As ListItem
 
-    sql = "SELECT *,p.id as P_id FROM `partida`  p left join `partida_stockin` ps on p.id=ps.partida_id left join `stock_in` s on ps.stockin_id=s.id group by partida_id"
+    sql = "SELECT *,p.id as P_id FROM `archievestatus` arc inner join `partida`  p on arc.partida_id=p.id  left join `partida_stockin` ps on p.id=ps.partida_id left join `stock_in` s on ps.stockin_id=s.id where arc.active=1 group by p.id"
+
 Set rs = db.execute(sql)
    lsv.ListItems.Clear
    On Error Resume Next
@@ -42,6 +48,11 @@ If rs.RecordCount Then
     rs.MoveNext
     Loop
 End If
+End Sub
+Sub ArchiveThisPartida(partida_id_to_archive As Double)
+    Dim sql As String
+        sql = "update `archievestatus`set active=0 where partida_id=" & partida_id_to_archive & ""
+    db.execute (sql)
 End Sub
 
 
@@ -118,8 +129,9 @@ If newPartida Then
             .created_by = activeUser.username
             .save
         End With
+        Call savedArchivedefaultStatus(new_partida.last_insert_id)
         MsgBox "Successfully saved!", vbInformation, "save"
-        Call loadPartidaList(frmManagePartida.lsvPartida)
+        Call loadPartidalistMainwindow(frmManagePartida.lsvPartida)
         newPartida = False
         activePartidaId = getlastId
         'Unload Me
@@ -138,8 +150,8 @@ Function editstockoutproduct(stockout_id As Double)
 Dim editstckout As New StockOut
     With editstckout
         .load_stockout (stockout_id)
-        frmStockOut.lbldate.Caption = .date_out
-        frmStockOut.txtItem.Text = getItemcode(.item_id)
+        frmStockOut.lblDate.Caption = .date_out
+        frmStockOut.txtitem.Text = getItemcode(.item_id)
         frmStockOut.txtPrice.Text = .unit_price
         frmStockOut.txtQty.Text = .qty_out
         frmStockOut.txtAmount.Text = .total_amount
@@ -151,10 +163,10 @@ Function editstockinProduct(stockin_id As Double)
 Dim editstockin As New StockIn
      With editstockin
         .load_stockin (stockin_id)
-        frmStockIn.lbldate.Caption = .date_in
+        frmStockIn.lblDate.Caption = .date_in
 '        frmStockIn.txtItem.Text = getItemcode(.item_id)
         frmStockIn.txtAmount.Text = .total_amount
-        frmStockIn.txtDescription.Text = .description
+        frmStockIn.txtdescription.Text = .description
         frmStockIn.txtNum_of_sack.Text = .Num_of_sack
         frmStockIn.txtPrice.Text = .unit_price
         frmStockIn.txtProvider.Text = getprovider(.id)
@@ -186,3 +198,9 @@ Function getprovider(item_id As Double) As String
     
     Set rs = Nothing
 End Function
+
+Sub editPartidaname(newname As String, partda_id As Double)
+    Dim sql As String
+        sql = "UPDATE `partida` SET name='" & newname & "' WHERE id=" & partda_id & ""
+    db.execute (sql)
+End Sub

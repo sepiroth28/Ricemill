@@ -35,6 +35,8 @@ Sub setPrevileges(previleges, action As Boolean)
             activeUser.previliges.canEvaluatePartida = action
         Case "can_manage_user_account":
             activeUser.previliges.canCreateUserAccount = action
+        Case "can_send_partida_to_archive":
+            activeUser.previliges.canSendPartidaToArchive = action
     End Select
 End Sub
 
@@ -44,6 +46,7 @@ Sub renderButtonBasedOnUserPreviliges()
         MDIForm1.mnuEvaluatepartida.Enabled = .canEvaluatePartida
         MDIForm1.mnumanageuseraccount.Enabled = .canCreateUserAccount
        frmManagePartida.cmdCreate.Enabled = .canCreatePartida
+       frmManagePartida.mnusend_to_archived.Enabled = .canSendPartidaToArchive
        'toolbar menu
     End With
 End Sub
@@ -54,8 +57,8 @@ Sub renderButtonBasedOnUserPreviligesInPartidaView()
 '       frmPartidaView.cmdAddStockOut.Enabled = .canStockOut
        frmPartidaView.cmdClosepartida.Enabled = .canClosePartida
        frmPartidaView.cmdClosePartidaStockout.Enabled = .canClosePartidaStockout
-       frmPartidaView.mnuedit.Enabled = .canEditDeletePartidaProd
-       frmPartidaView.mnudelete.Enabled = .canEditDeletePartidaProd
+       frmPartidaView.mnuEdit.Enabled = .canEditDeletePartidaProd
+       frmPartidaView.mnuDelete.Enabled = .canEditDeletePartidaProd
     End With
 End Sub
 
