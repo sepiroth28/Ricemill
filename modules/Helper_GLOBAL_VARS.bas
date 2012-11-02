@@ -10,7 +10,7 @@ Public activeform As Form
 Public kilospersack As Double
 Public totalkg As Double
 Public profit As Double
-Public partida_id_toevaluate As Integer
+Public partida_id_toevaluate As Double
 Public partida_id_to_manage As Double
 Public active_provider_id As String
 Public activeUser As New Useraccount
@@ -23,6 +23,7 @@ Public activestockinID As Double
 Public editPartida_id As Double
 Public edit_user_account As Boolean
 Public activeEditUsername As String
+Public evaluatepartida As New Partida
 '
 
 Public Sub get_item_id(desc As String)
@@ -47,7 +48,7 @@ End Sub
 Public Sub view_profit(lbl As Label)
 Dim capital As Double
 Dim gross As Double
-capital = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(5)) + Val(frmPartidaView.lsvtotalExpenses.SelectedItem.SubItems(5))
+capital = Val(frmPartidaView.lsvStockInTotal.SelectedItem.SubItems(5)) + Val(frmPartidaView.lsvTotalExpenses.SelectedItem.SubItems(5))
 gross = Val(frmPartidaView.lsvStockOutTotal.SelectedItem.SubItems(5))
 lbl = gross - capital
 End Sub

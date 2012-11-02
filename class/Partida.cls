@@ -60,7 +60,10 @@ End Property
 Public Sub update_status(status_code As String)
 End Sub
 
-Public Sub delete_partida(partida_id As Integer)
+Public Sub delete_partida(partda_id As Double)
+    Dim sql As String
+        sql = "DELETE FROM `partida` WHERE id=" & partda_id & ""
+    db.execute (sql)
 End Sub
 
 Public Sub load_partida(partida_id As Double)

@@ -21,6 +21,28 @@ Private mvardate_created As String 'local copy
 'local variable(s) to hold property value(s)
 Private mvarno_of_kg As Double 'local copy
 Private mvarrate_per_kg As Double 'local copy
+Public Sub delete_expenses()
+    Dim sql As String
+        sql = "DELETE FROM `expenses` WHERE id=" & Me.id & ""
+    db.execute (sql)
+End Sub
+
+Sub loadallexpenses(expenses_id As Integer)
+Dim sql As String
+Dim rs As New ADODB.Recordset
+    sql = "SELECT * FROM `expenses` where id=" & expenses_id & ""
+   Set rs = db.execute(sql)
+    With Me
+            .id = rs.Fields("id").Value
+            .desc = rs.Fields("description").Value
+            .amount = rs.Fields("amount").Value
+            .date_created = rs.Fields("date_created").Value
+            .no_of_kg = rs.Fields("no_of_kg").Value
+            .rate_per_kg = rs.Fields("rate_per_kg").Value
+    End With
+End Sub
+
+
 Public Property Let rate_per_kg(ByVal vData As Double)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.rate_per_kg = 5
@@ -134,6 +156,8 @@ Dim rs As New ADODB.Recordset
     Me.no_of_kg = rs.Fields("no_of_kg").Value
     Me.rate_per_kg = rs.Fields("rate_per_kg").Value
 End Sub
+
+
 
 Sub printexpenses(partida_name As String)
 Dim rs As New ADODB.Recordset

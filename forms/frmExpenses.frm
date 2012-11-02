@@ -5,10 +5,10 @@ Begin VB.Form frmExpenses
    ClientHeight    =   4215
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   6615
+   ClientWidth     =   6285
    LinkTopic       =   "Form1"
    ScaleHeight     =   4215
-   ScaleWidth      =   6615
+   ScaleWidth      =   6285
    StartUpPosition =   3  'Windows Default
    Begin VB.Frame Frame1 
       BackColor       =   &H80000018&
@@ -16,7 +16,7 @@ Begin VB.Form frmExpenses
       Left            =   60
       TabIndex        =   0
       Top             =   60
-      Width           =   6465
+      Width           =   6165
       Begin VB.TextBox txtDescription 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -27,12 +27,12 @@ Begin VB.Form frmExpenses
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   915
-         Left            =   1740
+         Height          =   675
+         Left            =   720
          MultiLine       =   -1  'True
          TabIndex        =   6
-         Top             =   780
-         Width           =   4215
+         Top             =   1080
+         Width           =   4455
       End
       Begin VB.TextBox txtAmount 
          BeginProperty Font 
@@ -45,9 +45,9 @@ Begin VB.Form frmExpenses
             Strikethrough   =   0   'False
          EndProperty
          Height          =   525
-         Left            =   4950
+         Left            =   4170
          TabIndex        =   5
-         Top             =   2160
+         Top             =   2100
          Width           =   1035
       End
       Begin VB.CommandButton cmdAddExpenses 
@@ -62,7 +62,7 @@ Begin VB.Form frmExpenses
             Strikethrough   =   0   'False
          EndProperty
          Height          =   675
-         Left            =   4140
+         Left            =   3360
          TabIndex        =   4
          Top             =   3210
          Width           =   1935
@@ -79,7 +79,7 @@ Begin VB.Form frmExpenses
             Strikethrough   =   0   'False
          EndProperty
          Height          =   675
-         Left            =   2100
+         Left            =   1320
          TabIndex        =   3
          Top             =   3210
          Width           =   1935
@@ -95,10 +95,10 @@ Begin VB.Form frmExpenses
             Strikethrough   =   0   'False
          EndProperty
          Height          =   525
-         Left            =   3270
+         Left            =   2430
          TabIndex        =   2
          Top             =   2130
-         Width           =   1035
+         Width           =   1095
       End
       Begin VB.TextBox txtnoogkg 
          BeginProperty Font 
@@ -111,10 +111,10 @@ Begin VB.Form frmExpenses
             Strikethrough   =   0   'False
          EndProperty
          Height          =   525
-         Left            =   1740
+         Left            =   720
          TabIndex        =   1
          Top             =   2100
-         Width           =   1035
+         Width           =   1335
       End
       Begin VB.Label Label3 
          AutoSize        =   -1  'True
@@ -122,18 +122,18 @@ Begin VB.Form frmExpenses
          Caption         =   "Amount:"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   12
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
-         Left            =   4980
+         Height          =   240
+         Left            =   4200
          TabIndex        =   14
          Top             =   1860
-         Width           =   1020
+         Width           =   840
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
@@ -149,7 +149,7 @@ Begin VB.Form frmExpenses
             Strikethrough   =   0   'False
          EndProperty
          Height          =   300
-         Left            =   240
+         Left            =   720
          TabIndex        =   13
          Top             =   720
          Width           =   1455
@@ -193,7 +193,7 @@ Begin VB.Form frmExpenses
          EndProperty
          ForeColor       =   &H000000C0&
          Height          =   315
-         Left            =   3960
+         Left            =   3780
          TabIndex        =   11
          Top             =   240
          Width           =   2175
@@ -201,21 +201,21 @@ Begin VB.Form frmExpenses
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "Rate/kg:"
+         Caption         =   "Rate/unit:"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   12
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
-         Left            =   3270
+         Height          =   240
+         Left            =   2490
          TabIndex        =   10
-         Top             =   1800
-         Width           =   1035
+         Top             =   1860
+         Width           =   1005
       End
       Begin VB.Label Label5 
          AutoSize        =   -1  'True
@@ -231,7 +231,7 @@ Begin VB.Form frmExpenses
             Strikethrough   =   0   'False
          EndProperty
          Height          =   300
-         Left            =   4560
+         Left            =   3780
          TabIndex        =   9
          Top             =   2220
          Width           =   165
@@ -239,21 +239,21 @@ Begin VB.Form frmExpenses
       Begin VB.Label Label6 
          AutoSize        =   -1  'True
          BackStyle       =   0  'Transparent
-         Caption         =   "No.of kg:"
+         Caption         =   "No.of kg/pcs:"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   12
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
-         Left            =   1740
+         Height          =   240
+         Left            =   720
          TabIndex        =   8
-         Top             =   1770
-         Width           =   1095
+         Top             =   1830
+         Width           =   1395
       End
       Begin VB.Label Label7 
          AutoSize        =   -1  'True
@@ -269,7 +269,7 @@ Begin VB.Form frmExpenses
             Strikethrough   =   0   'False
          EndProperty
          Height          =   300
-         Left            =   2970
+         Left            =   2190
          TabIndex        =   7
          Top             =   2190
          Width           =   135
@@ -285,13 +285,15 @@ Private Sub cmdAddExpenses_Click()
 Dim exp As New expenses
 Set exp = New expenses
 With exp
-    .desc = txtDescription.Text
+    .desc = txtdescription.Text
     .amount = Val(txtAmount.Text)
     .date_created = Format(lbldate.Caption, "yyyy-mm-dd")
     .no_of_kg = txtnoogkg.Text
     .rate_per_kg = txtrate.Text
     .add_expenses
 End With
+MsgBox (txtdescription.Text & " Expenses Added")
+Call clearctrl(frmExpenses)
 Call totalexpenses(activePartidaId, frmPartidaView.lsvtotalExpenses)
 End Sub
 

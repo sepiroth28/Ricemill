@@ -1,11 +1,11 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmExpensesdetail 
    BackColor       =   &H0097C2FD&
    Caption         =   "EXPENSES DETAILS"
    ClientHeight    =   5610
-   ClientLeft      =   120
-   ClientTop       =   450
+   ClientLeft      =   225
+   ClientTop       =   855
    ClientWidth     =   6810
    LinkTopic       =   "Form1"
    ScaleHeight     =   5610
@@ -109,37 +109,15 @@ Begin VB.Form frmExpensesdetail
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   6
+         NumItems        =   2
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "id"
-            Object.Width           =   0
+            Object.Width           =   3528
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
             Text            =   "Item"
             Object.Width           =   4939
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   2
-            Text            =   "# of kilo"
-            Object.Width           =   4410
-         EndProperty
-         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   3
-            Text            =   "Unit price"
-            Object.Width           =   0
-         EndProperty
-         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   4
-            Text            =   "Total"
-            Object.Width           =   0
-         EndProperty
-         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   5
-            Text            =   "date in"
-            Object.Width           =   0
          EndProperty
       End
       Begin VB.Label lblPartidaName 
@@ -167,6 +145,12 @@ Begin VB.Form frmExpensesdetail
          Y2              =   510
       End
    End
+   Begin VB.Menu mnumanageexpenses 
+      Caption         =   "Manage Expenses"
+      Begin VB.Menu mnudeleteexpenses 
+         Caption         =   "Delete Expenses"
+      End
+   End
 End
 Attribute VB_Name = "frmExpensesdetail"
 Attribute VB_GlobalNameSpace = False
@@ -187,5 +171,26 @@ Me.Left = frmPartidaView.Left + 900
 newPartida.load_partida (activePartidaId)
 lblPartidaName.Caption = newPartida.partida_name & "Expenses"
 Call loadExpensesOnthisPartida(activePartidaId, lsvPartidaExpenses)
-Call totalexpenses(activePartidaId, lsvtotalExpenses)
+Call totalexpenses(activePartidaId, lsvTotalExpenses)
+End Sub
+
+Private Sub lsvPartidaExpenses_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+    If Button = 2 Then
+        PopupMenu mnumanageexpenses
+    End If
+End Sub
+
+Private Sub mnudeleteexpenses_Click()
+    Dim del_expenses As New expenses
+        Dim confirm As Byte
+            confirm = MsgBox("Delete this expenses?", vbQuestion + vbYesNo)
+        If confirm = vbYes Then
+            With del_expenses
+                .loadallexpenses (lsvPartidaExpenses.SelectedItem.Text)
+                .delete_expenses
+            End With
+            MsgBox ("Expenses deleted")
+        End If
+Call loadExpensesOnthisPartida(activePartidaId, lsvPartidaExpenses)
+Call totalexpenses(activePartidaId, lsvTotalExpenses)
 End Sub

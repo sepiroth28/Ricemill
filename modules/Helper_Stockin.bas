@@ -37,13 +37,34 @@ If partida_id <> 0 Then
             list.SubItems(1) = "TOTAL KG: "
             list.SubItems(2) = rs.Fields("total_in").Value
             Set lst = listv.ListItems.Add(, , "")
-            lst.SubItems(1) = "TOTAL AMOUNT: "
+            lst.SubItems(1) = "TOTAL CAPITAL: "
             lst.SubItems(2) = "Php." & FormatNumber(rs.Fields("total_amount").Value, 2)
         rs.MoveNext
         Loop
     End If
 End If
 End Sub
+
+Sub loadStockInTotals_itemized(partida_id As Double, listv As ListView)
+Dim sql As String
+Dim rs As New ADODB.Recordset
+Dim list As ListItem
+Dim lst As ListItem
+If partida_id <> 0 Then
+    sql = view_partida_stock_in_totals & " WHERE ps.partida_id = " & partida_id
+    Set rs = db.execute(sql)
+    listv.ListItems.Clear
+    On Error Resume Next
+    If rs.RecordCount > 0 Then
+        Do Until rs.EOF
+            Set lst = listv.ListItems.Add(, , "TOTAL CAPITAL: ")
+            lst.SubItems(1) = "Php." & FormatNumber(rs.Fields("total_amount").Value, 2)
+        rs.MoveNext
+        Loop
+    End If
+End If
+End Sub
+
 
 Public Sub get_total_amount(qty As TextBox, price As TextBox, total As TextBox)
 Dim total_amount As Double

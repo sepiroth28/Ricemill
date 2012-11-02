@@ -51,6 +51,12 @@ Begin VB.MDIForm MDIForm1
          Caption         =   "Manage Provider"
       End
    End
+   Begin VB.Menu mnuview 
+      Caption         =   "View"
+      Begin VB.Menu mnuArchive_partida 
+         Caption         =   "Archived Partida"
+      End
+   End
 End
 Attribute VB_Name = "MDIForm1"
 Attribute VB_GlobalNameSpace = False
@@ -71,6 +77,10 @@ End Sub
 
 Private Sub mnuClosepartida_Click()
 frmManagePartida.Show 1
+End Sub
+
+Private Sub mnuArchive_partida_Click()
+    frmArchieve_partida.Show 1
 End Sub
 
 Private Sub mnuEvaluatepartida_Click()
