@@ -12,16 +12,14 @@ If partida_id <> 0 Then
     On Error Resume Next
     If rs.RecordCount > 0 Then
         Do Until rs.EOF
-            Set list = lsv.ListItems.Add(, , "")
-            list.SubItems(1) = "TOTAL EXPENSES: "
-            list.SubItems(2) = "Php." & FormatNumber(rs.Fields("total_amunt").Value, 2)
-            totalexpensesholder = list.SubItems(2)
+            Set list = lsv.ListItems.Add(, , "TOTAL EXPENSES: ")
+            list.SubItems(1) = "Php." & FormatNumber(rs.Fields("total_amunt").Value, 2)
+            totalexpensesholder = list.SubItems(1)
         rs.MoveNext
         Loop
     Else
-    Set list = lsv.ListItems.Add(, , "")
-    list.SubItems(1) = "TOTAL EXPENSES: "
-    list.SubItems(2) = "Php." & FormatNumber(0, 2)
+    Set list = lsv.ListItems.Add(, , "TOTAL EXPENSES: ")
+    list.SubItems(1) = "Php." & FormatNumber(0, 2)
     End If
 End If
 End Sub
@@ -38,5 +36,23 @@ If partida_id <> 0 Then
     Call populateResultOnThisListView(sql, lsv, attributes)
 End If
 End Sub
+
+Sub loadExpensesOnthisPartida_itemized(partida_id As Double, lsv As ListView)
+Dim sql As String
+Dim rs As New ADODB.Recordset
+Dim lst As ListItem
+    sql = view_expenses_in_this_partida_itemized & " WHERE pe.partida_id = " & partida_id
+Set rs = db.execute(sql)
+    lsv.ListItems.Clear
+    If rs.RecordCount Then
+    Do Until rs.EOF
+        Set lst = lsv.ListItems.Add(, , UCase(rs.Fields("description").Value))
+            lst.SubItems(1) = "Php." & FormatNumber(rs.Fields("amount").Value, 2)
+        rs.MoveNext
+    Loop
+    End If
+End Sub
+
+
 
 

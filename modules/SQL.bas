@@ -28,6 +28,11 @@ Public Const view_expenses_in_this_partida As String = "SELECT * FROM partida_ex
                                                     " ON pe.expenses_id=e.id INNER JOIN partida p " & _
                                                     " ON pe.partida_id=p.id"
                                                     
+Public Const view_expenses_in_this_partida_itemized As String = "SELECT * FROM partida_expenses pe " & _
+                                                    " INNER JOIN expenses e " & _
+                                                    " ON pe.expenses_id=e.id INNER JOIN partida p " & _
+                                                    " ON pe.partida_id=p.id"
+                                                    
                                                     
 Public Const load_partida_to_evaluate As String = "SELECT p.id,p.name,sum(s.total_amount) as " & _
                                                  " totalcapital,sum(e.amount) as totalexpenses,sum(so.total_amount) as " & _

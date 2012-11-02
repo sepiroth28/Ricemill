@@ -1,40 +1,24 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmEvaluatepartida 
    BackColor       =   &H00000080&
    Caption         =   "PARTIDA EVALUATION"
-   ClientHeight    =   6570
+   ClientHeight    =   7725
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   10665
+   ClientWidth     =   12045
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6570
-   ScaleWidth      =   10665
+   ScaleHeight     =   7725
+   ScaleWidth      =   12045
    StartUpPosition =   3  'Windows Default
    Begin VB.Frame Frame1 
       BackColor       =   &H80000018&
-      Height          =   6435
-      Left            =   60
+      Caption         =   "SELECT PARTIDA TO EVALUATE"
+      Height          =   7515
+      Left            =   120
       TabIndex        =   0
-      Top             =   60
-      Width           =   10545
-      Begin VB.CommandButton cmdEvaluate 
-         Caption         =   "Evaluate Partida"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   795
-         Left            =   270
-         TabIndex        =   14
-         Top             =   5130
-         Width           =   3795
-      End
+      Top             =   120
+      Width           =   11835
       Begin VB.Frame fraDetail 
          BackColor       =   &H00FFFFFF&
          Caption         =   "Evaluation Detail"
@@ -48,11 +32,142 @@ Begin VB.Form frmEvaluatepartida
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H000000FF&
-         Height          =   5595
-         Left            =   4260
-         TabIndex        =   1
-         Top             =   360
-         Width           =   6045
+         Height          =   5655
+         Left            =   4800
+         TabIndex        =   2
+         Top             =   540
+         Width           =   6885
+         Begin VB.Frame Frame3 
+            BackColor       =   &H00FFFFFF&
+            Caption         =   "Expenses"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H000000FF&
+            Height          =   1395
+            Left            =   120
+            TabIndex        =   3
+            Top             =   2640
+            Width           =   6555
+            Begin MSComctlLib.ListView lsvPartidaExpenses 
+               Height          =   705
+               Left            =   120
+               TabIndex        =   4
+               Top             =   240
+               Width           =   5865
+               _ExtentX        =   10345
+               _ExtentY        =   1244
+               View            =   3
+               LabelEdit       =   1
+               LabelWrap       =   -1  'True
+               HideSelection   =   -1  'True
+               HideColumnHeaders=   -1  'True
+               FullRowSelect   =   -1  'True
+               _Version        =   393217
+               ForeColor       =   -2147483640
+               BackColor       =   16777215
+               Appearance      =   0
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "MS Sans Serif"
+                  Size            =   8.25
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               NumItems        =   2
+               BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+                  Text            =   "Description"
+                  Object.Width           =   3528
+               EndProperty
+               BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+                  SubItemIndex    =   1
+                  Text            =   "Amount"
+                  Object.Width           =   4410
+               EndProperty
+            End
+            Begin MSComctlLib.ListView lsvTotalExpenses 
+               Height          =   285
+               Left            =   120
+               TabIndex        =   5
+               Top             =   1020
+               Width           =   5895
+               _ExtentX        =   10398
+               _ExtentY        =   503
+               View            =   3
+               LabelEdit       =   1
+               LabelWrap       =   -1  'True
+               HideSelection   =   -1  'True
+               HideColumnHeaders=   -1  'True
+               _Version        =   393217
+               ForeColor       =   -2147483640
+               BackColor       =   16777215
+               Appearance      =   0
+               BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+                  Name            =   "MS Sans Serif"
+                  Size            =   8.25
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               NumItems        =   2
+               BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+                  Text            =   "Item"
+                  Object.Width           =   3528
+               EndProperty
+               BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+                  SubItemIndex    =   1
+                  Text            =   "# of kilo"
+                  Object.Width           =   4410
+               EndProperty
+            End
+         End
+         Begin MSComctlLib.ListView ListView1 
+            Height          =   285
+            Left            =   240
+            TabIndex        =   6
+            Top             =   2340
+            Width           =   6315
+            _ExtentX        =   11139
+            _ExtentY        =   503
+            View            =   3
+            LabelEdit       =   1
+            LabelWrap       =   -1  'True
+            HideSelection   =   -1  'True
+            HideColumnHeaders=   -1  'True
+            _Version        =   393217
+            ForeColor       =   -2147483640
+            BackColor       =   16777215
+            Appearance      =   0
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            NumItems        =   2
+            BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               Text            =   "Item"
+               Object.Width           =   3528
+            EndProperty
+            BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+               SubItemIndex    =   1
+               Text            =   "# of kilo"
+               Object.Width           =   4410
+            EndProperty
+         End
          Begin VB.Label lblProfit 
             BackStyle       =   0  'Transparent
             BeginProperty Font 
@@ -66,46 +181,10 @@ Begin VB.Form frmEvaluatepartida
             EndProperty
             ForeColor       =   &H00000000&
             Height          =   495
-            Left            =   1860
-            TabIndex        =   13
-            Top             =   4530
-            Width           =   4095
-         End
-         Begin VB.Label lblexpenses 
-            BackStyle       =   0  'Transparent
-            BeginProperty Font 
-               Name            =   "Arial Narrow"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   285
-            Left            =   1860
-            TabIndex        =   12
-            Top             =   3870
-            Width           =   2805
-         End
-         Begin VB.Label lblcapital 
-            BackStyle       =   0  'Transparent
-            BeginProperty Font 
-               Name            =   "Arial Narrow"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000000&
-            Height          =   285
-            Left            =   1830
-            TabIndex        =   11
-            Top             =   3510
-            Width           =   2835
+            Left            =   2520
+            TabIndex        =   14
+            Top             =   4770
+            Width           =   4515
          End
          Begin VB.Label lblTotalCapital 
             BackStyle       =   0  'Transparent
@@ -120,9 +199,9 @@ Begin VB.Form frmEvaluatepartida
             EndProperty
             ForeColor       =   &H00000000&
             Height          =   435
-            Left            =   1860
-            TabIndex        =   10
-            Top             =   2880
+            Left            =   2520
+            TabIndex        =   13
+            Top             =   4200
             Width           =   4125
          End
          Begin VB.Label lblTotalincome 
@@ -138,9 +217,9 @@ Begin VB.Form frmEvaluatepartida
             EndProperty
             ForeColor       =   &H00000000&
             Height          =   435
-            Left            =   1860
-            TabIndex        =   9
-            Top             =   1860
+            Left            =   2520
+            TabIndex        =   12
+            Top             =   1560
             Width           =   4095
          End
          Begin VB.Label lblPartidaname 
@@ -156,8 +235,8 @@ Begin VB.Form frmEvaluatepartida
             EndProperty
             ForeColor       =   &H00000000&
             Height          =   465
-            Left            =   1860
-            TabIndex        =   8
+            Left            =   2520
+            TabIndex        =   11
             Top             =   690
             Width           =   4065
          End
@@ -174,50 +253,14 @@ Begin VB.Form frmEvaluatepartida
                Strikethrough   =   0   'False
             EndProperty
             Height          =   285
-            Left            =   1020
-            TabIndex        =   7
-            Top             =   4620
+            Left            =   180
+            TabIndex        =   10
+            Top             =   4860
             Width           =   705
-         End
-         Begin VB.Label Label7 
-            BackStyle       =   0  'Transparent
-            Caption         =   "Expenses -"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   285
-            Left            =   600
-            TabIndex        =   6
-            Top             =   3870
-            Width           =   1245
-         End
-         Begin VB.Label Label6 
-            BackStyle       =   0  'Transparent
-            Caption         =   "Capital -"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   285
-            Left            =   900
-            TabIndex        =   5
-            Top             =   3510
-            Width           =   975
          End
          Begin VB.Label Label5 
             BackStyle       =   0  'Transparent
-            Caption         =   "Total Capital:"
+            Caption         =   "Total Cost of Sale:"
             BeginProperty Font 
                Name            =   "MS Sans Serif"
                Size            =   12
@@ -229,13 +272,13 @@ Begin VB.Form frmEvaluatepartida
             EndProperty
             Height          =   285
             Left            =   180
-            TabIndex        =   4
-            Top             =   2970
-            Width           =   1605
+            TabIndex        =   9
+            Top             =   4290
+            Width           =   2265
          End
          Begin VB.Label Label4 
             BackStyle       =   0  'Transparent
-            Caption         =   "Total Income:"
+            Caption         =   "Total Sales:"
             BeginProperty Font 
                Name            =   "MS Sans Serif"
                Size            =   12
@@ -247,8 +290,8 @@ Begin VB.Form frmEvaluatepartida
             EndProperty
             Height          =   285
             Left            =   150
-            TabIndex        =   3
-            Top             =   1950
+            TabIndex        =   8
+            Top             =   1650
             Width           =   1665
          End
          Begin VB.Label Label3 
@@ -265,24 +308,44 @@ Begin VB.Form frmEvaluatepartida
             EndProperty
             Height          =   285
             Left            =   120
-            TabIndex        =   2
+            TabIndex        =   7
             Top             =   810
             Width           =   1725
          End
       End
+      Begin VB.CommandButton cmdEvaluate 
+         Caption         =   "Evaluate Partida"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   915
+         Left            =   180
+         TabIndex        =   1
+         Top             =   6240
+         Width           =   4515
+      End
       Begin MSComctlLib.ListView lsvpartidalist 
-         Height          =   4095
-         Left            =   240
+         Height          =   5655
+         Left            =   180
          TabIndex        =   15
-         Top             =   900
-         Width           =   3825
-         _ExtentX        =   6747
-         _ExtentY        =   7223
+         Top             =   540
+         Width           =   4515
+         _ExtentX        =   7964
+         _ExtentY        =   9975
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
+         HideSelection   =   0   'False
          FullRowSelect   =   -1  'True
+         GridLines       =   -1  'True
+         HotTracking     =   -1  'True
+         HoverSelection  =   -1  'True
          _Version        =   393217
          ForeColor       =   -2147483640
          BackColor       =   -2147483643
@@ -297,55 +360,41 @@ Begin VB.Form frmEvaluatepartida
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   6
+         NumItems        =   7
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "id"
+            Text            =   "ID"
             Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
-            Text            =   "name"
-            Object.Width           =   6703
+            Text            =   "PARTIDA NAME"
+            Object.Width           =   7673
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
-            Text            =   "Status"
+            Text            =   "STATUS"
             Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "Stockout_status"
+            Text            =   "DESCRIPTION"
             Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
-            Text            =   "created at"
+            Text            =   "CREATED ON"
             Object.Width           =   0
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   5
-            Text            =   "created by"
+            Text            =   "CREATED BY"
             Object.Width           =   0
          EndProperty
-      End
-      Begin VB.Label Label1 
-         BackStyle       =   0  'Transparent
-         Caption         =   "Select Partida to Evaluate"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
+            Text            =   "STOCKOU STATUS"
+            Object.Width           =   0
          EndProperty
-         ForeColor       =   &H000000FF&
-         Height          =   345
-         Left            =   300
-         TabIndex        =   16
-         Top             =   420
-         Width           =   3255
       End
    End
 End
@@ -354,35 +403,17 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim evaluatepartida As New Partida
-
 Private Sub cmdEvaluate_Click()
-visibleDetail
-partida_id_toevaluate = lsvpartidalist.SelectedItem.Text
-evaluatepartida.load_partida_evaluation (partida_id_toevaluate)
-lblPartidaName.Caption = evaluatepartida.partida_name_toevaluate
-lblTotalincome.Caption = "Php." & FormatNumber(evaluatepartida.partida_totalgross, 2)
-lblTotalCapital.Caption = "Php." & FormatNumber(evaluatepartida.partida_totalcapital + evaluatepartida.partida_totalexpenses, 2)
-lblcapital.Caption = evaluatepartida.partida_totalcapital
-lblexpenses.Caption = evaluatepartida.partida_totalexpenses
-If evaluatepartida.partida_profit < 0 Then
-    With lblProfit
-    .ForeColor = &HFF&
-    .Caption = "need to recover (Php." & Replace(FormatNumber(evaluatepartida.partida_profit, 2), "-", "") & ")"
-    End With
-Else
-    With lblProfit
-        .ForeColor = vbBlack
-        .Caption = "Php." & FormatNumber(evaluatepartida.partida_profit, 2)
-    End With
-End If
+    partida_id_toevaluate = lsvpartidalist.SelectedItem.Text
+    Call showEvaluation(lblPartidaname, lblTotalincome, lblTotalCapital, lblProfit, ListView1, lsvPartidaExpenses, lsvTotalExpenses)
 End Sub
 Private Sub Form_Load()
 Me.Top = 3800
 Me.Left = 5600
-Call loadPartidaList(lsvpartidalist)
+Call loadPartidalistMainwindow(lsvpartidalist)
 cmdEvaluate.Enabled = False
 invisibleDetail
+visibleDetail
 End Sub
 
 Private Sub lsvpartidalist_Click()
@@ -397,3 +428,4 @@ End Sub
 Private Sub visibleDetail()
 fraDetail.Visible = True
 End Sub
+

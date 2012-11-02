@@ -49,6 +49,35 @@ If rs.RecordCount Then
     Loop
 End If
 End Sub
+
+Sub loadPartidalistInArchive(lsv As ListView)
+Dim sql As String
+Dim rs As New ADODB.Recordset
+Dim lst As ListItem
+
+    sql = "SELECT *,p.id as P_id FROM `archievestatus` arc inner join `partida`  p on arc.partida_id=p.id  left join `partida_stockin` ps on p.id=ps.partida_id left join `stock_in` s on ps.stockin_id=s.id where arc.active=0 group by p.id"
+
+Set rs = db.execute(sql)
+   lsv.ListItems.Clear
+   On Error Resume Next
+If rs.RecordCount Then
+   Do Until rs.EOF
+        Set lst = lsv.ListItems.Add(, , rs.Fields("P_id").Value)
+            lst.SubItems(1) = rs.Fields("name").Value
+            If rs.Fields("status").Value = 1 Then
+            lst.SubItems(2) = "open"
+            Else
+            lst.SubItems(2) = "closed"
+            End If
+            lst.SubItems(3) = rs.Fields("description").Value
+            lst.SubItems(4) = rs.Fields("created_at").Value
+            lst.SubItems(5) = rs.Fields("created_by").Value
+            lst.SubItems(6) = rs.Fields("stockout_status").Value
+    rs.MoveNext
+    Loop
+End If
+End Sub
+
 Sub ArchiveThisPartida(partida_id_to_archive As Double)
     Dim sql As String
         sql = "update `archievestatus`set active=0 where partida_id=" & partida_id_to_archive & ""
@@ -150,8 +179,8 @@ Function editstockoutproduct(stockout_id As Double)
 Dim editstckout As New StockOut
     With editstckout
         .load_stockout (stockout_id)
-        frmStockOut.lblDate.Caption = .date_out
-        frmStockOut.txtitem.Text = getItemcode(.item_id)
+        frmStockOut.lbldate.Caption = .date_out
+        frmStockOut.txtItem.Text = getItemcode(.item_id)
         frmStockOut.txtPrice.Text = .unit_price
         frmStockOut.txtQty.Text = .qty_out
         frmStockOut.txtAmount.Text = .total_amount
@@ -163,10 +192,10 @@ Function editstockinProduct(stockin_id As Double)
 Dim editstockin As New StockIn
      With editstockin
         .load_stockin (stockin_id)
-        frmStockIn.lblDate.Caption = .date_in
+        frmStockIn.lbldate.Caption = .date_in
 '        frmStockIn.txtItem.Text = getItemcode(.item_id)
         frmStockIn.txtAmount.Text = .total_amount
-        frmStockIn.txtdescription.Text = .description
+        frmStockIn.txtDescription.Text = .description
         frmStockIn.txtNum_of_sack.Text = .Num_of_sack
         frmStockIn.txtPrice.Text = .unit_price
         frmStockIn.txtProvider.Text = getprovider(.id)
@@ -204,3 +233,29 @@ Sub editPartidaname(newname As String, partda_id As Double)
         sql = "UPDATE `partida` SET name='" & newname & "' WHERE id=" & partda_id & ""
     db.execute (sql)
 End Sub
+
+Function showEvaluation(lblPartidaname As Label, lblTotalincome As Label, lblTotalCapital As Label, lblProfit As Label, ListView1 As ListView, lsvPartidaExpenses As ListView, lsvTotalExpenses As ListView)
+evaluatepartida.load_partida_evaluation (partida_id_toevaluate)
+lblPartidaname.Caption = evaluatepartida.partida_name_toevaluate
+lblTotalincome.Caption = "Php." & FormatNumber(evaluatepartida.partida_totalgross, 2)
+lblTotalCapital.Caption = "Php." & FormatNumber(evaluatepartida.partida_totalcapital + evaluatepartida.partida_totalexpenses, 2)
+'lblcapital.Caption = evaluatepartida.partida_totalcapital
+'lblexpenses.Caption = evaluatepartida.partida_totalexpenses
+Call loadStockInTotals_itemized(partida_id_toevaluate, ListView1)
+Call loadExpensesOnthisPartida_itemized(partida_id_toevaluate, lsvPartidaExpenses)
+Call totalexpenses(partida_id_toevaluate, lsvTotalExpenses)
+If evaluatepartida.partida_profit < 0 Then
+    With lblProfit
+    .ForeColor = &HFF&
+    .Caption = "need to recover (Php." & Replace(FormatNumber(evaluatepartida.partida_profit, 2), "-", "") & ")"
+    End With
+Else
+    With lblProfit
+        .ForeColor = vbBlack
+        .Caption = "Php." & FormatNumber(evaluatepartida.partida_profit, 2)
+    End With
+End If
+End Function
+
+
+

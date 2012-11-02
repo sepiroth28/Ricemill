@@ -57,8 +57,9 @@ Sub renderButtonBasedOnUserPreviligesInPartidaView()
 '       frmPartidaView.cmdAddStockOut.Enabled = .canStockOut
        frmPartidaView.cmdClosepartida.Enabled = .canClosePartida
        frmPartidaView.cmdClosePartidaStockout.Enabled = .canClosePartidaStockout
-       frmPartidaView.mnuEdit.Enabled = .canEditDeletePartidaProd
-       frmPartidaView.mnuDelete.Enabled = .canEditDeletePartidaProd
+       frmPartidaView.mnuedit.Enabled = .canEditDeletePartidaProd
+       frmPartidaView.mnudelete.Enabled = .canEditDeletePartidaProd
+       frmPartidaView.cmdEvaluate.Enabled = .canEvaluatePartida
     End With
 End Sub
 
