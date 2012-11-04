@@ -4,6 +4,13 @@ Public DB_NAME As String
 Public DB_USERNAME As String
 Public DB_PASSWORD As String
 
+'PUBLIC VARIABLES FOR 2ND db
+Public DBSERVER2 As String
+Public DB_NAME2 As String
+Public DB_USERNAME2 As String
+Public DB_PASSWORD2 As String
+
+
 Public Const PAYMENT_COD As Integer = 1
 Public Const PAYMENT_ACCOUNT_RECEIVABLE As Integer = 2
 
@@ -40,6 +47,21 @@ Input #intEmpFileNbr, server, dba_name, dba_username, dba_pass
  DB_NAME = dba_name
  DB_USERNAME = dba_username
  DB_PASSWORD = dba_pass
+
+Close #intEmpFileNbr
+
+'for second db
+intEmpFileNbr = FreeFile
+file_name = App.Path & "\config\config2.dat"
+
+Open file_name For Input As #intEmpFileNbr
+
+Input #intEmpFileNbr, server, dba_name, dba_username, dba_pass
+
+ DBSERVER2 = server
+ DB_NAME2 = dba_name
+ DB_USERNAME2 = dba_username
+ DB_PASSWORD2 = dba_pass
 
 Close #intEmpFileNbr
 

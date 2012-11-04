@@ -354,6 +354,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim item_id As Integer
+Dim ref_no As String
 
 Private Sub cmdBrowse_Click()
     Call toggle_listview(lsvoutputProductlist)
@@ -371,7 +372,7 @@ With stock_out
     .unit_price = Val(txtPrice.Text)
     .total_amount = Val(txtAmount.Text)
     .received_by = activeUser.username
-    .date_out = Format(lbldate.Caption, "yyyy-mm-dd")
+    .date_out = Format(lblDate.Caption, "yyyy-mm-dd")
     If stockout_product_edit_mode = True Then
     .editStockout
     MsgBox "Successfully Updated stockout", vbInformation, "StockOut"
@@ -389,13 +390,14 @@ Call get_output_product_percentage(frmPartidaView.lsvPercentage, activePartidaId
 End Sub
 
 Private Sub Command1_Click()
-Set activedate = lbldate
+Set activedate = lblDate
 frmCalendar.Show 1
 End Sub
 Private Sub Form_Load()
 Me.Top = frmPartidaView.Top + 2500
 Me.Left = frmPartidaView.Left + 9300
-lbldate.Caption = FormatDateTime(Date, vbShortDate)
+ref_no = settedSI
+lblDate.Caption = FormatDateTime(Date, vbShortDate)
 Call loadoutputProductOfThisPartida(lsvoutputProductlist, activePartidaId)
 End Sub
 
@@ -411,3 +413,17 @@ End Sub
 Private Sub txtQty_Change()
 Call get_total_amount(txtQty, txtPrice, txtAmount)
 End Sub
+
+Function settedSI() As String
+    Dim sql As String
+    Dim temp As String
+    Dim rs As New ADODB.Recordset
+    Dim x As Integer
+    
+        sql = "SELECT * FROM `stock_in_reference`"
+    Set rs = db2.execute(sql)
+        x = rs.Fields(0).Value
+        
+    temp = "SI-" & String((7 - Len(x)), "0") & x
+    settedSI = temp
+End Function

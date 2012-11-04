@@ -1,5 +1,6 @@
 Attribute VB_Name = "Helper_GLOBAL_VARS"
 Public db As New db
+Public db2 As New db
 Public activePartidaId As Double
 Public PartidaStatus As Integer
 Public stockout_status As Integer

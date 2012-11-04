@@ -32,6 +32,9 @@ Begin VB.MDIForm MDIForm1
       Begin VB.Menu mnumanageuseraccount 
          Caption         =   "Manage User Accounts"
       End
+      Begin VB.Menu mnustockout_manufacturer 
+         Caption         =   "Stockout Manufacturer"
+      End
    End
    Begin VB.Menu mnuAdmin 
       Caption         =   "Admin"
@@ -101,4 +104,8 @@ End Sub
 
 Private Sub mnuPartidavisibility_Click()
 frmPartidaVisibility.Show 1
+End Sub
+
+Private Sub mnustockout_manufacturer_Click()
+    frmStockout_manufacturer.Show 1
 End Sub
